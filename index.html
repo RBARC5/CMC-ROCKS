@@ -113,8 +113,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .shift-entries{font-size:0.72rem;color:var(--dust);font-family:'Barlow Condensed',sans-serif;margin-bottom:0.5rem}
 .shift-entry-row{display:flex;gap:1rem;padding:0.2rem 0;border-bottom:1px solid rgba(244,233,211,0.05)}
 .shift-entry-row:last-child{border-bottom:none}
-
-/* Button grid */
 .shift-btn-grid{display:grid;gap:0.4rem;margin-top:0.5rem}
 .shift-btn-grid.row-2{grid-template-columns:1fr 1fr}
 .shift-btn-grid.row-3{grid-template-columns:1fr 1fr 1fr}
@@ -135,8 +133,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .sbtn-dnd{border-color:rgba(245,66,23,0.3);color:rgba(245,66,23,0.65)}
 .sbtn-dnd:hover{background:rgba(245,66,23,0.1);border-color:var(--rust)}
 .sbtn-dnd.active{background:rgba(245,66,23,0.18);color:var(--rust);border-color:var(--rust)}
-
-/* Manual time entry toggle */
 .manual-toggle{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dust);cursor:pointer;text-align:right;margin-top:0.35rem;margin-bottom:0;text-decoration:underline;display:block}
 .manual-toggle:hover{color:var(--gold)}
 .manual-time-row{display:none;margin-top:0.5rem;gap:0.4rem;align-items:center}
@@ -144,7 +140,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .manual-time-row input[type=time]{margin-bottom:0;flex:1;font-size:0.9rem;padding:0.4rem 0.6rem}
 .manual-time-row .sbtn{font-size:0.7rem;padding:0.4rem 0.7rem;width:auto;white-space:nowrap}
 
-/* PIN overlay */
+/* ── PIN ── */
 .pin-dots{display:flex;gap:0.6rem;justify-content:center;margin:1.2rem 0}
 .pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(244,233,211,0.15);border:1px solid var(--border);transition:background 0.15s}
 .pin-dot.filled{background:var(--rust);border-color:var(--rust)}
@@ -154,7 +150,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .pin-key:active{background:rgba(245,66,23,0.25)}
 .pin-error{color:var(--rust);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;letter-spacing:0.15em;text-align:center;min-height:1.2em;margin-bottom:0.5rem}
 
-/* History report */
+/* ── HISTORY REPORT ── */
 .report-header{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;color:var(--cream);margin-bottom:0.3rem}
 .report-date-filter{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
 .report-date-filter label{margin-bottom:0;font-size:0.65rem}
@@ -168,6 +164,48 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .rpt-name{font-weight:600;color:var(--cream)}
 .rpt-meal-done{color:var(--olive)}
 .rpt-meal-none{color:rgba(160,136,80,0.3)}
+
+/* ── CAMPING TAB ── */
+.camp-map-wrap{position:relative;width:100%;border-radius:6px;overflow:hidden;border:1px solid var(--border);margin-bottom:1.2rem;background:var(--panel);touch-action:pinch-zoom}
+.camp-map-wrap img{width:100%;height:auto;display:block;cursor:zoom-in}
+.camp-map-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.15em;text-align:center;padding:2rem;gap:0.5rem}
+.camp-map-placeholder .map-icon{font-size:2.5rem;opacity:0.3}
+.camp-map-placeholder .map-hint{font-size:0.7rem;color:rgba(160,136,80,0.5)}
+.map-fullscreen-btn{position:absolute;bottom:0.6rem;right:0.6rem;background:rgba(26,25,21,0.85);border:1px solid var(--border);border-radius:3px;color:var(--dust);font-size:0.75rem;padding:0.3rem 0.55rem;cursor:pointer;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;backdrop-filter:blur(4px)}
+.map-fullscreen-btn:hover{color:var(--cream);border-color:var(--cream)}
+
+/* Map fullscreen overlay */
+#map-fs-overlay{position:fixed;inset:0;z-index:150;background:#000;display:flex;align-items:center;justify-content:center}
+#map-fs-overlay.hidden{display:none}
+#map-fs-overlay img{max-width:100%;max-height:100%;object-fit:contain;touch-action:pinch-zoom}
+#map-fs-close{position:absolute;top:1rem;right:1rem;background:rgba(26,25,21,0.9);border:1px solid var(--border);border-radius:3px;color:var(--cream);font-size:1rem;padding:0.4rem 0.8rem;cursor:pointer;font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em}
+
+/* Gate cards */
+.gate-section-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);margin:0 0 0.6rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border)}
+.gate-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:0.85rem 1rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.75rem}
+.gate-card.gate-open{border-color:rgba(157,152,18,0.4)}
+.gate-card.gate-closed{border-color:rgba(245,66,23,0.3)}
+.gate-status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.gate-open .gate-status-dot{background:var(--olive)}
+.gate-closed .gate-status-dot{background:var(--rust)}
+.gate-info{flex:1;min-width:0}
+.gate-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.06em;color:var(--cream)}
+.gate-times{font-size:0.75rem;color:var(--dust);font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;margin-top:0.15rem}
+.gate-times span{color:var(--cream)}
+.gate-notes{font-size:0.72rem;color:var(--dust);margin-top:0.2rem;font-style:italic}
+.gate-status-pill{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2px;flex-shrink:0}
+.gate-open .gate-status-pill{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
+.gate-closed .gate-status-pill{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
+
+/* Gate editor (manager mode) */
+.gate-editor{background:rgba(244,233,211,0.03);border:1px solid var(--border);border-radius:6px;padding:1rem;margin-bottom:0.6rem}
+.gate-editor-row{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.5rem}
+.gate-editor-row.row-3{grid-template-columns:1fr 1fr 1fr}
+.gate-editor input,.gate-editor select,.gate-editor textarea{margin-bottom:0;font-size:0.9rem;padding:0.5rem 0.7rem}
+.gate-editor textarea{min-height:44px;resize:none}
+.gate-editor-label{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust);margin-bottom:0.25rem;display:block}
+.gate-editor-actions{display:flex;gap:0.4rem;margin-top:0.5rem}
+.camp-edit-bar{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
 </style>
 </head>
 <body>
@@ -184,10 +222,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
     <div class="modal-sub">Crew Portal &mdash; QLD</div>
     <h2 id="reg-title">Register to Continue</h2>
     <div id="reg-form">
-      <label>Full Name</label>
-      <input type="text" id="reg-name" placeholder="Your name" autocomplete="name">
-      <label>Phone Number</label>
-      <input type="tel" id="reg-phone" placeholder="04xx xxx xxx" autocomplete="tel">
+      <label>Full Name</label><input type="text" id="reg-name" placeholder="Your name" autocomplete="name">
+      <label>Phone Number</label><input type="tel" id="reg-phone" placeholder="04xx xxx xxx" autocomplete="tel">
       <button class="btn" onclick="submitReg()">Join Crew</button>
       <button class="btn secondary" onclick="showPickList()">Already registered? Pick from list</button>
     </div>
@@ -224,10 +260,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
     <label>Select Radio</label>
     <select id="ro-known" onchange="onKnownRadioSelect()"><option value="">-- Select or enter new below --</option></select>
     <div id="ro-manual">
-      <label>Site ID</label>
-      <input type="text" id="ro-siteid" placeholder="e.g. S01" autocomplete="off" oninput="onSiteIdInput()">
-      <label>Department ID</label>
-      <input type="text" id="ro-deptid" placeholder="e.g. Traffic-1" autocomplete="off">
+      <label>Site ID</label><input type="text" id="ro-siteid" placeholder="e.g. S01" autocomplete="off" oninput="onSiteIdInput()">
+      <label>Department ID</label><input type="text" id="ro-deptid" placeholder="e.g. Traffic-1" autocomplete="off">
       <div id="ro-prefill-hint" class="prefill-hint" style="display:none">&#10003; Auto-filled from history</div>
     </div>
     <label>Condition</label>
@@ -291,29 +325,21 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- PIN ENTRY OVERLAY -->
+<!-- PIN ENTRY (shared — context set before opening) -->
 <div class="overlay hidden" id="pin-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
     <div class="modal-sub">Manager Access</div>
-    <h2>Enter PIN to View History</h2>
-    <div class="pin-dots" id="pin-dots">
-      <div class="pin-dot" id="pd0"></div>
-      <div class="pin-dot" id="pd1"></div>
-      <div class="pin-dot" id="pd2"></div>
-      <div class="pin-dot" id="pd3"></div>
+    <h2 id="pin-title">Enter PIN</h2>
+    <div class="pin-dots">
+      <div class="pin-dot" id="pd0"></div><div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div><div class="pin-dot" id="pd3"></div>
     </div>
     <div class="pin-error" id="pin-error"></div>
     <div class="pin-keypad">
-      <div class="pin-key" onclick="pinKey('1')">1</div>
-      <div class="pin-key" onclick="pinKey('2')">2</div>
-      <div class="pin-key" onclick="pinKey('3')">3</div>
-      <div class="pin-key" onclick="pinKey('4')">4</div>
-      <div class="pin-key" onclick="pinKey('5')">5</div>
-      <div class="pin-key" onclick="pinKey('6')">6</div>
-      <div class="pin-key" onclick="pinKey('7')">7</div>
-      <div class="pin-key" onclick="pinKey('8')">8</div>
-      <div class="pin-key" onclick="pinKey('9')">9</div>
+      <div class="pin-key" onclick="pinKey('1')">1</div><div class="pin-key" onclick="pinKey('2')">2</div><div class="pin-key" onclick="pinKey('3')">3</div>
+      <div class="pin-key" onclick="pinKey('4')">4</div><div class="pin-key" onclick="pinKey('5')">5</div><div class="pin-key" onclick="pinKey('6')">6</div>
+      <div class="pin-key" onclick="pinKey('7')">7</div><div class="pin-key" onclick="pinKey('8')">8</div><div class="pin-key" onclick="pinKey('9')">9</div>
       <div class="pin-key" onclick="pinClear()" style="font-size:1rem;letter-spacing:0">CLR</div>
       <div class="pin-key" onclick="pinKey('0')">0</div>
       <div class="pin-key" onclick="pinBackspace()" style="font-size:1rem;letter-spacing:0">&#9003;</div>
@@ -322,7 +348,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- HISTORY REPORT OVERLAY -->
+<!-- HISTORY REPORT -->
 <div class="overlay hidden" id="history-overlay">
   <div class="modal" style="max-width:640px">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -345,6 +371,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- MAP FULLSCREEN -->
+<div id="map-fs-overlay" class="hidden">
+  <button id="map-fs-close" onclick="closeMapFS()">&#10005; Close</button>
+  <img id="map-fs-img" src="" alt="Camp Map">
+</div>
+
 <div id="app" style="display:none">
   <div id="app-header">
     <div class="header-logo">CMC <span>Rocks</span> Crew</div>
@@ -359,9 +391,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   <div id="nav-tabs">
     <button class="tab-btn active" onclick="showTab('radios',this)">2-Way Radios</button>
     <button class="tab-btn" onclick="showTab('shifts',this)">Staff Shifts</button>
+    <button class="tab-btn" onclick="showTab('camping',this)">Camping</button>
   </div>
   <div id="content">
 
+    <!-- RADIOS TAB -->
     <div class="tab-section active" id="tab-radios">
       <div style="display:flex;align-items:center;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
         <div class="section-title" style="margin:0;padding:0;border:none">2-Way Radios</div>
@@ -376,22 +410,54 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       <div id="radio-history-section"></div>
     </div>
 
+    <!-- SHIFTS TAB -->
     <div class="tab-section" id="tab-shifts">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
         <div style="display:flex;align-items:center;gap:0.5rem">
           <div class="section-title" style="margin:0;padding:0;border:none">Staff Shifts</div>
           <span id="shift-save-indicator"></span>
         </div>
-        <button class="btn btn-sm" style="background:rgba(0,72,255,0.25);border:1px solid rgba(0,72,255,0.4);color:#7fa8ff;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;padding:0.35rem 0.75rem;border-radius:3px;white-space:nowrap" onclick="openPinOverlay()">&#128274; History</button>
+        <button class="btn btn-sm" style="background:rgba(0,72,255,0.25);border:1px solid rgba(0,72,255,0.4);color:#7fa8ff;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;padding:0.35rem 0.75rem;border-radius:3px;white-space:nowrap" onclick="openPinFor('history')">&#128274; History</button>
       </div>
-
-      <!-- Live Clock -->
       <div class="clock-block">
         <div id="shift-clock">00:00:00</div>
         <div id="shift-date"></div>
       </div>
-
       <div id="shifts-list"><div class="loading-text">Loading...</div></div>
+    </div>
+
+    <!-- CAMPING TAB -->
+    <div class="tab-section" id="tab-camping">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          <div class="section-title" style="margin:0;padding:0;border:none">Camping</div>
+          <span id="camp-save-indicator"></span>
+        </div>
+        <button id="camp-edit-btn" class="btn btn-sm" style="background:rgba(0,72,255,0.25);border:1px solid rgba(0,72,255,0.4);color:#7fa8ff;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;padding:0.35rem 0.75rem;border-radius:3px;white-space:nowrap" onclick="openPinFor('camping')">&#128274; Edit</button>
+      </div>
+
+      <!-- Map section -->
+      <div class="radio-section-label">Campground Map</div>
+      <div class="camp-map-wrap" id="camp-map-wrap">
+        <div class="camp-map-placeholder" id="camp-map-placeholder">
+          <div class="map-icon">&#128506;</div>
+          <div>No map uploaded yet</div>
+          <div class="map-hint">Upload campmap.webp to the repo root to display it here</div>
+        </div>
+      </div>
+
+      <!-- Gate times section -->
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem">
+        <div class="radio-section-label" style="margin:0;border:none">Gate Times</div>
+        <span id="camp-edit-mode-tag" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);padding:0.15rem 0.5rem;border:1px solid rgba(243,159,52,0.3);border-radius:2px">Edit Mode</span>
+      </div>
+      <div id="gates-list"></div>
+      <div id="gate-add-btn-wrap" style="display:none;margin-top:0.5rem">
+        <button class="btn btn-green btn-sm" onclick="addGateEditor()">&#43; Add Gate</button>
+      </div>
+      <div style="margin-top:0.5rem;display:none" id="camp-edit-done-wrap">
+        <button class="btn btn-sm" style="background:rgba(157,152,18,0.25);border:1px solid rgba(157,152,18,0.4);color:var(--olive);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;padding:0.4rem 1rem;border-radius:3px" onclick="exitCampEditMode()">&#10003; Done Editing</button>
+      </div>
     </div>
 
   </div>
@@ -399,9 +465,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 
 <script>
 const PROXY='https://cmc-rocks-proxy.8gonula.workers.dev';
-const MANAGER_PIN='1234'; // Change this PIN as needed
+const MANAGER_PIN='1234';
+const CAMP_MAP_URL='campmap.webp'; // filename in repo root
 let data=null,currentUser=null,pollTimer=null,clockTimer=null,activeReturnId=null,pendingSignOut=null;
-let pinBuffer='';
+let pinBuffer='',pinContext=''; // pinContext: 'history' | 'camping'
+let campEditMode=false;
 
 // ── UTILITIES ──
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
@@ -410,95 +478,81 @@ function loadLocalCrew(){try{return JSON.parse(localStorage.getItem('cmcCrew'))|
 function saveLocalCrew(c){localStorage.setItem('cmcCrew',JSON.stringify(c))}
 function addLocalCrew(u){const c=loadLocalCrew();if(!c.find(x=>x.phone===u.phone)){c.push(u);saveLocalCrew(c);}}
 function getMergedCrew(){
-  const remote=(data&&data.crew)?data.crew:[];
-  const local=loadLocalCrew();
-  const merged=[...remote];
-  local.forEach(u=>{if(!merged.find(c=>c.phone===u.phone))merged.push(u);});
-  return merged;
+  const remote=(data&&data.crew)?data.crew:[];const local=loadLocalCrew();const merged=[...remote];
+  local.forEach(u=>{if(!merged.find(c=>c.phone===u.phone))merged.push(u);});return merged;
 }
-function getKnownRadios(){
-  const log=(data&&data.radioLog)?data.radioLog:[];
-  const map={};log.forEach(e=>{if(e.siteId&&e.deptId)map[e.siteId]=e.deptId;});return map;
-}
-function getLastEntry(siteId,deptId){
-  const log=(data&&data.radioLog)?data.radioLog:[];
-  const entries=log.filter(e=>e.siteId===siteId&&e.deptId===deptId);
-  return entries.length?entries[entries.length-1]:null;
-}
+function getKnownRadios(){const log=(data&&data.radioLog)?data.radioLog:[];const map={};log.forEach(e=>{if(e.siteId&&e.deptId)map[e.siteId]=e.deptId;});return map;}
+function getLastEntry(siteId,deptId){const log=(data&&data.radioLog)?data.radioLog:[];const entries=log.filter(e=>e.siteId===siteId&&e.deptId===deptId);return entries.length?entries[entries.length-1]:null;}
 function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
 function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
 function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'});}
 function formatTimeOnly(ts){if(!ts)return'';return new Date(ts).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'});}
-function formatDateOnly(ts){if(!ts)return'';return new Date(ts).toLocaleDateString('en-AU',{weekday:'short',day:'2-digit',month:'short',year:'numeric'});}
 
 async function init(){
   currentUser=loadUser();
   if(currentUser){
-    showApp();
-    document.getElementById('boot-screen').classList.add('hidden');
-    await fetchData();
-    renderRadios();renderShifts();
-  } else {
-    await fetchData();
-    document.getElementById('boot-screen').classList.add('hidden');
-    openOverlay('reg-overlay');
+    showApp();document.getElementById('boot-screen').classList.add('hidden');
+    await fetchData();renderRadios();renderShifts();renderCamping();
+  }else{
+    await fetchData();document.getElementById('boot-screen').classList.add('hidden');openOverlay('reg-overlay');
   }
-  startPolling();
-  startClock();
+  startPolling();startClock();loadMapImage();
 }
 
 async function fetchData(){
   try{
     const resp=await fetch(PROXY,{headers:{'Accept':'application/json'}});
     const meta=await resp.json();
-    if(meta.content){
-      const decoded=decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));
-      data=JSON.parse(decoded);
-    }
-  }catch(e){
-    if(!data)data={crew:[],radioLog:[],shifts:{}};
-    console.warn('Fetch failed',e);
-  }
+    if(meta.content){const decoded=decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));data=JSON.parse(decoded);}
+  }catch(e){if(!data)data={crew:[],radioLog:[],shifts:{},gates:[]};console.warn('Fetch failed',e);}
 }
 
 function startPolling(){
   if(pollTimer)clearInterval(pollTimer);
-  pollTimer=setInterval(async()=>{await fetchData();renderRadios();renderShifts();},8000);
+  pollTimer=setInterval(async()=>{await fetchData();renderRadios();renderShifts();renderCamping();},8000);
 }
 
-// ── LIVE CLOCK ──
-function startClock(){
-  if(clockTimer)clearInterval(clockTimer);
-  tickClock();
-  clockTimer=setInterval(tickClock,1000);
+// ── MAP IMAGE ──
+function loadMapImage(){
+  const img=new Image();
+  img.onload=()=>{
+    const wrap=document.getElementById('camp-map-wrap');
+    document.getElementById('camp-map-placeholder').style.display='none';
+    const imgEl=document.createElement('img');
+    imgEl.src=CAMP_MAP_URL;imgEl.alt='Campground Map';imgEl.style.width='100%';
+    const btn=document.createElement('button');btn.className='map-fullscreen-btn';btn.textContent='⛶ Full Screen';
+    btn.onclick=()=>openMapFS();
+    wrap.appendChild(imgEl);wrap.appendChild(btn);
+  };
+  img.onerror=()=>{}; // placeholder stays
+  img.src=CAMP_MAP_URL;
 }
+function openMapFS(){
+  document.getElementById('map-fs-img').src=CAMP_MAP_URL;
+  document.getElementById('map-fs-overlay').classList.remove('hidden');
+}
+function closeMapFS(){document.getElementById('map-fs-overlay').classList.add('hidden');}
+
+// ── LIVE CLOCK ──
+function startClock(){if(clockTimer)clearInterval(clockTimer);tickClock();clockTimer=setInterval(tickClock,1000);}
 function tickClock(){
   const now=new Date();
-  const h=String(now.getHours()).padStart(2,'0');
-  const m=String(now.getMinutes()).padStart(2,'0');
-  const s=String(now.getSeconds()).padStart(2,'0');
-  const el=document.getElementById('shift-clock');
-  const de=document.getElementById('shift-date');
+  const h=String(now.getHours()).padStart(2,'0'),m=String(now.getMinutes()).padStart(2,'0'),s=String(now.getSeconds()).padStart(2,'0');
+  const el=document.getElementById('shift-clock'),de=document.getElementById('shift-date');
   if(el)el.textContent=`${h}:${m}:${s}`;
   if(de)de.textContent=now.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 }
 
 async function pushData(msg,indId){
-  const id=indId||'save-indicator';
-  showSaveStatus('saving',id);
+  const id=indId||'save-indicator';showSaveStatus('saving',id);
   try{
     const metaResp=await fetch(PROXY,{headers:{'Accept':'application/json'}});
-    const meta=await metaResp.json();
-    const sha=meta.sha;
-    if(!sha)throw new Error('No SHA');
+    const meta=await metaResp.json();const sha=meta.sha;if(!sha)throw new Error('No SHA');
     const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
     const resp=await fetch(PROXY,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,content,sha})});
     if(!resp.ok){const err=await resp.text();throw new Error(`PUT failed: ${resp.status} ${err}`);}
     showSaveStatus('ok',id);
-  }catch(e){
-    console.error('pushData error:',e);
-    showSaveStatus('err',id);
-  }
+  }catch(e){console.error('pushData error:',e);showSaveStatus('err',id);}
 }
 
 function showSaveStatus(state,id){
@@ -513,8 +567,7 @@ function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 function showTab(id,btn){
   document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  if(btn)btn.classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');if(btn)btn.classList.add('active');
 }
 
 // ── RADIOS ──
@@ -631,59 +684,30 @@ function downloadRadioCSV(){
 }
 
 // ── STAFF SHIFTS ──
-// Shift data per person per day is now an ARRAY of sessions:
-// data.shifts[phone][dateKey] = {
-//   sessions: [{start, end}],      // multiple start/end pairs allowed
-//   breakfast, lunch, dinner,       // timestamps (reset after midnight)
-//   status                          // 'on'|'off'|'resting'|'dnd'
-// }
-
-function todayKey(){
-  const n=new Date();
-  return `${String(n.getDate()).padStart(2,'0')}-${String(n.getMonth()+1).padStart(2,'0')}-${n.getFullYear()}`;
-}
-
+function todayKey(){const n=new Date();return `${String(n.getDate()).padStart(2,'0')}-${String(n.getMonth()+1).padStart(2,'0')}-${n.getFullYear()}`;}
 function getShiftDay(phone){
-  if(!data.shifts)data.shifts={};
-  if(!data.shifts[phone])data.shifts[phone]={};
+  if(!data.shifts)data.shifts={};if(!data.shifts[phone])data.shifts[phone]={};
   const key=todayKey();
   if(!data.shifts[phone][key])data.shifts[phone][key]={sessions:[],status:'off'};
   if(!data.shifts[phone][key].sessions)data.shifts[phone][key].sessions=[];
   return data.shifts[phone][key];
 }
-
 function getDisplayStatus(s){
-  if(s.status==='dnd') return 'dnd';
-  if(s.status==='resting') return 'resting';
-  // on shift = last session has no end
-  const sess=s.sessions||[];
-  if(sess.length&&!sess[sess.length-1].end) return 'on';
-  return 'off';
+  if(s.status==='dnd')return 'dnd';if(s.status==='resting')return 'resting';
+  const sess=s.sessions||[];if(sess.length&&!sess[sess.length-1].end)return 'on';return 'off';
 }
-
-function isCurrentlyOnShift(s){
-  const sess=s.sessions||[];return sess.length>0&&!sess[sess.length-1].end;
-}
-
+function isCurrentlyOnShift(s){const sess=s.sessions||[];return sess.length>0&&!sess[sess.length-1].end;}
 function statusLabel(st){return {off:'Off Shift',on:'On Shift',resting:'Resting',dnd:'Do Not Disturb'}[st]||'Off Shift';}
 function statusHlClass(st){return {off:'hl-off',on:'hl-on',resting:'hl-resting',dnd:'hl-dnd'}[st]||'hl-off';}
 function cardClass(st){return {resting:'status-resting',dnd:'status-dnd',on:'status-on-shift'}[st]||'';}
-
 function renderShifts(){
-  if(!data)return;
-  const el=document.getElementById('shifts-list');const crew=getMergedCrew();
+  if(!data)return;const el=document.getElementById('shifts-list');const crew=getMergedCrew();
   if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.</div>';return;}
   el.innerHTML=crew.map(u=>buildStaffCard(u)).join('');
 }
-
 function buildStaffCard(u){
-  const s=getShiftDay(u.phone);
-  const isMe=currentUser&&currentUser.phone===u.phone;
-  const st=getDisplayStatus(s);
-  const sess=s.sessions||[];
-  const meals=['breakfast','lunch','dinner'];
-
-  // Session rows
+  const s=getShiftDay(u.phone);const isMe=currentUser&&currentUser.phone===u.phone;
+  const st=getDisplayStatus(s);const sess=s.sessions||[];const meals=['breakfast','lunch','dinner'];
   let sessHTML='';
   if(sess.length){
     sessHTML=`<div class="shift-entries">`+
@@ -693,25 +717,16 @@ function buildStaffCard(u){
         <span><span style="color:var(--dust)">Out: </span><span class="t-val">${ss.end?formatTimeOnly(ss.end):'&mdash;'}</span></span>
       </div>`).join('')+`</div>`;
   }
-
-  // Meal info
   const mealInfo=meals.map(m=>{
-    if(s[m]) return `<span class="meal-done">&#10003; ${cap(m)} ${formatTimeOnly(s[m])}</span>`;
+    if(s[m])return `<span class="meal-done">&#10003; ${cap(m)} ${formatTimeOnly(s[m])}</span>`;
     return `<span class="meal-none">${cap(m)}</span>`;
   }).join('&ensp;');
-
   let btns='';
   if(isMe){
     const onShift=isCurrentlyOnShift(s);
-
-    // Start / End shift with manual time option
     btns+=`<div class="shift-btn-grid row-2">
-      <button class="sbtn sbtn-on-shift${onShift?' active':''}" onclick="shiftIn()" ${onShift?'disabled':''}>
-        ${onShift?'&#9679; On Shift':'+ Start Shift'}
-      </button>
-      <button class="sbtn sbtn-off-shift" onclick="shiftOut()" ${!onShift?'disabled':''}>
-        End Shift
-      </button>
+      <button class="sbtn sbtn-on-shift${onShift?' active':''}" onclick="shiftIn()" ${onShift?'disabled':''}>${onShift?'&#9679; On Shift':'+ Start Shift'}</button>
+      <button class="sbtn sbtn-off-shift" onclick="shiftOut()" ${!onShift?'disabled':''}>End Shift</button>
     </div>
     <span class="manual-toggle" onclick="toggleManual('manual-shift')">enter time manually</span>
     <div class="manual-time-row" id="manual-shift">
@@ -719,42 +734,28 @@ function buildStaffCard(u){
       <button class="sbtn sbtn-on-shift" onclick="shiftInManual()">Start</button>
       <button class="sbtn sbtn-off-shift" onclick="shiftOutManual()">End</button>
     </div>`;
-
-    // Meals with manual time option
     btns+=`<div class="shift-btn-grid row-3" style="margin-top:0.5rem">
-      ${meals.map(m=>`<button class="sbtn sbtn-${m}${s[m]?' active':''}" onclick="setMeal('${m}',null)" ${s[m]?'disabled':''}>
-        ${s[m]?'&#10003; '+cap(m):cap(m)}
-      </button>`).join('')}
+      ${meals.map(m=>`<button class="sbtn sbtn-${m}${s[m]?' active':''}" onclick="setMeal('${m}',null)" ${s[m]?'disabled':''}>${s[m]?'&#10003; '+cap(m):cap(m)}</button>`).join('')}
     </div>
     <span class="manual-toggle" onclick="toggleManual('manual-meals')">enter meal time manually</span>
     <div class="manual-time-row" id="manual-meals">
       <input type="time" id="manual-meal-time">
       <select id="manual-meal-select" style="margin-bottom:0;padding:0.4rem 0.4rem;font-size:0.82rem;flex:1">
-        ${meals.map(m=>`<option value="${m}"${s[m]?' disabled':''}>` +cap(m)+(s[m]?' ✓':'')+`</option>`).join('')}
+        ${meals.map(m=>`<option value="${m}"${s[m]?' disabled':''}>${cap(m)}${s[m]?' ✓':''}</option>`).join('')}
       </select>
       <button class="sbtn sbtn-breakfast" onclick="setMealManual()">Save</button>
     </div>`;
-
-    // Resting / DND
     const restActive=st==='resting';const dndActive=st==='dnd';
     btns+=`<div class="shift-btn-grid row-2" style="margin-top:0.5rem">
-      <button class="sbtn sbtn-resting${restActive?' active':''}" onclick="setOverlayStatus('resting')">
-        ${restActive?'&#9675; Resting':'Resting'}
-      </button>
-      <button class="sbtn sbtn-dnd${dndActive?' active':''}" onclick="setOverlayStatus('dnd')">
-        ${dndActive?'&#9888; Do Not Disturb':'Do Not Disturb'}
-      </button>
+      <button class="sbtn sbtn-resting${restActive?' active':''}" onclick="setOverlayStatus('resting')">${restActive?'&#9675; Resting':'Resting'}</button>
+      <button class="sbtn sbtn-dnd${dndActive?' active':''}" onclick="setOverlayStatus('dnd')">${dndActive?'&#9888; Do Not Disturb':'Do Not Disturb'}</button>
     </div>`;
   }
-
   return `<div class="staff-card ${cardClass(st)}">
     <div class="staff-card-header">
       <div class="staff-name-row">
         <div class="crew-avatar" style="width:28px;height:28px;font-size:0.8rem">${initials(u.name)}</div>
-        <div>
-          <span class="staff-card-name">${u.name}</span>
-          ${isMe?'<span class="staff-you-tag"> (you)</span>':''}
-        </div>
+        <div><span class="staff-card-name">${u.name}</span>${isMe?'<span class="staff-you-tag"> (you)</span>':''}</div>
       </div>
       <span class="staff-status-highlight ${statusHlClass(st)}">${statusLabel(st)}</span>
     </div>
@@ -763,187 +764,117 @@ function buildStaffCard(u){
     ${btns}
   </div>`;
 }
-
-function toggleManual(id){
-  const el=document.getElementById(id);
-  el.classList.toggle('visible');
-}
-
+function toggleManual(id){document.getElementById(id).classList.toggle('visible');}
 function tsFromTimeInput(inputId){
-  const val=document.getElementById(inputId).value;
-  if(!val)return null;
-  const [h,m]=val.split(':').map(Number);
-  const d=new Date();d.setHours(h,m,0,0);return d.getTime();
+  const val=document.getElementById(inputId).value;if(!val)return null;
+  const [h,m]=val.split(':').map(Number);const d=new Date();d.setHours(h,m,0,0);return d.getTime();
 }
-
 async function shiftIn(ts){
-  if(!currentUser)return;
-  const t=ts||Date.now();
-  const key=todayKey();
-  if(!data.shifts)data.shifts={};
-  if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
+  if(!currentUser)return;const t=ts||Date.now();const key=todayKey();
+  if(!data.shifts)data.shifts={};if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
   if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={sessions:[],status:'off'};
-  const day=data.shifts[currentUser.phone][key];
-  if(!day.sessions)day.sessions=[];
-  // Only add if not currently on shift
-  if(day.sessions.length&&!day.sessions[day.sessions.length-1].end){return;}
-  day.sessions.push({start:t});
-  day.status='on';
-  renderShifts();
+  const day=data.shifts[currentUser.phone][key];if(!day.sessions)day.sessions=[];
+  if(day.sessions.length&&!day.sessions[day.sessions.length-1].end)return;
+  day.sessions.push({start:t});day.status='on';renderShifts();
   await pushData(`Shift start: ${currentUser.name}`,'shift-save-indicator');
 }
 async function shiftOut(ts){
-  if(!currentUser)return;
-  const t=ts||Date.now();
-  const key=todayKey();
+  if(!currentUser)return;const t=ts||Date.now();const key=todayKey();
   const day=data.shifts&&data.shifts[currentUser.phone]&&data.shifts[currentUser.phone][key];
   if(!day||!day.sessions||!day.sessions.length)return;
-  const last=day.sessions[day.sessions.length-1];
-  if(last.end)return;
-  last.end=t;
-  day.status='off';
-  renderShifts();
+  const last=day.sessions[day.sessions.length-1];if(last.end)return;
+  last.end=t;day.status='off';renderShifts();
   await pushData(`Shift end: ${currentUser.name}`,'shift-save-indicator');
 }
-async function shiftInManual(){
-  const ts=tsFromTimeInput('manual-shift-time');
-  if(!ts){alert('Please enter a time.');return;}
-  await shiftIn(ts);
-  document.getElementById('manual-shift').classList.remove('visible');
-}
-async function shiftOutManual(){
-  const ts=tsFromTimeInput('manual-shift-time');
-  if(!ts){alert('Please enter a time.');return;}
-  await shiftOut(ts);
-  document.getElementById('manual-shift').classList.remove('visible');
-}
-
+async function shiftInManual(){const ts=tsFromTimeInput('manual-shift-time');if(!ts){alert('Please enter a time.');return;}await shiftIn(ts);document.getElementById('manual-shift').classList.remove('visible');}
+async function shiftOutManual(){const ts=tsFromTimeInput('manual-shift-time');if(!ts){alert('Please enter a time.');return;}await shiftOut(ts);document.getElementById('manual-shift').classList.remove('visible');}
 async function setMeal(meal,ts){
-  if(!currentUser)return;
-  const t=ts||Date.now();
-  const key=todayKey();
-  if(!data.shifts)data.shifts={};
-  if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
+  if(!currentUser)return;const t=ts||Date.now();const key=todayKey();
+  if(!data.shifts)data.shifts={};if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
   if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={sessions:[],status:'off'};
   if(data.shifts[currentUser.phone][key][meal])return;
-  data.shifts[currentUser.phone][key][meal]=t;
-  renderShifts();
+  data.shifts[currentUser.phone][key][meal]=t;renderShifts();
   await pushData(`${meal} marked: ${currentUser.name}`,'shift-save-indicator');
 }
 async function setMealManual(){
-  const ts=tsFromTimeInput('manual-meal-time');
-  const meal=document.getElementById('manual-meal-select').value;
-  if(!ts){alert('Please enter a time.');return;}
-  if(!meal){alert('Please select a meal.');return;}
-  await setMeal(meal,ts);
-  document.getElementById('manual-meals').classList.remove('visible');
+  const ts=tsFromTimeInput('manual-meal-time');const meal=document.getElementById('manual-meal-select').value;
+  if(!ts){alert('Please enter a time.');return;}if(!meal){alert('Please select a meal.');return;}
+  await setMeal(meal,ts);document.getElementById('manual-meals').classList.remove('visible');
 }
-
 async function setOverlayStatus(status){
-  if(!currentUser)return;
-  const key=todayKey();
-  if(!data.shifts)data.shifts={};
-  if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
+  if(!currentUser)return;const key=todayKey();
+  if(!data.shifts)data.shifts={};if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
   if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={sessions:[],status:'off'};
   const current=data.shifts[currentUser.phone][key].status;
   const onShift=isCurrentlyOnShift(data.shifts[currentUser.phone][key]);
   data.shifts[currentUser.phone][key].status=current===status?(onShift?'on':'off'):status;
-  renderShifts();
-  await pushData(`Status: ${currentUser.name}`,'shift-save-indicator');
+  renderShifts();await pushData(`Status: ${currentUser.name}`,'shift-save-indicator');
 }
 
-// ── PIN + HISTORY REPORT ──
-function openPinOverlay(){pinReset();openOverlay('pin-overlay');}
+// ── PIN (shared, context-aware) ──
+function openPinFor(ctx){pinContext=ctx;pinReset();document.getElementById('pin-title').textContent=ctx==='camping'?'Enter PIN to Edit':'Enter PIN to View History';openOverlay('pin-overlay');}
 function pinReset(){pinBuffer='';updatePinDots();document.getElementById('pin-error').textContent='';}
-function pinKey(k){
-  if(pinBuffer.length>=4)return;
-  pinBuffer+=k;updatePinDots();
-  if(pinBuffer.length===4)setTimeout(checkPin,120);
-}
+function pinKey(k){if(pinBuffer.length>=4)return;pinBuffer+=k;updatePinDots();if(pinBuffer.length===4)setTimeout(checkPin,120);}
 function pinBackspace(){if(pinBuffer.length)pinBuffer=pinBuffer.slice(0,-1);updatePinDots();}
 function pinClear(){pinBuffer='';updatePinDots();}
-function updatePinDots(){
-  for(let i=0;i<4;i++){const d=document.getElementById('pd'+i);if(d)d.classList.toggle('filled',i<pinBuffer.length);}
-}
+function updatePinDots(){for(let i=0;i<4;i++){const d=document.getElementById('pd'+i);if(d)d.classList.toggle('filled',i<pinBuffer.length);}}
 function checkPin(){
   if(pinBuffer===MANAGER_PIN){
-    closeOverlay('pin-overlay');pinReset();openHistoryReport();
+    closeOverlay('pin-overlay');pinReset();
+    if(pinContext==='history')openHistoryReport();
+    else if(pinContext==='camping')enterCampEditMode();
   }else{
     document.getElementById('pin-error').textContent='Incorrect PIN. Try again.';
     pinBuffer='';updatePinDots();
   }
 }
 
+// ── HISTORY REPORT ──
 function openHistoryReport(){
-  // Default date range: last 7 days
   const today=new Date();const from=new Date();from.setDate(today.getDate()-6);
   document.getElementById('rpt-from').value=from.toISOString().slice(0,10);
   document.getElementById('rpt-to').value=today.toISOString().slice(0,10);
-  // Populate person filter
-  const sel=document.getElementById('rpt-person');
-  sel.innerHTML='<option value="">All Staff</option>';
-  getMergedCrew().forEach(u=>{
-    const o=document.createElement('option');o.value=u.phone;o.textContent=u.name;sel.appendChild(o);
-  });
-  renderReport();
-  openOverlay('history-overlay');
+  const sel=document.getElementById('rpt-person');sel.innerHTML='<option value="">All Staff</option>';
+  getMergedCrew().forEach(u=>{const o=document.createElement('option');o.value=u.phone;o.textContent=u.name;sel.appendChild(o);});
+  renderReport();openOverlay('history-overlay');
 }
-
 function renderReport(){
-  const fromVal=document.getElementById('rpt-from').value;
-  const toVal=document.getElementById('rpt-to').value;
+  const fromVal=document.getElementById('rpt-from').value;const toVal=document.getElementById('rpt-to').value;
   const personFilter=document.getElementById('rpt-person').value;
   const fromTs=fromVal?new Date(fromVal).setHours(0,0,0,0):0;
   const toTs=toVal?new Date(toVal).setHours(23,59,59,999):Date.now();
-
   const crew=getMergedCrew().filter(u=>!personFilter||u.phone===personFilter);
   if(!data||!data.shifts){document.getElementById('report-body').innerHTML='<div class="empty-state">No shift data yet.</div>';return;}
-
-  // Collect all day entries within range
   let rows=[];
   crew.forEach(u=>{
     const userShifts=data.shifts[u.phone]||{};
     Object.entries(userShifts).forEach(([dateKey,day])=>{
-      // dateKey format: DD-MM-YYYY
       const parts=dateKey.split('-');
       const dayTs=new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).getTime();
       if(dayTs<fromTs||dayTs>toTs)return;
-      const sessions=(day.sessions||[]);
-      const hasMeals=day.breakfast||day.lunch||day.dinner;
+      const sessions=(day.sessions||[]);const hasMeals=day.breakfast||day.lunch||day.dinner;
       if(!sessions.length&&!hasMeals)return;
       rows.push({name:u.name,dateKey,dayTs,day});
     });
   });
-
   rows.sort((a,b)=>b.dayTs-a.dayTs||(a.name.localeCompare(b.name)));
-
   if(!rows.length){document.getElementById('report-body').innerHTML='<div class="empty-state" style="padding:1.5rem">No records found for selected range.</div>';return;}
-
   const meals=['breakfast','lunch','dinner'];
   const tableRows=rows.map(r=>{
-    const {name,dateKey,day}=r;
-    const dateParts=dateKey.split('-');
+    const {name,dateKey,day}=r;const dateParts=dateKey.split('-');
     const displayDate=`${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
     const sessions=(day.sessions||[]);
-    const sessText=sessions.length
-      ?sessions.map(ss=>`${formatTimeOnly(ss.start)} &rarr; ${ss.end?formatTimeOnly(ss.end):'ongoing'}`).join('<br>')
-      :'<span style="color:rgba(160,136,80,0.4)">—</span>';
-    const mealCells=meals.map(m=>day[m]
-      ?`<td class="rpt-meal-done">&#10003; ${formatTimeOnly(day[m])}</td>`
-      :`<td class="rpt-meal-none">&mdash;</td>`).join('');
+    const sessText=sessions.length?sessions.map(ss=>`${formatTimeOnly(ss.start)} &rarr; ${ss.end?formatTimeOnly(ss.end):'ongoing'}`).join('<br>'):'<span style="color:rgba(160,136,80,0.4)">—</span>';
+    const mealCells=meals.map(m=>day[m]?`<td class="rpt-meal-done">&#10003; ${formatTimeOnly(day[m])}</td>`:`<td class="rpt-meal-none">&mdash;</td>`).join('');
     return `<tr><td class="rpt-name">${name}</td><td style="color:var(--dust)">${displayDate}</td><td style="line-height:1.7">${sessText}</td>${mealCells}</tr>`;
   }).join('');
-
   document.getElementById('report-body').innerHTML=`<table class="rpt-table">
     <thead><tr><th>Name</th><th>Date</th><th>Shift Times</th><th>Bfast</th><th>Lunch</th><th>Dinner</th></tr></thead>
-    <tbody>${tableRows}</tbody>
-  </table>`;
+    <tbody>${tableRows}</tbody></table>`;
 }
-
 function printShiftReport(){
   const content=document.getElementById('report-body').innerHTML;
-  const fromVal=document.getElementById('rpt-from').value;
-  const toVal=document.getElementById('rpt-to').value;
+  const fromVal=document.getElementById('rpt-from').value;const toVal=document.getElementById('rpt-to').value;
   const w=window.open('','_blank');
   w.document.write(`<!DOCTYPE html><html><head><title>CMC Rocks — Shift Report</title>
   <style>body{font-family:Arial,sans-serif;font-size:12px;padding:20px;color:#111}
@@ -959,11 +890,98 @@ function printShiftReport(){
   w.document.close();w.print();
 }
 
-// ── REGISTRATION ──
-function showRegForm(){
-  document.getElementById('reg-form').style.display='block';document.getElementById('pick-form').style.display='none';
-  document.getElementById('reg-title').textContent='Register to Continue';
+// ── CAMPING TAB ──
+function renderCamping(){
+  if(!data)return;
+  const gates=data.gates||[];
+  const el=document.getElementById('gates-list');
+  if(!gates.length&&!campEditMode){
+    el.innerHTML='<div class="empty-state">No gates added yet.</div>';return;
+  }
+  if(campEditMode){
+    // Render editable gate editors
+    el.innerHTML=gates.map((g,i)=>buildGateEditor(g,i)).join('');
+  }else{
+    el.innerHTML=gates.map(g=>{
+      const isOpen=g.status==='open';
+      return `<div class="gate-card ${isOpen?'gate-open':'gate-closed'}">
+        <div class="gate-status-dot"></div>
+        <div class="gate-info">
+          <div class="gate-name">${g.name}</div>
+          <div class="gate-times">
+            <span style="color:var(--dust)">Open: </span><span>${g.open||'—'}</span>
+            &ensp;<span style="color:var(--dust)">Close: </span><span>${g.close||'—'}</span>
+          </div>
+          ${g.notes?`<div class="gate-notes">${g.notes}</div>`:''}
+        </div>
+        <span class="gate-status-pill">${isOpen?'Open':'Closed'}</span>
+      </div>`;
+    }).join('');
+  }
 }
+
+function buildGateEditor(g,i){
+  return `<div class="gate-editor" id="gate-editor-${i}">
+    <div class="gate-editor-row">
+      <div><span class="gate-editor-label">Gate Name</span><input type="text" value="${g.name||''}" placeholder="e.g. Main Gate" oninput="updateGateField(${i},'name',this.value)"></div>
+      <div><span class="gate-editor-label">Status</span>
+        <select onchange="updateGateField(${i},'status',this.value)">
+          <option value="open"${g.status==='open'?' selected':''}>Open</option>
+          <option value="closed"${g.status==='closed'?' selected':''}>Closed</option>
+        </select>
+      </div>
+    </div>
+    <div class="gate-editor-row">
+      <div><span class="gate-editor-label">Opens</span><input type="time" value="${g.open||''}" oninput="updateGateField(${i},'open',this.value)"></div>
+      <div><span class="gate-editor-label">Closes</span><input type="time" value="${g.close||''}" oninput="updateGateField(${i},'close',this.value)"></div>
+    </div>
+    <div><span class="gate-editor-label">Notes (optional)</span><textarea placeholder="Any extra info..." oninput="updateGateField(${i},'notes',this.value)">${g.notes||''}</textarea></div>
+    <div class="gate-editor-actions">
+      <button class="btn btn-sm" style="background:rgba(245,66,23,0.2);border:1px solid rgba(245,66,23,0.3);color:var(--rust);font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.14em;cursor:pointer;padding:0.35rem 0.8rem;border-radius:3px" onclick="removeGate(${i})">&#10005; Remove</button>
+    </div>
+  </div>`;
+}
+
+function updateGateField(i,field,val){
+  if(!data.gates)data.gates=[];
+  if(data.gates[i])data.gates[i][field]=val;
+}
+
+function addGateEditor(){
+  if(!data.gates)data.gates=[];
+  data.gates.push({name:'',status:'closed',open:'',close:'',notes:''});
+  renderCamping();
+}
+
+function removeGate(i){
+  if(!data.gates)return;
+  data.gates.splice(i,1);renderCamping();
+}
+
+function enterCampEditMode(){
+  campEditMode=true;
+  document.getElementById('camp-edit-mode-tag').style.display='inline-block';
+  document.getElementById('camp-edit-btn').style.display='none';
+  document.getElementById('gate-add-btn-wrap').style.display='block';
+  document.getElementById('camp-edit-done-wrap').style.display='block';
+  renderCamping();
+}
+
+async function exitCampEditMode(){
+  campEditMode=false;
+  document.getElementById('camp-edit-mode-tag').style.display='none';
+  document.getElementById('camp-edit-btn').style.display='inline-block';
+  document.getElementById('gate-add-btn-wrap').style.display='none';
+  document.getElementById('camp-edit-done-wrap').style.display='none';
+  if(!data.gates)data.gates=[];
+  // Filter out any blank gates
+  data.gates=data.gates.filter(g=>g.name.trim());
+  renderCamping();
+  await pushData('Update gate times','camp-save-indicator');
+}
+
+// ── REGISTRATION ──
+function showRegForm(){document.getElementById('reg-form').style.display='block';document.getElementById('pick-form').style.display='none';document.getElementById('reg-title').textContent='Register to Continue';}
 function showPickList(){
   document.getElementById('reg-form').style.display='none';document.getElementById('pick-form').style.display='block';
   document.getElementById('reg-title').textContent='Select Your Name';
@@ -983,44 +1001,29 @@ async function submitReg(){
   const name=document.getElementById('reg-name').value.trim();const phone=document.getElementById('reg-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};saveUser(user);addLocalCrew(user);
-  if(!data)data={crew:[],radioLog:[],shifts:{}};
+  if(!data)data={crew:[],radioLog:[],shifts:{},gates:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('reg-overlay');showApp();
 }
 function showPickOverlay(){
   hidePickOverlayReg();openOverlay('pick-overlay');
-  renderPickList('pick-overlay-list',u=>{
-    saveUser(u);closeOverlay('pick-overlay');
-    document.getElementById('header-avatar').textContent=initials(u.name);
-    document.getElementById('header-name').textContent=u.name.split(' ')[0];
-  });
+  renderPickList('pick-overlay-list',u=>{saveUser(u);closeOverlay('pick-overlay');document.getElementById('header-avatar').textContent=initials(u.name);document.getElementById('header-name').textContent=u.name.split(' ')[0];});
 }
-function showPickOverlayReg(){
-  document.getElementById('pick-overlay-list-wrap').style.display='none';
-  document.getElementById('pick-overlay-reg').style.display='block';
-  document.getElementById('pick-overlay-sub').textContent='New Crew Member';
-  document.getElementById('por-name').value='';document.getElementById('por-phone').value='';
-}
-function hidePickOverlayReg(){
-  document.getElementById('pick-overlay-list-wrap').style.display='block';
-  document.getElementById('pick-overlay-reg').style.display='none';
-  document.getElementById('pick-overlay-sub').textContent='Who are you?';
-}
+function showPickOverlayReg(){document.getElementById('pick-overlay-list-wrap').style.display='none';document.getElementById('pick-overlay-reg').style.display='block';document.getElementById('pick-overlay-sub').textContent='New Crew Member';document.getElementById('por-name').value='';document.getElementById('por-phone').value='';}
+function hidePickOverlayReg(){document.getElementById('pick-overlay-list-wrap').style.display='block';document.getElementById('pick-overlay-reg').style.display='none';document.getElementById('pick-overlay-sub').textContent='Who are you?';}
 async function submitPickOverlayReg(){
   const name=document.getElementById('por-name').value.trim();const phone=document.getElementById('por-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};saveUser(user);addLocalCrew(user);
-  if(!data)data={crew:[],radioLog:[],shifts:{}};
+  if(!data)data={crew:[],radioLog:[],shifts:{},gates:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
-  closeOverlay('pick-overlay');
-  document.getElementById('header-avatar').textContent=initials(user.name);
-  document.getElementById('header-name').textContent=user.name.split(' ')[0];
+  closeOverlay('pick-overlay');document.getElementById('header-avatar').textContent=initials(user.name);document.getElementById('header-name').textContent=user.name.split(' ')[0];
 }
 function showApp(){
   document.getElementById('app').style.display='block';
   document.getElementById('header-avatar').textContent=initials(currentUser.name);
   document.getElementById('header-name').textContent=currentUser.name.split(' ')[0];
-  if(data){renderRadios();renderShifts();}
+  if(data){renderRadios();renderShifts();renderCamping();}
 }
 init();
 </script>
