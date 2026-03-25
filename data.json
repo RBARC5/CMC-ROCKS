@@ -4,29 +4,113 @@
   "announcements": [],
   "emergency": {
     "contacts": [
-      {
-        "role": "Site Emergency",
-        "number": "000"
-      },
-      {
-        "role": "Festival Medical",
-        "number": "TBC"
-      },
-      {
-        "role": "Site Manager",
-        "number": "TBC"
-      }
+      { "role": "Site Emergency", "number": "000" },
+      { "role": "Festival Medical", "number": "TBC" },
+      { "role": "Site Manager", "number": "TBC" }
     ]
   },
   "timetables": [],
   "signins": [],
   "radioLog": [],
-  "shifts": {
-    "0452511922": {
-      "26-03-2026": {
-        "sessions": [],
-        "status": "off"
-      }
+  "shifts": {},
+  "gates": [
+    {
+      "name": "All Campgrounds — Wed 18 March",
+      "status": "closed",
+      "open": "09:00",
+      "close": "21:00",
+      "notes": "Open to CMC Rocks QLD Campers Only"
+    },
+    {
+      "name": "Tailgate — Wed 18 March",
+      "status": "closed",
+      "open": "16:30",
+      "close": "00:00",
+      "notes": "Open to CMC Rocks QLD Campers Only"
+    },
+    {
+      "name": "All Campgrounds — Thu 19 March",
+      "status": "closed",
+      "open": "09:00",
+      "close": "21:00",
+      "notes": "Open to CMC Rocks QLD Campers Only"
+    },
+    {
+      "name": "Tailgate — Thu 19 March",
+      "status": "closed",
+      "open": "12:00",
+      "close": "01:30",
+      "notes": "Open to CMC Rocks QLD Campers Only"
+    },
+    {
+      "name": "Festival Gates — Fri 20 March",
+      "status": "closed",
+      "open": "09:15",
+      "close": "23:15",
+      "notes": "Festival Day"
+    },
+    {
+      "name": "Camping — Fri 20 March",
+      "status": "closed",
+      "open": "09:00",
+      "close": "21:00",
+      "notes": "Festival Day"
+    },
+    {
+      "name": "Tailgate — Fri 20 March",
+      "status": "closed",
+      "open": "",
+      "close": "",
+      "notes": "General Public close 11:15pm — Campers close 1:30am"
+    },
+    {
+      "name": "Festival Gates — Sat 21 March",
+      "status": "closed",
+      "open": "09:15",
+      "close": "23:15",
+      "notes": "Festival Day"
+    },
+    {
+      "name": "Camping — Sat 21 March",
+      "status": "closed",
+      "open": "09:00",
+      "close": "17:00",
+      "notes": "Festival Day"
+    },
+    {
+      "name": "Tailgate — Sat 21 March",
+      "status": "closed",
+      "open": "",
+      "close": "",
+      "notes": "General Public close 11:15pm — Campers close 1:30am"
+    },
+    {
+      "name": "Festival Gates — Sun 22 March",
+      "status": "closed",
+      "open": "09:15",
+      "close": "22:40",
+      "notes": "Festival Day"
+    },
+    {
+      "name": "Camping — Sun 22 March",
+      "status": "closed",
+      "open": "09:00",
+      "close": "17:00",
+      "notes": "Festival Day"
+    },
+    {
+      "name": "Tailgate — Sun 22 March",
+      "status": "closed",
+      "open": "",
+      "close": "",
+      "notes": "General Public close 10:40pm — Campers close 1:00am"
+    },
+    {
+      "name": "Camping — Mon 23 March",
+      "status": "closed",
+      "open": "",
+      "close": "12:00",
+      "notes": "Close out day"
     }
-  }
+  ]
 }
