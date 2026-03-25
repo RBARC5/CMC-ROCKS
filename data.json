@@ -21,5 +21,12 @@
   "timetables": [],
   "signins": [],
   "radioLog": [],
-  "shifts": {}
+  "shifts": {
+    "0452511922": {
+      "26-03-2026": {
+        "sessions": [],
+        "status": "off"
+      }
+    }
+  }
 }
