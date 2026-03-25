@@ -72,8 +72,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .save-err{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
 #pick-overlay-reg{display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:1.2rem}
 .prefill-hint{font-size:0.7rem;color:var(--olive);margin-top:-0.6rem;margin-bottom:0.8rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em}
-
-/* FAULT WARNING MODAL */
 .fault-warning-box{background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.55);border-radius:5px;padding:1.2rem;margin-bottom:1.4rem}
 .fault-warning-box .fw-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em;color:#e74c3c;margin-bottom:0.3rem}
 .fault-warning-box .fw-radio{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.18em;color:var(--gold);margin-bottom:0.6rem}
@@ -108,7 +106,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- FAULT WARNING — shown before sign-out if radio has fault logged -->
 <div class="overlay hidden" id="fault-warn-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -129,7 +126,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO SIGN OUT -->
 <div class="overlay hidden" id="radio-out-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -237,15 +233,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 </div>
 
 <script>
+// All reads AND writes go through the Cloudflare Worker proxy
+// Proxy reads directly from GitHub API — no CDN lag, always current
 const PROXY = 'https://cmc-rocks-proxy.8gonula.workers.dev';
-const RAW   = 'https://raw.githubusercontent.com/RBARC5/CMC-ROCKS/main/data.json';
 
-let data=null, currentUser=null, pollTimer=null, activeReturnId=null;
-let writeLockUntil=0;
-// Stores sign-out data while user is on the fault warning screen
-let pendingSignOut=null;
-
-function lockWrites(){writeLockUntil=Date.now()+40000;}
+let data=null, currentUser=null, pollTimer=null, activeReturnId=null, pendingSignOut=null;
 
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
@@ -259,19 +251,16 @@ function getMergedCrew(){
   local.forEach(u=>{if(!merged.find(c=>c.phone===u.phone))merged.push(u);});
   return merged;
 }
-
 function getKnownRadios(){
   const log=(data&&data.radioLog)?data.radioLog:[];
   const map={};
-  log.forEach(e=>{if(e.siteId&&e.deptId) map[e.siteId]=e.deptId;});
+  log.forEach(e=>{if(e.siteId&&e.deptId)map[e.siteId]=e.deptId;});
   return map;
 }
-
-// Returns the last log entry for a given radio, or null
-function getLastEntry(siteId, deptId){
+function getLastEntry(siteId,deptId){
   const log=(data&&data.radioLog)?data.radioLog:[];
   const entries=log.filter(e=>e.siteId===siteId&&e.deptId===deptId);
-  return entries.length ? entries[entries.length-1] : null;
+  return entries.length?entries[entries.length-1]:null;
 }
 
 async function init(){
@@ -289,11 +278,16 @@ async function init(){
   startPolling();
 }
 
+// ── READ via proxy — GitHub API, no CDN, always fresh ──
 async function fetchData(){
-  if(Date.now()<writeLockUntil) return;
   try{
-    const r=await fetch(RAW+'?t='+Date.now());
-    data=await r.json();
+    const resp=await fetch(PROXY,{headers:{'Accept':'application/json'}});
+    const meta=await resp.json();
+    // Proxy returns the GitHub file object — content is base64 encoded
+    if(meta.content){
+      const decoded=decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));
+      data=JSON.parse(decoded);
+    }
   }catch(e){
     if(!data)data={crew:[],radioLog:[]};
     console.warn('Fetch failed',e);
@@ -302,16 +296,19 @@ async function fetchData(){
 
 function startPolling(){
   if(pollTimer)clearInterval(pollTimer);
-  pollTimer=setInterval(async()=>{await fetchData();renderRadios();},10000);
+  // Poll every 8 seconds via proxy — always get live data, no CDN lag
+  pollTimer=setInterval(async()=>{await fetchData();renderRadios();},8000);
 }
 
+// ── WRITE via proxy ──
 async function pushData(msg){
   showSaveStatus('saving');
   try{
+    // Get fresh SHA first
     const metaResp=await fetch(PROXY,{headers:{'Accept':'application/json'}});
     const meta=await metaResp.json();
     const sha=meta.sha;
-    if(!sha) throw new Error('No SHA from proxy');
+    if(!sha)throw new Error('No SHA from proxy');
     const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
     const resp=await fetch(PROXY,{
       method:'PUT',
@@ -322,7 +319,6 @@ async function pushData(msg){
     showSaveStatus('ok');
   }catch(e){
     console.error('pushData error:',e);
-    writeLockUntil=0;
     showSaveStatus('err');
   }
 }
@@ -338,7 +334,6 @@ function showSaveStatus(state){
 function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
 function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 
-// ── SIGN OUT MODAL ──
 function openSignOutModal(){
   const known=getKnownRadios();
   const sel=document.getElementById('ro-known');
@@ -348,7 +343,7 @@ function openSignOutModal(){
     const hasFault=last&&last.action==='fault';
     const opt=document.createElement('option');
     opt.value=siteId;
-    opt.textContent=`${siteId}  /  ${deptId}${hasFault?' ⚠ FAULT':'' }`;
+    opt.textContent=`${siteId}  /  ${deptId}${hasFault?' ⚠ FAULT':''}`;
     opt.dataset.deptid=deptId;
     sel.appendChild(opt);
   });
@@ -359,7 +354,6 @@ function openSignOutModal(){
   document.getElementById('ro-prefill-hint').style.display='none';
   openOverlay('radio-out-overlay');
 }
-
 function onKnownRadioSelect(){
   const sel=document.getElementById('ro-known');
   const opt=sel.options[sel.selectedIndex];
@@ -373,7 +367,6 @@ function onKnownRadioSelect(){
     document.getElementById('ro-prefill-hint').style.display='none';
   }
 }
-
 function onSiteIdInput(){
   const typed=document.getElementById('ro-siteid').value.trim().toUpperCase();
   const known=getKnownRadios();
@@ -381,15 +374,12 @@ function onSiteIdInput(){
     document.getElementById('ro-deptid').value=known[typed];
     document.getElementById('ro-prefill-hint').style.display='block';
     const sel=document.getElementById('ro-known');
-    for(let i=0;i<sel.options.length;i++){
-      if(sel.options[i].value===typed){sel.selectedIndex=i;break;}
-    }
+    for(let i=0;i<sel.options.length;i++){if(sel.options[i].value===typed){sel.selectedIndex=i;break;}}
   } else {
     document.getElementById('ro-prefill-hint').style.display='none';
   }
 }
 
-// ── CONFIRM SIGN OUT — checks for fault first ──
 async function confirmRadioOut(){
   if(!currentUser)return;
   const siteId=document.getElementById('ro-siteid').value.trim().toUpperCase();
@@ -397,11 +387,8 @@ async function confirmRadioOut(){
   const condition=document.getElementById('ro-condition').value;
   const notes=document.getElementById('ro-notes').value.trim();
   if(!siteId||!deptId){alert('Please select a radio or enter both Site ID and Department ID.');return;}
-
-  // Check if last entry for this radio is a fault
   const last=getLastEntry(siteId,deptId);
   if(last&&last.action==='fault'){
-    // Store the sign-out details and show warning
     pendingSignOut={siteId,deptId,condition,notes};
     document.getElementById('fw-radio-id').textContent=`${siteId}  /  ${deptId}`;
     document.getElementById('fw-reported-by').textContent=`Reported by ${last.by} on ${formatTime(last.time)}`;
@@ -410,12 +397,8 @@ async function confirmRadioOut(){
     openOverlay('fault-warn-overlay');
     return;
   }
-
-  // No fault — proceed directly
   await doSignOut(siteId,deptId,condition,notes);
 }
-
-// Called when user clicks "I Understand — Sign Out Anyway" on the fault warning
 async function proceedAfterFaultWarning(){
   closeOverlay('fault-warn-overlay');
   if(!pendingSignOut)return;
@@ -423,9 +406,7 @@ async function proceedAfterFaultWarning(){
   pendingSignOut=null;
   await doSignOut(siteId,deptId,condition,notes);
 }
-
 async function doSignOut(siteId,deptId,condition,notes){
-  lockWrites();
   if(!data.radioLog)data.radioLog=[];
   data.radioLog.push({action:'out',siteId,deptId,by:currentUser.name,time:Date.now(),condition,notes,id:Date.now().toString()});
   closeOverlay('radio-out-overlay');
@@ -433,7 +414,7 @@ async function doSignOut(siteId,deptId,condition,notes){
   await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`);
 }
 
-// ── REGISTRATION ──
+// REGISTRATION
 function showRegForm(){
   document.getElementById('reg-form').style.display='block';
   document.getElementById('pick-form').style.display='none';
@@ -461,12 +442,11 @@ async function submitReg(){
   const phone=document.getElementById('reg-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
-  lockWrites();saveUser(user);addLocalCrew(user);
+  saveUser(user);addLocalCrew(user);
   if(!data)data={crew:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('reg-overlay');showApp();
 }
-
 function showPickOverlay(){
   hidePickOverlayReg();
   openOverlay('pick-overlay');
@@ -493,7 +473,7 @@ async function submitPickOverlayReg(){
   const phone=document.getElementById('por-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
-  lockWrites();saveUser(user);addLocalCrew(user);
+  saveUser(user);addLocalCrew(user);
   if(!data)data={crew:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('pick-overlay');
@@ -567,7 +547,6 @@ function openReturnModal(){
   }
   openOverlay('radio-in-overlay');
 }
-
 function selectReturn(siteId,deptId){
   activeReturnId={siteId,deptId};
   document.getElementById('radio-ret-title').textContent=`Return: ${siteId} / ${deptId}`;
@@ -576,10 +555,8 @@ function selectReturn(siteId,deptId){
   closeOverlay('radio-in-overlay');
   openOverlay('radio-ret-overlay');
 }
-
 async function confirmRadioReturn(){
   if(!activeReturnId||!currentUser)return;
-  lockWrites();
   const condition=document.getElementById('rr-condition').value;
   const issues=document.getElementById('rr-issues').value.trim();
   const isFault=condition==='Faulty / Not working'||issues.length>0;
