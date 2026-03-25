@@ -46,6 +46,16 @@
       "condition": "Faulty / Not working",
       "notes": "screen cracked",
       "id": "1774439317266"
+    },
+    {
+      "action": "out",
+      "siteId": "S 2",
+      "deptId": "8",
+      "by": "Rhys Barclay",
+      "time": 1774439810576,
+      "condition": "Good",
+      "notes": "",
+      "id": "1774439810576"
     }
   ]
 }
