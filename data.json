@@ -10,102 +10,12 @@
   "announcements": [],
   "emergency": {
     "contacts": [
-      {
-        "role": "Site Emergency",
-        "number": "000"
-      },
-      {
-        "role": "Festival Medical",
-        "number": "TBC"
-      },
-      {
-        "role": "Site Manager",
-        "number": "TBC"
-      }
+      { "role": "Site Emergency", "number": "000" },
+      { "role": "Festival Medical", "number": "TBC" },
+      { "role": "Site Manager", "number": "TBC" }
     ]
   },
   "timetables": [],
   "signins": [],
-  "radioLog": [
-    {
-      "action": "out",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774438957467,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774438957467"
-    },
-    {
-      "action": "fault",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774439317266,
-      "condition": "Faulty / Not working",
-      "notes": "screen cracked",
-      "id": "1774439317266"
-    },
-    {
-      "action": "out",
-      "siteId": "SITE 228",
-      "deptId": "Traffic 8",
-      "by": "Rhys Barclay",
-      "time": 1774440005658,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774440005658"
-    },
-    {
-      "action": "in",
-      "siteId": "SITE 228",
-      "deptId": "Traffic 8",
-      "by": "Rhys Barclay",
-      "time": 1774440018970,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774440018970"
-    },
-    {
-      "action": "out",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774440087985,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774440087985"
-    },
-    {
-      "action": "in",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774440091409,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774440091409"
-    },
-    {
-      "action": "out",
-      "siteId": "SITE 228",
-      "deptId": "Traffic 8",
-      "by": "Rhys Barclay",
-      "time": 1774440593470,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774440593470"
-    },
-    {
-      "action": "in",
-      "siteId": "SITE 228",
-      "deptId": "Traffic 8",
-      "by": "Rhys Barclay",
-      "time": 1774440882455,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774440882455"
-    }
-  ]
+  "radioLog": []
 }
