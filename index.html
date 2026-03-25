@@ -67,7 +67,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .section.active{display:block}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.08em;color:var(--cream);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
 
-/* TODO */
 .todo-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.85rem;background:var(--panel);border:1px solid var(--border);border-radius:4px;margin-bottom:0.5rem;cursor:pointer;transition:background 0.15s}
 .todo-item:hover{background:rgba(244,233,211,0.04)}
 .todo-item.done{opacity:0.45}
@@ -81,7 +80,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .add-row input{flex:1;margin:0;padding:0.6rem 0.8rem;font-size:0.9rem}
 .add-row .btn{width:auto;padding:0.6rem 1rem;font-size:0.9rem}
 
-/* CREW SIGN IN */
 .signin-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1.2rem;margin-bottom:0.5rem;display:flex;align-items:center;justify-content:space-between}
 .signin-info .sname{font-weight:600;font-size:0.95rem}
 .signin-info .stime{font-size:0.75rem;color:var(--dust);margin-top:0.15rem}
@@ -91,57 +89,41 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .my-signin-btn{display:flex;gap:0.5rem;margin-bottom:1.2rem}
 .my-signin-btn .btn{font-size:0.9rem;padding:0.7rem}
 
-/* EMERGENCY */
 .emerg-card{background:rgba(245,66,23,0.1);border:1px solid rgba(245,66,23,0.3);border-radius:4px;padding:1rem;margin-bottom:0.6rem;display:flex;justify-content:space-between;align-items:center}
 .emerg-role{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:0.12em;color:var(--dust)}
 .emerg-num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;color:var(--rust)}
 
-/* CONTACTS */
 .contact-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:0.85rem 1rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem}
 .contact-info .cname{font-weight:600;font-size:0.95rem}
 .contact-num{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--gold);font-size:0.9rem}
 
-/* TIMETABLE */
 .tt-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1rem;margin-bottom:0.8rem}
 .tt-route{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.5rem}
 .tt-row{display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--border);font-size:0.88rem}
 .tt-row:last-child{border-bottom:none}
 .tt-time{color:var(--rust);font-family:'Barlow Condensed',sans-serif;font-weight:600}
 
-/* RADIO */
 .radio-toolbar{display:flex;gap:0.6rem;margin-bottom:1.2rem;flex-wrap:wrap}
 .radio-section-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);margin:1.2rem 0 0.5rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border)}
-
-/* Active loans */
 .loan-card{background:var(--panel);border:1px solid rgba(243,159,52,0.35);border-radius:5px;padding:1rem;margin-bottom:0.6rem}
-.loan-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem}
 .loan-ids .site-id{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.08em;color:var(--cream);line-height:1}
 .loan-ids .dept-id{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.78rem;letter-spacing:0.14em;color:var(--gold);margin-top:0.1rem}
-.loan-meta{font-size:0.75rem;color:var(--dust);line-height:1.6;margin-bottom:0.7rem}
+.loan-meta{font-size:0.75rem;color:var(--dust);line-height:1.6;margin-top:0.5rem}
 .loan-meta strong{color:var(--cream)}
-.fault-pill{display:inline-block;background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.45);border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.15rem 0.5rem;margin-bottom:0.5rem}
-
-/* History table */
+.fault-pill{display:inline-block;background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.45);border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.15rem 0.5rem;margin-top:0.4rem;display:block}
 .history-table{width:100%;border-collapse:collapse;font-size:0.78rem;margin-top:0.5rem}
 .history-table th{text-align:left;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust);padding:0.4rem 0.5rem;border-bottom:1px solid var(--border)}
 .history-table td{padding:0.5rem 0.5rem;border-bottom:1px solid rgba(244,233,211,0.05);vertical-align:top;line-height:1.4}
 .history-table tr:last-child td{border-bottom:none}
-.ht-out{color:var(--gold)}
-.ht-in{color:var(--olive)}
-.ht-fault{color:#e74c3c}
+.ht-out{color:var(--gold)}.ht-in{color:var(--olive)}.ht-fault{color:#e74c3c}
 
 .loading-text{text-align:center;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.2em;padding:2rem}
 .empty-state{text-align:center;color:var(--dust);font-size:0.85rem;padding:2rem 1rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em}
-
-.fault-warning{background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.5);border-radius:4px;padding:1rem;margin-bottom:1rem}
-.fault-warning h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.18em;text-transform:uppercase;color:#e74c3c;margin-bottom:0.4rem}
-.fault-warning p{font-size:0.85rem;color:var(--cream);line-height:1.5}
 </style>
 </head>
 <body>
 <div id="stripe-top"></div>
 
-<!-- REGISTRATION -->
 <div class="overlay" id="reg-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -162,7 +144,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO SIGN OUT MODAL -->
 <div class="overlay hidden" id="radio-out-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -186,18 +167,16 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO RETURN MODAL -->
 <div class="overlay hidden" id="radio-in-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
     <div class="modal-sub">Return 2-Way Radio</div>
-    <h2 id="radio-in-title">Select Radio to Return</h2>
+    <h2>Select Radio to Return</h2>
     <div id="radio-return-list"></div>
     <button class="btn secondary" onclick="closeOverlay('radio-in-overlay')">Cancel</button>
   </div>
 </div>
 
-<!-- RADIO RETURN DETAILS MODAL -->
 <div class="overlay hidden" id="radio-ret-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -217,7 +196,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- MAIN APP -->
 <div id="app" style="display:none">
   <div id="app-header">
     <div class="header-logo">CMC <span>Rocks</span> Crew</div>
@@ -238,7 +216,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
     <button class="tab-btn" onclick="showTab('emergency',this)">Emergency</button>
   </div>
   <div id="content">
-
     <div class="section active" id="tab-todo">
       <div class="section-title">Task List</div>
       <div id="todo-list"><div class="loading-text">Loading...</div></div>
@@ -247,7 +224,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
         <button class="btn" onclick="addTodo()">Add</button>
       </div>
     </div>
-
     <div class="section" id="tab-signin">
       <div class="section-title">Sign In / Out</div>
       <div class="my-signin-btn">
@@ -256,7 +232,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       </div>
       <div id="signin-list"><div class="loading-text">Loading...</div></div>
     </div>
-
     <div class="section" id="tab-radios">
       <div class="section-title">2-Way Radios</div>
       <div class="radio-toolbar">
@@ -267,26 +242,21 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       <div id="radio-active-section"></div>
       <div id="radio-history-section"></div>
     </div>
-
     <div class="section" id="tab-timetable">
       <div class="section-title">Bus Timetables</div>
       <div id="tt-list"><div class="loading-text">Loading...</div></div>
     </div>
-
     <div class="section" id="tab-contacts">
       <div class="section-title">Crew Contacts</div>
       <div id="contact-list"><div class="loading-text">Loading...</div></div>
     </div>
-
     <div class="section" id="tab-emergency">
       <div class="section-title">Emergency Info</div>
       <div id="emerg-list"><div class="loading-text">Loading...</div></div>
     </div>
-
   </div>
 </div>
 
-<!-- PICK OVERLAY -->
 <div class="overlay hidden" id="pick-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -302,17 +272,47 @@ const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/data.json`;
 const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/data.json`;
 let data=null,currentUser=null,pollTimer=null,activeReturnId=null;
 
-async function init(){
-  currentUser=loadUser();
-  await fetchData();
-  if(currentUser) showApp();
-  else openOverlay('reg-overlay');
-  startPolling();
-}
+// ── LOCAL STORAGE HELPERS ──
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
-async function fetchData(){try{const r=await fetch(RAW+'?t='+Date.now());data=await r.json()}catch(e){console.error(e)}}
-function startPolling(){if(pollTimer)clearInterval(pollTimer);pollTimer=setInterval(async()=>{await fetchData();renderAll()},10000)}
+
+// Local crew cache — persists across visits even when GitHub write fails
+function loadLocalCrew(){try{return JSON.parse(localStorage.getItem('cmcCrew'))||[]}catch{return[]}}
+function saveLocalCrew(crew){localStorage.setItem('cmcCrew',JSON.stringify(crew))}
+function addLocalCrew(user){
+  const crew=loadLocalCrew();
+  if(!crew.find(c=>c.phone===user.phone)){crew.push(user);saveLocalCrew(crew);}
+}
+
+// Merged crew list: GitHub data.json + local cache (deduplicated by phone)
+function getMergedCrew(){
+  const remote=(data&&data.crew)?data.crew:[];
+  const local=loadLocalCrew();
+  const merged=[...remote];
+  local.forEach(u=>{if(!merged.find(c=>c.phone===u.phone))merged.push(u);});
+  return merged;
+}
+
+// ── INIT ──
+async function init(){
+  // Load user from localStorage FIRST before anything else
+  currentUser=loadUser();
+  await fetchData();
+  if(currentUser){
+    showApp();
+  } else {
+    openOverlay('reg-overlay');
+  }
+  startPolling();
+}
+
+async function fetchData(){
+  try{const r=await fetch(RAW+'?t='+Date.now());data=await r.json();}catch(e){console.error(e);}
+}
+function startPolling(){
+  if(pollTimer)clearInterval(pollTimer);
+  pollTimer=setInterval(async()=>{await fetchData();renderAll();},10000);
+}
 async function pushData(msg){
   try{
     const meta=await fetch(API,{headers:{'Accept':'application/vnd.github.v3+json'}});
@@ -320,13 +320,13 @@ async function pushData(msg){
     const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
     const resp=await fetch(API,{method:'PUT',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({message:msg,content,sha:mj.sha})});
-    if(!resp.ok)console.warn('Push failed - proxy needed for writes');
-  }catch(e){console.warn(e)}
+    if(!resp.ok)console.warn('Push failed - write proxy not yet configured');
+  }catch(e){console.warn('Push error:',e);}
 }
 function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
 function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 
-// REGISTRATION
+// ── REGISTRATION ──
 function showRegForm(){
   document.getElementById('reg-form').style.display='block';
   document.getElementById('pick-form').style.display='none';
@@ -336,31 +336,36 @@ function showPickList(){
   document.getElementById('reg-form').style.display='none';
   document.getElementById('pick-form').style.display='block';
   document.getElementById('reg-title').textContent='Select Your Name';
-  renderPickList('pick-list',u=>{saveUser(u);closeOverlay('reg-overlay');showApp()});
+  renderPickList('pick-list',u=>{saveUser(u);closeOverlay('reg-overlay');showApp();});
 }
 function renderPickList(elId,onSelect){
   const el=document.getElementById(elId);
-  const crew=(data&&data.crew)?data.crew:[];
-  if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.</div>';return}
+  // Use merged crew (GitHub + local cache)
+  const crew=getMergedCrew();
+  if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.<br><small style="opacity:0.6">Register using the form.</small></div>';return;}
   el.innerHTML=crew.map(u=>`<div class="crew-list-item" onclick='_pick(${JSON.stringify(u)},"${elId}")'>
     <div class="crew-avatar">${initials(u.name)}</div>
     <div><div class="crew-name">${u.name}</div><div class="crew-phone">${u.phone}</div></div>
   </div>`).join('');
   el._cb=onSelect;
 }
-function _pick(u,id){const el=document.getElementById(id);if(el&&el._cb)el._cb(u)}
+function _pick(u,id){const el=document.getElementById(id);if(el&&el._cb)el._cb(u);}
 async function submitReg(){
   const name=document.getElementById('reg-name').value.trim();
   const phone=document.getElementById('reg-phone').value.trim();
-  if(!name||!phone){alert('Please enter your name and phone number.');return}
+  if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
+  // Save to localStorage immediately — works even without GitHub write access
   saveUser(user);
+  addLocalCrew(user);
+  // Also try to push to GitHub (will fail silently until proxy is set up)
   if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
-  if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`)}
-  closeOverlay('reg-overlay');showApp();
+  if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
+  closeOverlay('reg-overlay');
+  showApp();
 }
 
-// APP
+// ── APP ──
 function showApp(){
   document.getElementById('app').style.display='block';
   document.getElementById('header-avatar').textContent=initials(currentUser.name);
@@ -387,11 +392,11 @@ function renderAll(){
   renderTodos();renderSignins();renderRadios();renderTimetables();renderContacts();renderEmergency();
 }
 
-// TODO
+// ── TODO ──
 function renderTodos(){
   const el=document.getElementById('todo-list');
   const todos=data.todos||[];
-  if(!todos.length){el.innerHTML='<div class="empty-state">No tasks yet. Add one below.</div>';return}
+  if(!todos.length){el.innerHTML='<div class="empty-state">No tasks yet. Add one below.</div>';return;}
   el.innerHTML=todos.map((t,i)=>`
     <div class="todo-item ${t.done?'done':''}" onclick="toggleTodo(${i})">
       <div class="todo-check"><svg class="todo-check-icon" width="12" height="12" viewBox="0 0 12 12">
@@ -415,11 +420,11 @@ async function addTodo(){
   renderTodos();await pushData(`Add todo: ${text}`);
 }
 
-// CREW SIGN IN/OUT
+// ── CREW SIGN IN/OUT ──
 function renderSignins(){
   const el=document.getElementById('signin-list');
   const s=data.signins||[];
-  if(!s.length){el.innerHTML='<div class="empty-state">No sign-ins recorded yet.</div>';return}
+  if(!s.length){el.innerHTML='<div class="empty-state">No sign-ins recorded yet.</div>';return;}
   el.innerHTML=[...s].sort((a,b)=>b.time-a.time).map(s=>`
     <div class="signin-card">
       <div class="signin-info"><div class="sname">${s.name}</div><div class="stime">${formatTime(s.time)}</div></div>
@@ -442,12 +447,9 @@ async function doSignOut(){
 // ── RADIOS ──
 function renderRadios(){
   const log=data.radioLog||[];
-  // Active loans = sign-outs with no matching return after them
   const active=getActiveLoans(log);
   const activeEl=document.getElementById('radio-active-section');
   const histEl=document.getElementById('radio-history-section');
-
-  // Active loans
   if(!active.length){
     activeEl.innerHTML='<div class="radio-section-label">Currently Signed Out</div><div class="empty-state" style="padding:1rem">No radios currently signed out.</div>';
   } else {
@@ -455,24 +457,12 @@ function renderRadios(){
       active.map(e=>{
         const fault=e.condition==='Faulty / Not working'||e.notes;
         return `<div class="loan-card">
-          <div class="loan-header">
-            <div class="loan-ids">
-              <div class="site-id">${e.siteId}</div>
-              <div class="dept-id">${e.deptId}</div>
-            </div>
-          </div>
+          <div class="loan-ids"><div class="site-id">${e.siteId}</div><div class="dept-id">${e.deptId}</div></div>
           ${fault?`<div class="fault-pill">&#9888; Issue noted on sign-out</div>`:''}
-          <div class="loan-meta">
-            Signed out by <strong>${e.by}</strong><br>
-            ${formatTime(e.time)}<br>
-            Condition: ${e.condition}
-            ${e.notes?`<br>Notes: ${e.notes}`:''}
-          </div>
+          <div class="loan-meta">Signed out by <strong>${e.by}</strong><br>${formatTime(e.time)}<br>Condition: ${e.condition}${e.notes?`<br>Notes: ${e.notes}`:''}</div>
         </div>`;
       }).join('');
   }
-
-  // Full history
   if(!log.length){
     histEl.innerHTML='<div class="radio-section-label">Full History</div><div class="empty-state" style="padding:1rem">No history yet.</div>';
   } else {
@@ -481,46 +471,29 @@ function renderRadios(){
       const label=e.action==='out'?'SIGN OUT':e.action==='in'?'RETURN':'FAULT';
       return `<tr>
         <td class="${cls}" style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em">${label}</td>
-        <td>${e.siteId} / ${e.deptId}</td>
-        <td>${e.by}</td>
-        <td>${formatTime(e.time)}</td>
-        <td>${e.condition||''}</td>
-        <td>${e.notes||''}</td>
+        <td>${e.siteId} / ${e.deptId}</td><td>${e.by}</td><td>${formatTime(e.time)}</td>
+        <td>${e.condition||''}</td><td>${e.notes||''}</td>
       </tr>`;
     }).join('');
     histEl.innerHTML=`<div class="radio-section-label">Full History</div>
-      <div style="overflow-x:auto">
-      <table class="history-table">
+      <div style="overflow-x:auto"><table class="history-table">
         <thead><tr><th>Action</th><th>Radio</th><th>By</th><th>Time</th><th>Condition</th><th>Notes</th></tr></thead>
         <tbody>${rows}</tbody>
       </table></div>`;
   }
 }
-
 function getActiveLoans(log){
-  // For each unique radio (siteId+deptId), find if last action is 'out'
   const radios={};
-  log.forEach(e=>{
-    const key=e.siteId+'|'+e.deptId;
-    if(!radios[key])radios[key]=[];
-    radios[key].push(e);
-  });
-  const active=[];
-  for(const key in radios){
-    const entries=radios[key];
-    const last=entries[entries.length-1];
-    if(last.action==='out')active.push(last);
-  }
-  return active;
+  log.forEach(e=>{const k=e.siteId+'|'+e.deptId;if(!radios[k])radios[k]=[];radios[k].push(e);});
+  return Object.values(radios).map(entries=>entries[entries.length-1]).filter(e=>e.action==='out');
 }
-
 async function confirmRadioOut(){
   if(!currentUser)return;
   const siteId=document.getElementById('ro-siteid').value.trim().toUpperCase();
   const deptId=document.getElementById('ro-deptid').value.trim();
   const condition=document.getElementById('ro-condition').value;
   const notes=document.getElementById('ro-notes').value.trim();
-  if(!siteId||!deptId){alert('Please enter both Site ID and Department ID.');return}
+  if(!siteId||!deptId){alert('Please enter both Site ID and Department ID.');return;}
   if(!data.radioLog)data.radioLog=[];
   data.radioLog.push({action:'out',siteId,deptId,by:currentUser.name,time:Date.now(),condition,notes,id:Date.now().toString()});
   document.getElementById('ro-siteid').value='';
@@ -531,10 +504,8 @@ async function confirmRadioOut(){
   renderRadios();
   await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`);
 }
-
 function openReturnModal(){
-  const log=data.radioLog||[];
-  const active=getActiveLoans(log);
+  const active=getActiveLoans(data.radioLog||[]);
   const el=document.getElementById('radio-return-list');
   if(!active.length){
     el.innerHTML='<div class="empty-state">No radios currently signed out.</div>';
@@ -547,7 +518,6 @@ function openReturnModal(){
   }
   openOverlay('radio-in-overlay');
 }
-
 function selectReturn(siteId,deptId){
   activeReturnId={siteId,deptId};
   document.getElementById('radio-ret-title').textContent=`Return: ${siteId} / ${deptId}`;
@@ -556,39 +526,25 @@ function selectReturn(siteId,deptId){
   closeOverlay('radio-in-overlay');
   openOverlay('radio-ret-overlay');
 }
-
 async function confirmRadioReturn(){
   if(!activeReturnId||!currentUser)return;
   const condition=document.getElementById('rr-condition').value;
   const issues=document.getElementById('rr-issues').value.trim();
   const isFault=condition==='Faulty / Not working'||issues.length>0;
   if(!data.radioLog)data.radioLog=[];
-  data.radioLog.push({
-    action:isFault?'fault':'in',
-    siteId:activeReturnId.siteId,
-    deptId:activeReturnId.deptId,
-    by:currentUser.name,
-    time:Date.now(),
-    condition,
-    notes:issues,
-    id:Date.now().toString()
-  });
+  data.radioLog.push({action:isFault?'fault':'in',siteId:activeReturnId.siteId,deptId:activeReturnId.deptId,by:currentUser.name,time:Date.now(),condition,notes:issues,id:Date.now().toString()});
   closeOverlay('radio-ret-overlay');
   activeReturnId=null;
   renderRadios();
   await pushData(`Radio returned by ${currentUser.name}`);
 }
-
 function downloadRadioCSV(){
   const log=data.radioLog||[];
-  if(!log.length){alert('No radio history to download.');return}
+  if(!log.length){alert('No radio history to download.');return;}
   const headers=['Action','Site ID','Dept ID','By','Date/Time','Condition','Notes'];
   const rows=log.map(e=>[
     e.action==='out'?'Sign Out':e.action==='in'?'Return':'Fault/Return',
-    e.siteId,e.deptId,e.by,
-    formatTime(e.time),
-    e.condition||'',
-    (e.notes||'').replace(/,/g,';')
+    e.siteId,e.deptId,e.by,formatTime(e.time),e.condition||'',(e.notes||'').replace(/,/g,';')
   ]);
   const csv=[headers,...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
   const blob=new Blob([csv],{type:'text/csv'});
@@ -598,21 +554,21 @@ function downloadRadioCSV(){
   a.click();URL.revokeObjectURL(url);
 }
 
-// TIMETABLE
+// ── TIMETABLE ──
 function renderTimetables(){
   const el=document.getElementById('tt-list');
   const tt=data.timetables||[];
-  if(!tt.length){el.innerHTML='<div class="empty-state">No timetables added yet.</div>';return}
+  if(!tt.length){el.innerHTML='<div class="empty-state">No timetables added yet.</div>';return;}
   el.innerHTML=tt.map(r=>`<div class="tt-card"><div class="tt-route">${r.name}</div>
     ${r.times.map(t=>`<div class="tt-row"><span>${t.label}</span><span class="tt-time">${t.time}</span></div>`).join('')}
   </div>`).join('');
 }
 
-// CONTACTS
+// ── CONTACTS ──
 function renderContacts(){
   const el=document.getElementById('contact-list');
   const c=(data.emergency&&data.emergency.contacts)?data.emergency.contacts.filter(c=>c.number!=='000'):[];
-  if(!c.length){el.innerHTML='<div class="empty-state">No contacts added yet.</div>';return}
+  if(!c.length){el.innerHTML='<div class="empty-state">No contacts added yet.</div>';return;}
   el.innerHTML=c.map(c=>`<div class="contact-card">
     <div class="crew-avatar">${initials(c.role)}</div>
     <div class="contact-info"><div class="cname">${c.role}</div></div>
@@ -620,18 +576,18 @@ function renderContacts(){
   </div>`).join('');
 }
 
-// EMERGENCY
+// ── EMERGENCY ──
 function renderEmergency(){
   const el=document.getElementById('emerg-list');
   const c=(data.emergency&&data.emergency.contacts)?data.emergency.contacts:[];
-  if(!c.length){el.innerHTML='<div class="empty-state">No emergency info added yet.</div>';return}
+  if(!c.length){el.innerHTML='<div class="empty-state">No emergency info added yet.</div>';return;}
   el.innerHTML=c.map(c=>`<a href="tel:${c.number}" style="text-decoration:none">
     <div class="emerg-card"><div class="emerg-role">${c.role}</div><div class="emerg-num">${c.number}</div></div>
   </a>`).join('');
 }
 
-function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
-function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'})}
+function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
+function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'});}
 
 init();
 </script>
