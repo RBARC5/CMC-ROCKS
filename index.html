@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>CMC Rocks Crew</title>
+<title>CMC Rocks Crew — Radios</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -16,6 +16,14 @@ html,body{width:100%;min-height:100%;background:var(--char);color:var(--cream);f
 #stripe-top{position:fixed;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--rust) 0%,var(--gold) 33%,var(--olive) 55%,var(--cobalt) 75%,var(--rust) 100%);background-size:300% 100%;z-index:200;animation:stripe 5s linear infinite}
 @keyframes stripe{0%{background-position:0% 0%}100%{background-position:300% 0%}}
 
+/* BOOT */
+#boot-screen{position:fixed;inset:0;z-index:300;background:var(--char);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.8rem}
+#boot-screen.hidden{display:none}
+.boot-logo{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--cream);letter-spacing:0.08em}
+.boot-logo span{color:var(--rust)}
+.boot-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--dust)}
+
+/* OVERLAYS */
 .overlay{position:fixed;inset:0;z-index:100;background:rgba(22,20,14,0.93);display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.5rem;backdrop-filter:blur(4px);overflow-y:auto}
 .overlay.hidden{display:none}
 .modal{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:2rem;width:100%;max-width:420px;margin:auto}
@@ -40,6 +48,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .btn-blue:hover{background:#0035cc!important}
 .btn-sm{padding:0.4rem 0.8rem;font-size:0.78rem;width:auto;display:inline-block}
 
+/* CREW LIST */
 .crew-list{max-height:260px;overflow-y:auto;margin-bottom:1rem;border:1px solid var(--border);border-radius:3px}
 .crew-list-item{padding:0.75rem 1rem;cursor:pointer;border-bottom:1px solid var(--border);transition:background 0.15s;display:flex;align-items:center;gap:0.75rem}
 .crew-list-item:last-child{border-bottom:none}
@@ -48,6 +57,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .crew-list-item .crew-phone{font-size:0.8rem;color:var(--dust)}
 .crew-avatar{width:34px;height:34px;border-radius:50%;background:var(--rust);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1rem;flex-shrink:0}
 
+/* HEADER */
 #app-header{position:sticky;top:4px;z-index:50;background:rgba(26,25,21,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between}
 .header-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.08em;color:var(--cream)}
 .header-logo span{color:var(--rust)}
@@ -56,53 +66,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .header-user .user-name{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:0.08em;color:var(--cream)}
 .not-you{font-size:0.65rem;color:var(--dust);letter-spacing:0.06em}
 
-#nav-tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--border);background:var(--panel);-webkit-overflow-scrolling:touch;scrollbar-width:none}
-#nav-tabs::-webkit-scrollbar{display:none}
-.tab-btn{flex-shrink:0;padding:0.85rem 1.1rem;background:none;border:none;border-bottom:2px solid transparent;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:color 0.2s,border-color 0.2s}
-.tab-btn.active{color:var(--rust);border-bottom-color:var(--rust)}
-.tab-btn:hover{color:var(--cream)}
-
+/* CONTENT */
 #content{padding:1.2rem 1rem 5rem;max-width:680px;margin:0 auto}
-.section{display:none}
-.section.active{display:block}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.08em;color:var(--cream);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
 
-.todo-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.85rem;background:var(--panel);border:1px solid var(--border);border-radius:4px;margin-bottom:0.5rem;cursor:pointer;transition:background 0.15s}
-.todo-item:hover{background:rgba(244,233,211,0.04)}
-.todo-item.done{opacity:0.45}
-.todo-check{width:20px;height:20px;border-radius:3px;border:1.5px solid var(--dust);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:background 0.15s,border-color 0.15s}
-.todo-item.done .todo-check{background:var(--olive);border-color:var(--olive)}
-.todo-check-icon{display:none}
-.todo-item.done .todo-check-icon{display:block}
-.todo-text{font-size:0.95rem;line-height:1.4}
-.todo-meta{font-size:0.72rem;color:var(--dust);margin-top:0.2rem}
-.add-row{display:flex;gap:0.5rem;margin-top:1rem}
-.add-row input{flex:1;margin:0;padding:0.6rem 0.8rem;font-size:0.9rem}
-.add-row .btn{width:auto;padding:0.6rem 1rem;font-size:0.9rem}
-
-.signin-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1.2rem;margin-bottom:0.5rem;display:flex;align-items:center;justify-content:space-between}
-.signin-info .sname{font-weight:600;font-size:0.95rem}
-.signin-info .stime{font-size:0.75rem;color:var(--dust);margin-top:0.15rem}
-.signin-badge{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.25rem 0.65rem;border-radius:2px}
-.badge-in{background:rgba(157,152,18,0.25);color:var(--olive);border:1px solid rgba(157,152,18,0.4)}
-.badge-out{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
-.my-signin-btn{display:flex;gap:0.5rem;margin-bottom:1.2rem}
-.my-signin-btn .btn{font-size:0.9rem;padding:0.7rem}
-
-.emerg-card{background:rgba(245,66,23,0.1);border:1px solid rgba(245,66,23,0.3);border-radius:4px;padding:1rem;margin-bottom:0.6rem;display:flex;justify-content:space-between;align-items:center}
-.emerg-role{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:0.12em;color:var(--dust)}
-.emerg-num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;color:var(--rust)}
-
-.contact-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:0.85rem 1rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem}
-.contact-info .cname{font-weight:600;font-size:0.95rem}
-.contact-num{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--gold);font-size:0.9rem}
-
-.tt-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1rem;margin-bottom:0.8rem}
-.tt-route{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.5rem}
-.tt-row{display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--border);font-size:0.88rem}
-.tt-row:last-child{border-bottom:none}
-.tt-time{color:var(--rust);font-family:'Barlow Condensed',sans-serif;font-weight:600}
-
+/* RADIO */
 .radio-toolbar{display:flex;gap:0.6rem;margin-bottom:1.2rem;flex-wrap:wrap}
 .radio-section-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);margin:1.2rem 0 0.5rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border)}
 .loan-card{background:var(--panel);border:1px solid rgba(243,159,52,0.35);border-radius:5px;padding:1rem;margin-bottom:0.6rem}
@@ -120,13 +88,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .loading-text{text-align:center;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.2em;padding:2rem}
 .empty-state{text-align:center;color:var(--dust);font-size:0.85rem;padding:2rem 1rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em}
 
-#boot-screen{position:fixed;inset:0;z-index:300;background:var(--char);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.8rem}
-#boot-screen.hidden{display:none}
-.boot-logo{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--cream);letter-spacing:0.08em}
-.boot-logo span{color:var(--rust)}
-.boot-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--dust)}
-
-/* Inline reg form inside pick overlay */
 #pick-overlay-reg{display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:1.2rem}
 </style>
 </head>
@@ -135,13 +96,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 
 <div id="boot-screen">
   <div class="boot-logo">CMC <span>Rocks</span></div>
-  <div class="boot-sub">Crew Portal</div>
+  <div class="boot-sub">Radio Register</div>
 </div>
 
+<!-- REGISTRATION -->
 <div class="overlay hidden" id="reg-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
-    <div class="modal-sub">Crew Portal &mdash; QLD</div>
+    <div class="modal-sub">Radio Register &mdash; QLD</div>
     <h2 id="reg-title">Register to Continue</h2>
     <div id="reg-form">
       <label>Full Name</label>
@@ -158,6 +120,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- RADIO SIGN OUT -->
 <div class="overlay hidden" id="radio-out-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -181,6 +144,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- RADIO RETURN — SELECT -->
 <div class="overlay hidden" id="radio-in-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -191,6 +155,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- RADIO RETURN — DETAILS -->
 <div class="overlay hidden" id="radio-ret-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -210,6 +175,29 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- PICK OVERLAY -->
+<div class="overlay hidden" id="pick-overlay">
+  <div class="modal">
+    <div class="modal-logo">CMC <span>Rocks</span></div>
+    <div class="modal-sub" id="pick-overlay-sub">Who are you?</div>
+    <div id="pick-overlay-list-wrap">
+      <div class="crew-list" id="pick-overlay-list"></div>
+      <button class="btn" onclick="showPickOverlayReg()">&#43; Register New Person</button>
+      <button class="btn secondary" onclick="closeOverlay('pick-overlay')">Cancel</button>
+    </div>
+    <div id="pick-overlay-reg">
+      <h2>New Registration</h2>
+      <label>Full Name</label>
+      <input type="text" id="por-name" placeholder="Your name" autocomplete="name">
+      <label>Phone Number</label>
+      <input type="tel" id="por-phone" placeholder="04xx xxx xxx" autocomplete="tel">
+      <button class="btn" onclick="submitPickOverlayReg()">Join Crew</button>
+      <button class="btn secondary" onclick="hidePickOverlayReg()">&#8592; Back to List</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
 <div id="app" style="display:none">
   <div id="app-header">
     <div class="header-logo">CMC <span>Rocks</span> Crew</div>
@@ -221,77 +209,15 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       </div>
     </div>
   </div>
-  <div id="nav-tabs">
-    <button class="tab-btn active" onclick="showTab('todo',this)">To-Do</button>
-    <button class="tab-btn" onclick="showTab('signin',this)">Sign In/Out</button>
-    <button class="tab-btn" onclick="showTab('radios',this)">Radios</button>
-    <button class="tab-btn" onclick="showTab('timetable',this)">Bus Times</button>
-    <button class="tab-btn" onclick="showTab('contacts',this)">Contacts</button>
-    <button class="tab-btn" onclick="showTab('emergency',this)">Emergency</button>
-  </div>
   <div id="content">
-    <div class="section active" id="tab-todo">
-      <div class="section-title">Task List</div>
-      <div id="todo-list"><div class="loading-text">Loading...</div></div>
-      <div class="add-row">
-        <input type="text" id="new-todo" placeholder="Add a task...">
-        <button class="btn" onclick="addTodo()">Add</button>
-      </div>
+    <div class="section-title">2-Way Radios</div>
+    <div class="radio-toolbar">
+      <button class="btn btn-gold btn-sm" onclick="openOverlay('radio-out-overlay')">&#43; Sign Out Radio</button>
+      <button class="btn btn-green btn-sm" onclick="openReturnModal()">Return Radio</button>
+      <button class="btn btn-blue btn-sm" onclick="downloadRadioCSV()">&#8595; Download History</button>
     </div>
-    <div class="section" id="tab-signin">
-      <div class="section-title">Sign In / Out</div>
-      <div class="my-signin-btn">
-        <button class="btn btn-green" onclick="doSignIn()">Sign Me In</button>
-        <button class="btn" style="background:var(--dust)" onclick="doSignOut()">Sign Me Out</button>
-      </div>
-      <div id="signin-list"><div class="loading-text">Loading...</div></div>
-    </div>
-    <div class="section" id="tab-radios">
-      <div class="section-title">2-Way Radios</div>
-      <div class="radio-toolbar">
-        <button class="btn btn-gold btn-sm" onclick="openOverlay('radio-out-overlay')">&#43; Sign Out Radio</button>
-        <button class="btn btn-green btn-sm" onclick="openReturnModal()">Return Radio</button>
-        <button class="btn btn-blue btn-sm" onclick="downloadRadioCSV()">&#8595; Download History</button>
-      </div>
-      <div id="radio-active-section"></div>
-      <div id="radio-history-section"></div>
-    </div>
-    <div class="section" id="tab-timetable">
-      <div class="section-title">Bus Timetables</div>
-      <div id="tt-list"><div class="loading-text">Loading...</div></div>
-    </div>
-    <div class="section" id="tab-contacts">
-      <div class="section-title">Crew Contacts</div>
-      <div id="contact-list"><div class="loading-text">Loading...</div></div>
-    </div>
-    <div class="section" id="tab-emergency">
-      <div class="section-title">Emergency Info</div>
-      <div id="emerg-list"><div class="loading-text">Loading...</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- PICK OVERLAY — with inline new registration form -->
-<div class="overlay hidden" id="pick-overlay">
-  <div class="modal">
-    <div class="modal-logo">CMC <span>Rocks</span></div>
-    <div class="modal-sub" id="pick-overlay-sub">Who are you?</div>
-    <!-- Pick from list -->
-    <div id="pick-overlay-list-wrap">
-      <div class="crew-list" id="pick-overlay-list"></div>
-      <button class="btn" onclick="showPickOverlayReg()">&#43; Register New Person</button>
-      <button class="btn secondary" onclick="closeOverlay('pick-overlay')">Cancel</button>
-    </div>
-    <!-- Inline new registration -->
-    <div id="pick-overlay-reg">
-      <h2>New Registration</h2>
-      <label>Full Name</label>
-      <input type="text" id="por-name" placeholder="Your name" autocomplete="name">
-      <label>Phone Number</label>
-      <input type="tel" id="por-phone" placeholder="04xx xxx xxx" autocomplete="tel">
-      <button class="btn" onclick="submitPickOverlayReg()">Join Crew</button>
-      <button class="btn secondary" onclick="hidePickOverlayReg()">&#8592; Back to List</button>
-    </div>
+    <div id="radio-active-section"><div class="loading-text">Loading...</div></div>
+    <div id="radio-history-section"></div>
   </div>
 </div>
 
@@ -320,7 +246,7 @@ async function init(){
     showApp();
     document.getElementById('boot-screen').classList.add('hidden');
     await fetchData();
-    renderAll();
+    renderRadios();
   } else {
     await fetchData();
     document.getElementById('boot-screen').classList.add('hidden');
@@ -328,16 +254,15 @@ async function init(){
   }
   startPolling();
 }
-
 async function fetchData(){
   try{const r=await fetch(RAW+'?t='+Date.now());data=await r.json();}catch(e){
-    if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
+    if(!data)data={crew:[],radioLog:[]};
     console.warn('Fetch failed');
   }
 }
 function startPolling(){
   if(pollTimer)clearInterval(pollTimer);
-  pollTimer=setInterval(async()=>{await fetchData();renderAll();},10000);
+  pollTimer=setInterval(async()=>{await fetchData();renderRadios();},10000);
 }
 async function pushData(msg){
   try{
@@ -352,7 +277,7 @@ async function pushData(msg){
 function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
 function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 
-// ── REGISTRATION (initial) ──
+// REGISTRATION
 function showRegForm(){
   document.getElementById('reg-form').style.display='block';
   document.getElementById('pick-form').style.display='none';
@@ -367,10 +292,7 @@ function showPickList(){
 function renderPickList(elId,onSelect){
   const el=document.getElementById(elId);
   const crew=getMergedCrew();
-  if(!crew.length){
-    el.innerHTML='<div class="empty-state">No crew registered yet.</div>';
-    return;
-  }
+  if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.</div>';return;}
   el.innerHTML=crew.map(u=>`<div class="crew-list-item" onclick='_pick(${JSON.stringify(u)},"${elId}")'>
     <div class="crew-avatar">${initials(u.name)}</div>
     <div><div class="crew-name">${u.name}</div><div class="crew-phone">${u.phone}</div></div>
@@ -383,25 +305,20 @@ async function submitReg(){
   const phone=document.getElementById('reg-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
-  saveUser(user);
-  addLocalCrew(user);
-  if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
+  saveUser(user);addLocalCrew(user);
+  if(!data)data={crew:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
-  closeOverlay('reg-overlay');
-  showApp();
+  closeOverlay('reg-overlay');showApp();
 }
 
-// ── PICK OVERLAY (not you?) ──
+// PICK OVERLAY
 function showPickOverlay(){
-  // Reset to list view
   hidePickOverlayReg();
   openOverlay('pick-overlay');
   renderPickList('pick-overlay-list',u=>{
-    saveUser(u);
-    closeOverlay('pick-overlay');
+    saveUser(u);closeOverlay('pick-overlay');
     document.getElementById('header-avatar').textContent=initials(u.name);
     document.getElementById('header-name').textContent=u.name.split(' ')[0];
-    renderAll();
   });
 }
 function showPickOverlayReg(){
@@ -421,92 +338,30 @@ async function submitPickOverlayReg(){
   const phone=document.getElementById('por-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
-  saveUser(user);
-  addLocalCrew(user);
-  if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
+  saveUser(user);addLocalCrew(user);
+  if(!data)data={crew:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('pick-overlay');
   document.getElementById('header-avatar').textContent=initials(user.name);
   document.getElementById('header-name').textContent=user.name.split(' ')[0];
-  renderAll();
 }
 
-// ── APP ──
+// APP
 function showApp(){
   document.getElementById('app').style.display='block';
   document.getElementById('header-avatar').textContent=initials(currentUser.name);
   document.getElementById('header-name').textContent=currentUser.name.split(' ')[0];
-  if(data)renderAll();
-}
-function showTab(id,btn){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  if(btn)btn.classList.add('active');
-}
-function renderAll(){
-  if(!data)return;
-  renderTodos();renderSignins();renderRadios();renderTimetables();renderContacts();renderEmergency();
+  if(data)renderRadios();
 }
 
-// ── TODO ──
-function renderTodos(){
-  const el=document.getElementById('todo-list');
-  const todos=data.todos||[];
-  if(!todos.length){el.innerHTML='<div class="empty-state">No tasks yet. Add one below.</div>';return;}
-  el.innerHTML=todos.map((t,i)=>`
-    <div class="todo-item ${t.done?'done':''}" onclick="toggleTodo(${i})">
-      <div class="todo-check"><svg class="todo-check-icon" width="12" height="12" viewBox="0 0 12 12">
-        <polyline points="1.5,6 4.5,9 10.5,3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg></div>
-      <div><div class="todo-text">${t.text}</div>
-      <div class="todo-meta">${t.done?'Done by '+(t.doneBy||'crew'):'Added by '+(t.addedBy||'crew')}</div></div>
-    </div>`).join('');
-}
-async function toggleTodo(i){
-  if(!data.todos[i])return;
-  data.todos[i].done=!data.todos[i].done;
-  data.todos[i].doneBy=currentUser?currentUser.name:'crew';
-  renderTodos();await pushData(`Toggle todo: ${data.todos[i].text}`);
-}
-async function addTodo(){
-  const inp=document.getElementById('new-todo');
-  const text=inp.value.trim();if(!text)return;inp.value='';
-  if(!data.todos)data.todos=[];
-  data.todos.push({text,done:false,addedBy:currentUser?currentUser.name:'crew',id:Date.now().toString()});
-  renderTodos();await pushData(`Add todo: ${text}`);
-}
-
-// ── CREW SIGN IN/OUT ──
-function renderSignins(){
-  const el=document.getElementById('signin-list');
-  const s=data.signins||[];
-  if(!s.length){el.innerHTML='<div class="empty-state">No sign-ins recorded yet.</div>';return;}
-  el.innerHTML=[...s].sort((a,b)=>b.time-a.time).map(s=>`
-    <div class="signin-card">
-      <div class="signin-info"><div class="sname">${s.name}</div><div class="stime">${formatTime(s.time)}</div></div>
-      <span class="signin-badge ${s.type==='in'?'badge-in':'badge-out'}">${s.type==='in'?'Signed In':'Signed Out'}</span>
-    </div>`).join('');
-}
-async function doSignIn(){
-  if(!currentUser)return;
-  if(!data.signins)data.signins=[];
-  data.signins.push({name:currentUser.name,phone:currentUser.phone,type:'in',time:Date.now()});
-  renderSignins();await pushData(`Sign in: ${currentUser.name}`);
-}
-async function doSignOut(){
-  if(!currentUser)return;
-  if(!data.signins)data.signins=[];
-  data.signins.push({name:currentUser.name,phone:currentUser.phone,type:'out',time:Date.now()});
-  renderSignins();await pushData(`Sign out: ${currentUser.name}`);
-}
-
-// ── RADIOS ──
+// RADIOS
 function renderRadios(){
+  if(!data)return;
   const log=data.radioLog||[];
   const active=getActiveLoans(log);
   const activeEl=document.getElementById('radio-active-section');
   const histEl=document.getElementById('radio-history-section');
+
   if(!active.length){
     activeEl.innerHTML='<div class="radio-section-label">Currently Signed Out</div><div class="empty-state" style="padding:1rem">No radios currently signed out.</div>';
   } else {
@@ -520,6 +375,7 @@ function renderRadios(){
         </div>`;
       }).join('');
   }
+
   if(!log.length){
     histEl.innerHTML='<div class="radio-section-label">Full History</div><div class="empty-state" style="padding:1rem">No history yet.</div>';
   } else {
@@ -609,38 +465,6 @@ function downloadRadioCSV(){
   const a=document.createElement('a');
   a.href=url;a.download=`CMC-Rocks-Radio-History-${new Date().toISOString().slice(0,10)}.csv`;
   a.click();URL.revokeObjectURL(url);
-}
-
-// ── TIMETABLE ──
-function renderTimetables(){
-  const el=document.getElementById('tt-list');
-  const tt=data.timetables||[];
-  if(!tt.length){el.innerHTML='<div class="empty-state">No timetables added yet.</div>';return;}
-  el.innerHTML=tt.map(r=>`<div class="tt-card"><div class="tt-route">${r.name}</div>
-    ${r.times.map(t=>`<div class="tt-row"><span>${t.label}</span><span class="tt-time">${t.time}</span></div>`).join('')}
-  </div>`).join('');
-}
-
-// ── CONTACTS ──
-function renderContacts(){
-  const el=document.getElementById('contact-list');
-  const c=(data.emergency&&data.emergency.contacts)?data.emergency.contacts.filter(c=>c.number!=='000'):[];
-  if(!c.length){el.innerHTML='<div class="empty-state">No contacts added yet.</div>';return;}
-  el.innerHTML=c.map(c=>`<div class="contact-card">
-    <div class="crew-avatar">${initials(c.role)}</div>
-    <div class="contact-info"><div class="cname">${c.role}</div></div>
-    <a class="contact-num" href="tel:${c.number}">${c.number}</a>
-  </div>`).join('');
-}
-
-// ── EMERGENCY ──
-function renderEmergency(){
-  const el=document.getElementById('emerg-list');
-  const c=(data.emergency&&data.emergency.contacts)?data.emergency.contacts:[];
-  if(!c.length){el.innerHTML='<div class="empty-state">No emergency info added yet.</div>';return;}
-  el.innerHTML=c.map(c=>`<a href="tel:${c.number}" style="text-decoration:none">
-    <div class="emerg-card"><div class="emerg-role">${c.role}</div><div class="emerg-num">${c.number}</div></div>
-  </a>`).join('');
 }
 
 function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
