@@ -44,14 +44,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .crew-list-item .crew-name{font-weight:600;font-size:0.95rem}
 .crew-list-item .crew-phone{font-size:0.8rem;color:var(--dust)}
 .crew-avatar{width:34px;height:34px;border-radius:50%;background:var(--rust);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1rem;flex-shrink:0}
-/* NAV */
 #nav-tabs{display:flex;border-bottom:1px solid var(--border);background:var(--panel);overflow-x:auto;scrollbar-width:none}
 #nav-tabs::-webkit-scrollbar{display:none}
 .tab-btn{flex-shrink:0;padding:0.85rem 1.2rem;background:none;border:none;border-bottom:2px solid transparent;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:color 0.2s,border-color 0.2s}
 .tab-btn.active{color:var(--rust);border-bottom-color:var(--rust)}
 .tab-btn:hover{color:var(--cream)}
-.tab-section{display:none}
-.tab-section.active{display:block}
+.tab-section{display:none}.tab-section.active{display:block}
 #app-header{position:sticky;top:4px;z-index:50;background:rgba(26,25,21,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between}
 .header-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.08em;color:var(--cream)}
 .header-logo span{color:var(--rust)}
@@ -86,27 +84,22 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .fault-warning-box .fw-radio{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.18em;color:var(--gold);margin-bottom:0.6rem}
 .fault-warning-box .fw-reported{font-size:0.72rem;color:var(--dust);margin-bottom:0.4rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.08em;text-transform:uppercase}
 .fault-warning-box .fw-message{font-size:0.9rem;color:var(--cream);line-height:1.5;background:rgba(0,0,0,0.2);border-radius:3px;padding:0.6rem 0.8rem;font-style:italic}
-
-/* ── STAFF SHIFTS ── */
+/* STAFF SHIFTS */
 .staff-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1rem;margin-bottom:0.75rem}
-.staff-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem}
+.staff-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem}
 .staff-card-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.08em}
 .staff-status-badge{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:2px;flex-shrink:0}
 .status-off{background:rgba(160,136,80,0.15);color:var(--dust);border:1px solid rgba(160,136,80,0.25)}
 .status-on{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
-.status-break{background:rgba(243,159,52,0.2);color:var(--gold);border:1px solid rgba(243,159,52,0.35)}
 .status-needs-break{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
-.staff-times{font-size:0.75rem;color:var(--dust);line-height:1.7;margin-bottom:0.7rem}
-.staff-times span{color:var(--cream)}
-.break-row{display:flex;align-items:center;gap:0.4rem;margin-bottom:0.3rem;font-size:0.75rem;color:var(--dust)}
-.break-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.break-done{background:var(--olive)}
-.break-active{background:var(--gold);animation:blink 1.2s ease-in-out infinite}
-.break-none{background:rgba(160,136,80,0.3)}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:0.4}}
-.staff-actions{display:flex;gap:0.5rem;flex-wrap:wrap;margin-top:0.6rem}
-.staff-actions .btn{font-size:0.72rem;padding:0.35rem 0.7rem;letter-spacing:0.12em}
-/* Time picker section in modal */
+.status-ended{background:rgba(160,136,80,0.15);color:var(--dust);border:1px solid rgba(160,136,80,0.25)}
+.staff-shift-time{font-size:0.78rem;color:var(--dust);margin-bottom:0.6rem}
+.staff-shift-time span{color:var(--cream)}
+.break-pills{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.7rem}
+.break-pill{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:2px;display:flex;align-items:center;gap:0.3rem}
+.break-pill-done{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
+.break-pill-none{background:rgba(160,136,80,0.08);color:var(--dust);border:1px solid rgba(160,136,80,0.18)}
+.staff-actions{display:flex;gap:0.5rem;flex-wrap:wrap}
 .time-toggle{display:flex;gap:0.5rem;margin-bottom:0.8rem}
 .time-toggle-btn{flex:1;padding:0.5rem;background:rgba(244,233,211,0.06);border:1px solid var(--border);border-radius:3px;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.15em;cursor:pointer;text-align:center;transition:all 0.15s}
 .time-toggle-btn.active{background:var(--rust);color:#fff;border-color:var(--rust)}
@@ -119,7 +112,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   <div class="boot-sub">Crew Portal</div>
 </div>
 
-<!-- REGISTRATION -->
 <div class="overlay hidden" id="reg-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -140,7 +132,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- FAULT WARNING -->
 <div class="overlay hidden" id="fault-warn-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -157,7 +148,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO SIGN OUT -->
 <div class="overlay hidden" id="radio-out-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -188,7 +178,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO RETURN SELECT -->
 <div class="overlay hidden" id="radio-in-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -199,7 +188,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO RETURN DETAILS -->
 <div class="overlay hidden" id="radio-ret-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -219,7 +207,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- SHIFT ACTION MODAL -->
+<!-- TIME MODAL — used for shift start/end and break logging -->
 <div class="overlay hidden" id="shift-action-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -238,7 +226,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- PICK OVERLAY -->
 <div class="overlay hidden" id="pick-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -260,7 +247,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- MAIN APP -->
 <div id="app" style="display:none">
   <div id="app-header">
     <div class="header-logo">CMC <span>Rocks</span> Crew</div>
@@ -272,15 +258,12 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       </div>
     </div>
   </div>
-
   <div id="nav-tabs">
     <button class="tab-btn active" onclick="showTab('radios',this)">2-Way Radios</button>
     <button class="tab-btn" onclick="showTab('shifts',this)">Staff Shifts</button>
   </div>
-
   <div id="content">
 
-    <!-- RADIOS TAB -->
     <div class="tab-section active" id="tab-radios">
       <div style="display:flex;align-items:center;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
         <div class="section-title" style="margin:0;padding:0;border:none">2-Way Radios</div>
@@ -295,7 +278,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       <div id="radio-history-section"></div>
     </div>
 
-    <!-- SHIFTS TAB -->
     <div class="tab-section" id="tab-shifts">
       <div style="display:flex;align-items:center;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
         <div class="section-title" style="margin:0;padding:0;border:none">Staff Shifts</div>
@@ -308,12 +290,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 </div>
 
 <script>
-const PROXY = 'https://cmc-rocks-proxy.8gonula.workers.dev';
-let data=null, currentUser=null, pollTimer=null, activeReturnId=null, pendingSignOut=null;
-let shiftActionPending=null; // {name, phone, field} — what we're logging
-let timeMode='now';
+const PROXY='https://cmc-rocks-proxy.8gonula.workers.dev';
+let data=null,currentUser=null,pollTimer=null,activeReturnId=null,pendingSignOut=null;
+let shiftActionPending=null,timeMode='now';
 
-// ── STORAGE ──
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
 function loadLocalCrew(){try{return JSON.parse(localStorage.getItem('cmcCrew'))||[]}catch{return[]}}
@@ -338,15 +318,13 @@ function getLastEntry(siteId,deptId){
   return entries.length?entries[entries.length-1]:null;
 }
 
-// ── INIT ──
 async function init(){
   currentUser=loadUser();
   if(currentUser){
     showApp();
     document.getElementById('boot-screen').classList.add('hidden');
     await fetchData();
-    renderRadios();
-    renderShifts();
+    renderRadios();renderShifts();
   } else {
     await fetchData();
     document.getElementById('boot-screen').classList.add('hidden');
@@ -374,9 +352,9 @@ function startPolling(){
   pollTimer=setInterval(async()=>{await fetchData();renderRadios();renderShifts();},8000);
 }
 
-async function pushData(msg,indicatorId){
-  const ind=indicatorId||'save-indicator';
-  showSaveStatus('saving',ind);
+async function pushData(msg,indId){
+  const id=indId||'save-indicator';
+  showSaveStatus('saving',id);
   try{
     const metaResp=await fetch(PROXY,{headers:{'Accept':'application/json'}});
     const meta=await metaResp.json();
@@ -385,10 +363,10 @@ async function pushData(msg,indicatorId){
     const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
     const resp=await fetch(PROXY,{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:msg,content,sha})});
     if(!resp.ok){const err=await resp.text();throw new Error(`PUT failed: ${resp.status} ${err}`);}
-    showSaveStatus('ok',ind);
+    showSaveStatus('ok',id);
   }catch(e){
     console.error('pushData error:',e);
-    showSaveStatus('err',ind);
+    showSaveStatus('err',id);
   }
 }
 
@@ -402,7 +380,6 @@ function showSaveStatus(state,id){
 
 function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
 function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
-
 function showTab(id,btn){
   document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
@@ -410,17 +387,16 @@ function showTab(id,btn){
   if(btn)btn.classList.add('active');
 }
 
-// ── RADIO FUNCTIONS ──
+// ── RADIOS ──
 function openSignOutModal(){
   const known=getKnownRadios();
   const sel=document.getElementById('ro-known');
   sel.innerHTML='<option value="">-- Select or enter new below --</option>';
   Object.entries(known).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([siteId,deptId])=>{
     const last=getLastEntry(siteId,deptId);
-    const hasFault=last&&last.action==='fault';
     const opt=document.createElement('option');
     opt.value=siteId;
-    opt.textContent=`${siteId}  /  ${deptId}${hasFault?' ⚠ FAULT':''}`;
+    opt.textContent=`${siteId}  /  ${deptId}${last&&last.action==='fault'?' ⚠ FAULT':''}`;
     opt.dataset.deptid=deptId;
     sel.appendChild(opt);
   });
@@ -452,9 +428,7 @@ function onSiteIdInput(){
     document.getElementById('ro-prefill-hint').style.display='block';
     const sel=document.getElementById('ro-known');
     for(let i=0;i<sel.options.length;i++){if(sel.options[i].value===typed){sel.selectedIndex=i;break;}}
-  } else {
-    document.getElementById('ro-prefill-hint').style.display='none';
-  }
+  } else {document.getElementById('ro-prefill-hint').style.display='none';}
 }
 async function confirmRadioOut(){
   if(!currentUser)return;
@@ -469,9 +443,7 @@ async function confirmRadioOut(){
     document.getElementById('fw-radio-id').textContent=`${siteId}  /  ${deptId}`;
     document.getElementById('fw-reported-by').textContent=`Reported by ${last.by} on ${formatTime(last.time)}`;
     document.getElementById('fw-message').textContent=last.notes||`Returned as: ${last.condition}`;
-    closeOverlay('radio-out-overlay');
-    openOverlay('fault-warn-overlay');
-    return;
+    closeOverlay('radio-out-overlay');openOverlay('fault-warn-overlay');return;
   }
   await doSignOut(siteId,deptId,condition,notes);
 }
@@ -485,19 +457,17 @@ async function proceedAfterFaultWarning(){
 async function doSignOut(siteId,deptId,condition,notes){
   if(!data.radioLog)data.radioLog=[];
   data.radioLog.push({action:'out',siteId,deptId,by:currentUser.name,time:Date.now(),condition,notes,id:Date.now().toString()});
-  closeOverlay('radio-out-overlay');
-  renderRadios();
+  closeOverlay('radio-out-overlay');renderRadios();
   await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`,'save-indicator');
 }
 function openReturnModal(){
   const active=getActiveLoans(data.radioLog||[]);
   const el=document.getElementById('radio-return-list');
-  if(!active.length){el.innerHTML='<div class="empty-state">No radios currently signed out.</div>';}
-  else{el.innerHTML=active.map(e=>`
-    <div class="loan-card" style="cursor:pointer;margin-bottom:0.5rem" onclick="selectReturn('${e.siteId}','${e.deptId}')">
+  el.innerHTML=!active.length?'<div class="empty-state">No radios currently signed out.</div>':
+    active.map(e=>`<div class="loan-card" style="cursor:pointer;margin-bottom:0.5rem" onclick="selectReturn('${e.siteId}','${e.deptId}')">
       <div class="loan-ids"><div class="site-id">${e.siteId}</div><div class="dept-id">${e.deptId}</div></div>
       <div class="loan-meta" style="margin-top:0.4rem">Signed out by <strong>${e.by}</strong> &bull; ${formatTime(e.time)}</div>
-    </div>`).join('');}
+    </div>`).join('');
   openOverlay('radio-in-overlay');
 }
 function selectReturn(siteId,deptId){
@@ -505,8 +475,7 @@ function selectReturn(siteId,deptId){
   document.getElementById('radio-ret-title').textContent=`Return: ${siteId} / ${deptId}`;
   document.getElementById('rr-condition').value='Good';
   document.getElementById('rr-issues').value='';
-  closeOverlay('radio-in-overlay');
-  openOverlay('radio-ret-overlay');
+  closeOverlay('radio-in-overlay');openOverlay('radio-ret-overlay');
 }
 async function confirmRadioReturn(){
   if(!activeReturnId||!currentUser)return;
@@ -515,9 +484,7 @@ async function confirmRadioReturn(){
   const isFault=condition==='Faulty / Not working'||issues.length>0;
   if(!data.radioLog)data.radioLog=[];
   data.radioLog.push({action:isFault?'fault':'in',siteId:activeReturnId.siteId,deptId:activeReturnId.deptId,by:currentUser.name,time:Date.now(),condition,notes:issues,id:Date.now().toString()});
-  closeOverlay('radio-ret-overlay');
-  activeReturnId=null;
-  renderRadios();
+  closeOverlay('radio-ret-overlay');activeReturnId=null;renderRadios();
   await pushData(`Radio returned by ${currentUser.name}`,'save-indicator');
 }
 function renderRadios(){
@@ -526,41 +493,33 @@ function renderRadios(){
   const active=getActiveLoans(log);
   const activeEl=document.getElementById('radio-active-section');
   const histEl=document.getElementById('radio-history-section');
-  if(!active.length){
-    activeEl.innerHTML='<div class="radio-section-label">Currently Signed Out</div><div class="empty-state" style="padding:1rem">No radios currently signed out.</div>';
-  } else {
-    activeEl.innerHTML='<div class="radio-section-label">Currently Signed Out</div>'+active.map(e=>{
+  activeEl.innerHTML='<div class="radio-section-label">Currently Signed Out</div>'+
+    (!active.length?'<div class="empty-state" style="padding:1rem">No radios currently signed out.</div>':
+    active.map(e=>{
       const fault=e.condition==='Faulty / Not working'||e.notes;
       return `<div class="loan-card">
         <div class="loan-ids"><div class="site-id">${e.siteId}</div><div class="dept-id">${e.deptId}</div></div>
         ${fault?`<div class="fault-pill">&#9888; Issue noted on sign-out</div>`:''}
         <div class="loan-meta">Signed out by <strong>${e.by}</strong><br>${formatTime(e.time)}<br>Condition: ${e.condition}${e.notes?`<br>Notes: ${e.notes}`:''}</div>
       </div>`;
-    }).join('');
-  }
-  if(!log.length){
-    histEl.innerHTML='<div class="radio-section-label">Full History</div><div class="empty-state" style="padding:1rem">No history yet.</div>';
-  } else {
-    const rows=[...log].reverse().map(e=>{
-      const cls=e.action==='out'?'ht-out':e.action==='in'?'ht-in':'ht-fault';
-      const label=e.action==='out'?'SIGN OUT':e.action==='in'?'RETURN':'FAULT';
-      return `<tr>
-        <td class="${cls}" style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em">${label}</td>
-        <td>${e.siteId} / ${e.deptId}</td><td>${e.by}</td><td>${formatTime(e.time)}</td>
-        <td>${e.condition||''}</td><td>${e.notes||''}</td>
-      </tr>`;
-    }).join('');
-    histEl.innerHTML=`<div class="radio-section-label">Full History</div>
-      <div style="overflow-x:auto"><table class="history-table">
-        <thead><tr><th>Action</th><th>Radio</th><th>By</th><th>Time</th><th>Condition</th><th>Notes</th></tr></thead>
-        <tbody>${rows}</tbody>
-      </table></div>`;
-  }
+    }).join(''));
+  if(!log.length){histEl.innerHTML='<div class="radio-section-label">Full History</div><div class="empty-state" style="padding:1rem">No history yet.</div>';return;}
+  const rows=[...log].reverse().map(e=>{
+    const cls=e.action==='out'?'ht-out':e.action==='in'?'ht-in':'ht-fault';
+    const label=e.action==='out'?'SIGN OUT':e.action==='in'?'RETURN':'FAULT';
+    return `<tr><td class="${cls}" style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em">${label}</td>
+      <td>${e.siteId} / ${e.deptId}</td><td>${e.by}</td><td>${formatTime(e.time)}</td>
+      <td>${e.condition||''}</td><td>${e.notes||''}</td></tr>`;
+  }).join('');
+  histEl.innerHTML=`<div class="radio-section-label">Full History</div>
+    <div style="overflow-x:auto"><table class="history-table">
+      <thead><tr><th>Action</th><th>Radio</th><th>By</th><th>Time</th><th>Condition</th><th>Notes</th></tr></thead>
+      <tbody>${rows}</tbody></table></div>`;
 }
 function getActiveLoans(log){
   const radios={};
   log.forEach(e=>{const k=e.siteId+'|'+e.deptId;if(!radios[k])radios[k]=[];radios[k].push(e);});
-  return Object.values(radios).map(entries=>entries[entries.length-1]).filter(e=>e.action==='out');
+  return Object.values(radios).map(e=>e[e.length-1]).filter(e=>e.action==='out');
 }
 function downloadRadioCSV(){
   const log=data.radioLog||[];
@@ -576,14 +535,11 @@ function downloadRadioCSV(){
 }
 
 // ── STAFF SHIFTS ──
-// Shift data structure per person per day:
-// data.shifts[phone][dateKey] = {
+// Shift data: data.shifts[phone][dateKey] = {
 //   shiftStart, shiftEnd,
-//   breakfast:{start,end}, lunch:{start,end}, dinner:{start,end}
+//   breakfast, lunch, dinner   ← each is just a timestamp (when the break was marked done)
 // }
-
 function todayKey(){return new Date().toLocaleDateString('en-AU',{year:'numeric',month:'2-digit',day:'2-digit'}).replace(/\//g,'-');}
-
 function getShift(phone){
   if(!data.shifts)data.shifts={};
   if(!data.shifts[phone])data.shifts[phone]={};
@@ -597,50 +553,44 @@ function renderShifts(){
   const el=document.getElementById('shifts-list');
   const crew=getMergedCrew();
   if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.</div>';return;}
-
   el.innerHTML=crew.map(u=>{
     const s=getShift(u.phone);
     const isMe=currentUser&&currentUser.phone===u.phone;
 
-    // Determine status
-    let statusClass='status-off', statusText='Not Started';
-    if(s.shiftStart&&!s.shiftEnd){
-      // Check if currently on a break
-      const onBreak=['breakfast','lunch','dinner'].find(b=>s[b]&&s[b].start&&!s[b].end);
-      if(onBreak){statusClass='status-break';statusText='On Break';}
-      else{
-        // Check if any break is overdue (on shift 4+ hours without a break)
-        const hoursOnShift=(Date.now()-s.shiftStart)/(1000*60*60);
-        const hasHadABreak=['breakfast','lunch','dinner'].some(b=>s[b]&&s[b].end);
-        if(hoursOnShift>=4&&!hasHadABreak){statusClass='status-needs-break';statusText='Needs Break!';}
-        else{statusClass='status-on';statusText='On Shift';}
-      }
-    } else if(s.shiftEnd){statusClass='status-off';statusText='Shift Ended';}
+    // Status
+    let statusClass='status-off',statusText='Not Started';
+    if(s.shiftEnd){statusClass='status-ended';statusText='Shift Ended';}
+    else if(s.shiftStart){
+      const hoursOn=(Date.now()-s.shiftStart)/(1000*60*60);
+      const hadBreak=s.breakfast||s.lunch||s.dinner;
+      if(hoursOn>=4&&!hadBreak){statusClass='status-needs-break';statusText='Needs Break!';}
+      else{statusClass='status-on';statusText='On Shift';}
+    }
 
-    // Break rows
-    const breakRows=['breakfast','lunch','dinner'].map(b=>{
-      const br=s[b]||{};
-      const dot=br.end?'break-done':br.start?'break-active':'break-none';
-      const label=b.charAt(0).toUpperCase()+b.slice(1);
-      const timeStr=br.start?(br.end?`${formatTimeOnly(br.start)} – ${formatTimeOnly(br.end)}`:`${formatTimeOnly(br.start)} (on break)`):'—';
-      return `<div class="break-row"><div class="break-dot ${dot}"></div><span style="width:70px">${label}:</span><span style="color:var(--cream)">${timeStr}</span></div>`;
+    // Shift time line
+    const shiftLine=s.shiftStart
+      ?`Shift: <span>${formatTimeOnly(s.shiftStart)}${s.shiftEnd?' – '+formatTimeOnly(s.shiftEnd):' → now'}</span>`
+      :'<span style="color:var(--dust)">Not on shift</span>';
+
+    // Break pills
+    const breakPills=['breakfast','lunch','dinner'].map(b=>{
+      const done=!!s[b];
+      return `<span class="break-pill ${done?'break-pill-done':'break-pill-none'}">
+        ${done?'✓':''} ${b.charAt(0).toUpperCase()+b.slice(1)}${done?' '+formatTimeOnly(s[b]):''}
+      </span>`;
     }).join('');
 
-    // Action buttons — only show for current user
+    // Buttons — only for current user
     let actions='';
     if(isMe){
       if(!s.shiftStart){
         actions=`<button class="btn btn-green btn-sm" onclick="openShiftAction('shiftStart','Start Shift')">Start Shift</button>`;
       } else if(!s.shiftEnd){
-        // Break buttons
-        const breakBtns=['breakfast','lunch','dinner'].map(b=>{
-          const br=s[b]||{};
-          const label=b.charAt(0).toUpperCase()+b.slice(1);
-          if(!br.start) return `<button class="btn btn-sm" style="background:rgba(243,159,52,0.3);color:var(--gold);border:1px solid rgba(243,159,52,0.4)" onclick="openShiftAction('${b}.start','Start ${label}')">Start ${label}</button>`;
-          if(!br.end) return `<button class="btn btn-sm" style="background:rgba(157,152,18,0.3);color:var(--olive);border:1px solid rgba(157,152,18,0.4)" onclick="openShiftAction('${b}.end','End ${label}')">End ${label}</button>`;
-          return '';
-        }).filter(Boolean).join('');
-        actions=breakBtns+`<button class="btn btn-sm" style="background:rgba(245,66,23,0.3);color:var(--rust);border:1px solid rgba(245,66,23,0.4);margin-top:0.4rem" onclick="openShiftAction('shiftEnd','End Shift')">End Shift</button>`;
+        const breakBtns=['breakfast','lunch','dinner']
+          .filter(b=>!s[b])
+          .map(b=>`<button class="btn btn-sm" style="background:rgba(243,159,52,0.25);color:var(--gold);border:1px solid rgba(243,159,52,0.4)" onclick="openShiftAction('${b}','${b.charAt(0).toUpperCase()+b.slice(1)} Break Done')">&#10003; ${b.charAt(0).toUpperCase()+b.slice(1)}</button>`)
+          .join('');
+        actions=breakBtns+`<button class="btn btn-sm" style="background:rgba(245,66,23,0.25);color:var(--rust);border:1px solid rgba(245,66,23,0.4)" onclick="openShiftAction('shiftEnd','End Shift')">End Shift</button>`;
       }
     }
 
@@ -648,70 +598,49 @@ function renderShifts(){
       <div class="staff-card-header">
         <div style="display:flex;align-items:center;gap:0.6rem">
           <div class="crew-avatar" style="width:28px;height:28px;font-size:0.8rem">${initials(u.name)}</div>
-          <div class="staff-card-name">${u.name}${isMe?' <span style="font-size:0.65rem;color:var(--dust);font-family:Barlow,sans-serif">(you)</span>':''}</div>
+          <div class="staff-card-name">${u.name}${isMe?' <span style="font-size:0.62rem;color:var(--dust);font-family:Barlow,sans-serif;font-weight:400">(you)</span>':''}</div>
         </div>
         <span class="staff-status-badge ${statusClass}">${statusText}</span>
       </div>
-      <div class="staff-times">
-        ${s.shiftStart?`Shift: <span>${formatTimeOnly(s.shiftStart)}${s.shiftEnd?' – '+formatTimeOnly(s.shiftEnd):' →  now'}</span>`:'<span style="color:var(--dust)">Not on shift</span>'}
-      </div>
-      ${breakRows}
+      <div class="staff-shift-time">${shiftLine}</div>
+      <div class="break-pills">${breakPills}</div>
       ${actions?`<div class="staff-actions">${actions}</div>`:''}
     </div>`;
   }).join('');
 }
 
-// Open the time-selection modal for a shift action
-function openShiftAction(field, label){
+function openShiftAction(field,label){
   shiftActionPending={field,label};
   document.getElementById('shift-action-sub').textContent=label;
   document.getElementById('shift-action-title').textContent='Select Time';
   selectTimeMode('now');
-  // Pre-fill manual time with current time
   const now=new Date();
   document.getElementById('manual-time-input').value=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
   openOverlay('shift-action-overlay');
 }
-
 function selectTimeMode(mode){
   timeMode=mode;
   document.getElementById('time-now-btn').classList.toggle('active',mode==='now');
   document.getElementById('time-manual-btn').classList.toggle('active',mode==='manual');
   document.getElementById('manual-time-wrap').style.display=mode==='manual'?'block':'none';
 }
-
 async function confirmShiftAction(){
   if(!shiftActionPending||!currentUser)return;
-  const {field}=shiftActionPending;
-
-  // Resolve timestamp
   let ts;
-  if(timeMode==='now'){
-    ts=Date.now();
-  } else {
+  if(timeMode==='now'){ts=Date.now();}
+  else{
     const val=document.getElementById('manual-time-input').value;
     if(!val){alert('Please enter a time.');return;}
     const [h,m]=val.split(':').map(Number);
-    const d=new Date();d.setHours(h,m,0,0);
-    ts=d.getTime();
+    const d=new Date();d.setHours(h,m,0,0);ts=d.getTime();
   }
-
-  // Apply to shift data
   if(!data.shifts)data.shifts={};
   if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
   const key=todayKey();
   if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={};
-  const shift=data.shifts[currentUser.phone][key];
-
-  // field can be 'shiftStart', 'shiftEnd', 'breakfast.start', 'breakfast.end', etc.
-  if(field.includes('.')){
-    const [breakName,breakField]=field.split('.');
-    if(!shift[breakName])shift[breakName]={};
-    shift[breakName][breakField]=ts;
-  } else {
-    shift[field]=ts;
-  }
-
+  // For shifts: store timestamp directly on the field
+  // For breaks (breakfast/lunch/dinner): store timestamp directly — single tap, no start/end
+  data.shifts[currentUser.phone][key][shiftActionPending.field]=ts;
   closeOverlay('shift-action-overlay');
   shiftActionPending=null;
   renderShifts();
@@ -752,8 +681,7 @@ async function submitReg(){
   closeOverlay('reg-overlay');showApp();
 }
 function showPickOverlay(){
-  hidePickOverlayReg();
-  openOverlay('pick-overlay');
+  hidePickOverlayReg();openOverlay('pick-overlay');
   renderPickList('pick-overlay-list',u=>{
     saveUser(u);closeOverlay('pick-overlay');
     document.getElementById('header-avatar').textContent=initials(u.name);
@@ -764,8 +692,7 @@ function showPickOverlayReg(){
   document.getElementById('pick-overlay-list-wrap').style.display='none';
   document.getElementById('pick-overlay-reg').style.display='block';
   document.getElementById('pick-overlay-sub').textContent='New Crew Member';
-  document.getElementById('por-name').value='';
-  document.getElementById('por-phone').value='';
+  document.getElementById('por-name').value='';document.getElementById('por-phone').value='';
 }
 function hidePickOverlayReg(){
   document.getElementById('pick-overlay-list-wrap').style.display='block';
@@ -784,14 +711,12 @@ async function submitPickOverlayReg(){
   document.getElementById('header-avatar').textContent=initials(user.name);
   document.getElementById('header-name').textContent=user.name.split(' ')[0];
 }
-
 function showApp(){
   document.getElementById('app').style.display='block';
   document.getElementById('header-avatar').textContent=initials(currentUser.name);
   document.getElementById('header-name').textContent=currentUser.name.split(' ')[0];
   if(data){renderRadios();renderShifts();}
 }
-
 function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
 function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'});}
 function formatTimeOnly(ts){if(!ts)return'';return new Date(ts).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'});}
