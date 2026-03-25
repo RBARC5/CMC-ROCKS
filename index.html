@@ -7,11 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --rust:#F54217;--gold:#F39F34;--olive:#9D9812;--cobalt:#0048FF;
-  --cream:#F4E9D3;--char:#22221F;--dust:#A08850;
-  --panel:#1A1915;--border:rgba(244,233,211,0.1);
-}
+:root{--rust:#F54217;--gold:#F39F34;--olive:#9D9812;--cobalt:#0048FF;--cream:#F4E9D3;--char:#22221F;--dust:#A08850;--panel:#1A1915;--border:rgba(244,233,211,0.1);}
 html,body{width:100%;min-height:100%;background:var(--char);color:var(--cream);font-family:'Barlow',sans-serif;overflow-x:hidden}
 #stripe-top{position:fixed;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--rust) 0%,var(--gold) 33%,var(--olive) 55%,var(--cobalt) 75%,var(--rust) 100%);background-size:300% 100%;z-index:200;animation:stripe 5s linear infinite}
 @keyframes stripe{0%{background-position:0% 0%}100%{background-position:300% 0%}}
@@ -208,8 +204,10 @@ const PROXY = 'https://cmc-rocks-proxy.8gonula.workers.dev';
 const RAW   = 'https://raw.githubusercontent.com/RBARC5/CMC-ROCKS/main/data.json';
 
 let data=null, currentUser=null, pollTimer=null, activeReturnId=null;
-// Blocks poll from overwriting local data while a write is pending or CDN hasn't caught up
-let writeLockUntil=0;
+let writeLockUntil=0; // epoch ms — poll is blocked until this time passes
+
+// ── LOCK HELPER — call this FIRST before any data mutation or render ──
+function lockWrites(){writeLockUntil=Date.now()+40000;}
 
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
@@ -240,8 +238,7 @@ async function init(){
 }
 
 async function fetchData(){
-  // Don't overwrite local data if a write just happened — CDN takes ~30s to update
-  if(Date.now() < writeLockUntil) return;
+  if(Date.now()<writeLockUntil) return; // blocked while write is propagating
   try{
     const r=await fetch(RAW+'?t='+Date.now());
     data=await r.json();
@@ -253,16 +250,11 @@ async function fetchData(){
 
 function startPolling(){
   if(pollTimer)clearInterval(pollTimer);
-  pollTimer=setInterval(async()=>{
-    await fetchData();
-    renderRadios();
-  },10000);
+  pollTimer=setInterval(async()=>{await fetchData();renderRadios();},10000);
 }
 
 async function pushData(msg){
   showSaveStatus('saving');
-  // Lock polling for 35 seconds after write to let GitHub CDN propagate
-  writeLockUntil=Date.now()+35000;
   try{
     const metaResp=await fetch(PROXY,{headers:{'Accept':'application/json'}});
     const meta=await metaResp.json();
@@ -281,7 +273,7 @@ async function pushData(msg){
     showSaveStatus('ok');
   }catch(e){
     console.error('pushData error:',e);
-    writeLockUntil=0; // release lock on failure so next poll can try again
+    writeLockUntil=0; // release lock on failure
     showSaveStatus('err');
   }
 }
@@ -324,6 +316,7 @@ async function submitReg(){
   const phone=document.getElementById('reg-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
+  lockWrites();
   saveUser(user);addLocalCrew(user);
   if(!data)data={crew:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
@@ -356,6 +349,7 @@ async function submitPickOverlayReg(){
   const phone=document.getElementById('por-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
+  lockWrites();
   saveUser(user);addLocalCrew(user);
   if(!data)data={crew:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
@@ -409,13 +403,17 @@ function renderRadios(){
       </table></div>`;
   }
 }
+
 function getActiveLoans(log){
   const radios={};
   log.forEach(e=>{const k=e.siteId+'|'+e.deptId;if(!radios[k])radios[k]=[];radios[k].push(e);});
   return Object.values(radios).map(entries=>entries[entries.length-1]).filter(e=>e.action==='out');
 }
+
 async function confirmRadioOut(){
   if(!currentUser)return;
+  // Lock FIRST — before any mutation or render
+  lockWrites();
   const siteId=document.getElementById('ro-siteid').value.trim().toUpperCase();
   const deptId=document.getElementById('ro-deptid').value.trim();
   const condition=document.getElementById('ro-condition').value;
@@ -431,6 +429,7 @@ async function confirmRadioOut(){
   renderRadios();
   await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`);
 }
+
 function openReturnModal(){
   const active=getActiveLoans(data.radioLog||[]);
   const el=document.getElementById('radio-return-list');
@@ -445,6 +444,7 @@ function openReturnModal(){
   }
   openOverlay('radio-in-overlay');
 }
+
 function selectReturn(siteId,deptId){
   activeReturnId={siteId,deptId};
   document.getElementById('radio-ret-title').textContent=`Return: ${siteId} / ${deptId}`;
@@ -453,8 +453,11 @@ function selectReturn(siteId,deptId){
   closeOverlay('radio-in-overlay');
   openOverlay('radio-ret-overlay');
 }
+
 async function confirmRadioReturn(){
   if(!activeReturnId||!currentUser)return;
+  // Lock FIRST — before any mutation or render
+  lockWrites();
   const condition=document.getElementById('rr-condition').value;
   const issues=document.getElementById('rr-issues').value.trim();
   const isFault=condition==='Faulty / Not working'||issues.length>0;
@@ -465,6 +468,7 @@ async function confirmRadioReturn(){
   renderRadios();
   await pushData(`Radio returned by ${currentUser.name}`);
 }
+
 function downloadRadioCSV(){
   const log=data.radioLog||[];
   if(!log.length){alert('No radio history to download.');return;}
@@ -480,6 +484,7 @@ function downloadRadioCSV(){
   a.href=url;a.download=`CMC-Rocks-Radio-History-${new Date().toISOString().slice(0,10)}.csv`;
   a.click();URL.revokeObjectURL(url);
 }
+
 function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
 function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'});}
 init();
