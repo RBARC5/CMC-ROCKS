@@ -1,0 +1,14 @@
+{
+  "crew": [],
+  "todos": [],
+  "announcements": [],
+  "emergency": {
+    "contacts": [
+      { "role": "Site Emergency", "number": "000" },
+      { "role": "Festival Medical", "number": "TBC" },
+      { "role": "Site Manager", "number": "TBC" }
+    ]
+  },
+  "timetables": [],
+  "signins": []
+}
