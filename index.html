@@ -84,25 +84,74 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .fault-warning-box .fw-radio{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.18em;color:var(--gold);margin-bottom:0.6rem}
 .fault-warning-box .fw-reported{font-size:0.72rem;color:var(--dust);margin-bottom:0.4rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.08em;text-transform:uppercase}
 .fault-warning-box .fw-message{font-size:0.9rem;color:var(--cream);line-height:1.5;background:rgba(0,0,0,0.2);border-radius:3px;padding:0.6rem 0.8rem;font-style:italic}
-/* STAFF SHIFTS */
-.staff-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1rem;margin-bottom:0.75rem}
-.staff-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.7rem}
-.staff-card-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.08em}
-.staff-status-badge{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:2px;flex-shrink:0}
-.status-off{background:rgba(160,136,80,0.15);color:var(--dust);border:1px solid rgba(160,136,80,0.25)}
-.status-on{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
-.status-needs-break{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
-.status-ended{background:rgba(160,136,80,0.15);color:var(--dust);border:1px solid rgba(160,136,80,0.25)}
-.staff-shift-time{font-size:0.78rem;color:var(--dust);margin-bottom:0.6rem}
-.staff-shift-time span{color:var(--cream)}
-.break-pills{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.7rem}
-.break-pill{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:2px;display:flex;align-items:center;gap:0.3rem}
-.break-pill-done{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
-.break-pill-none{background:rgba(160,136,80,0.08);color:var(--dust);border:1px solid rgba(160,136,80,0.18)}
-.staff-actions{display:flex;gap:0.5rem;flex-wrap:wrap}
-.time-toggle{display:flex;gap:0.5rem;margin-bottom:0.8rem}
-.time-toggle-btn{flex:1;padding:0.5rem;background:rgba(244,233,211,0.06);border:1px solid var(--border);border-radius:3px;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.15em;cursor:pointer;text-align:center;transition:all 0.15s}
-.time-toggle-btn.active{background:var(--rust);color:#fff;border-color:var(--rust)}
+
+/* ── STAFF SHIFTS REWORK ── */
+.staff-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1rem 1rem 0.8rem;margin-bottom:0.75rem;transition:border-color 0.2s}
+.staff-card.status-resting{border-color:rgba(243,159,52,0.45);background:rgba(243,159,52,0.04)}
+.staff-card.status-dnd{border-color:rgba(245,66,23,0.55);background:rgba(245,66,23,0.05)}
+.staff-card.status-on-shift{border-color:rgba(157,152,18,0.4)}
+
+.staff-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem}
+.staff-name-row{display:flex;align-items:center;gap:0.6rem}
+.staff-card-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.06em}
+.staff-you-tag{font-size:0.6rem;color:var(--dust);font-family:'Barlow',sans-serif;font-weight:400}
+
+/* Status badge next to name */
+.staff-status-highlight{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:2px;white-space:nowrap}
+.hl-off{background:rgba(160,136,80,0.12);color:var(--dust);border:1px solid rgba(160,136,80,0.2)}
+.hl-on{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
+.hl-resting{background:rgba(243,159,52,0.2);color:var(--gold);border:1px solid rgba(243,159,52,0.4)}
+.hl-dnd{background:rgba(245,66,23,0.2);color:var(--rust);border:1px solid rgba(245,66,23,0.4);animation:pulse-dnd 2s ease-in-out infinite}
+@keyframes pulse-dnd{0%,100%{opacity:1}50%{opacity:0.55}}
+.hl-ended{background:rgba(160,136,80,0.12);color:var(--dust);border:1px solid rgba(160,136,80,0.2)}
+
+/* Shift time info */
+.staff-time-info{font-size:0.75rem;color:var(--dust);margin-bottom:0.7rem;line-height:1.7;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.05em}
+.staff-time-info .t-label{color:var(--dust)}
+.staff-time-info .t-val{color:var(--cream);font-weight:600}
+.staff-time-info .meal-done{color:var(--olive)}
+.staff-time-info .meal-none{color:rgba(160,136,80,0.4)}
+
+/* Button grid */
+.shift-btn-grid{display:grid;gap:0.4rem;margin-top:0.5rem}
+.shift-btn-grid.row-2{grid-template-columns:1fr 1fr}
+.shift-btn-grid.row-3{grid-template-columns:1fr 1fr 1fr}
+.shift-btn-grid.row-full{grid-template-columns:1fr}
+.sbtn{padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;transition:all 0.15s;background:rgba(244,233,211,0.05);color:var(--dust);text-align:center}
+.sbtn:hover{border-color:var(--cream);color:var(--cream)}
+.sbtn:disabled{opacity:0.35;cursor:default;pointer-events:none}
+.sbtn.active{cursor:default}
+
+/* Individual button states */
+.sbtn-on-shift{border-color:rgba(157,152,18,0.4);color:var(--olive)}
+.sbtn-on-shift:hover{background:rgba(157,152,18,0.15);border-color:var(--olive)}
+.sbtn-on-shift.active{background:rgba(157,152,18,0.2);color:var(--olive);border-color:var(--olive)}
+
+.sbtn-off-shift{border-color:rgba(160,136,80,0.25);color:var(--dust)}
+.sbtn-off-shift:hover{background:rgba(160,136,80,0.1);border-color:var(--dust)}
+.sbtn-off-shift.active{background:rgba(160,136,80,0.12);color:var(--cream);border-color:var(--dust)}
+
+.sbtn-breakfast{border-color:rgba(243,159,52,0.3);color:rgba(243,159,52,0.7)}
+.sbtn-breakfast:hover{background:rgba(243,159,52,0.12);border-color:var(--gold)}
+.sbtn-breakfast.active{background:rgba(157,152,18,0.15);color:var(--olive);border-color:rgba(157,152,18,0.4)}
+
+.sbtn-lunch{border-color:rgba(243,159,52,0.3);color:rgba(243,159,52,0.7)}
+.sbtn-lunch:hover{background:rgba(243,159,52,0.12);border-color:var(--gold)}
+.sbtn-lunch.active{background:rgba(157,152,18,0.15);color:var(--olive);border-color:rgba(157,152,18,0.4)}
+
+.sbtn-dinner{border-color:rgba(243,159,52,0.3);color:rgba(243,159,52,0.7)}
+.sbtn-dinner:hover{background:rgba(243,159,52,0.12);border-color:var(--gold)}
+.sbtn-dinner.active{background:rgba(157,152,18,0.15);color:var(--olive);border-color:rgba(157,152,18,0.4)}
+
+.sbtn-resting{border-color:rgba(243,159,52,0.25);color:rgba(243,159,52,0.6)}
+.sbtn-resting:hover{background:rgba(243,159,52,0.1);border-color:var(--gold)}
+.sbtn-resting.active{background:rgba(243,159,52,0.18);color:var(--gold);border-color:var(--gold)}
+
+.sbtn-dnd{border-color:rgba(245,66,23,0.3);color:rgba(245,66,23,0.65)}
+.sbtn-dnd:hover{background:rgba(245,66,23,0.1);border-color:var(--rust)}
+.sbtn-dnd.active{background:rgba(245,66,23,0.18);color:var(--rust);border-color:var(--rust)}
+
+.shift-divider{width:100%;height:1px;background:var(--border);margin:0.5rem 0}
 </style>
 </head>
 <body>
@@ -207,25 +256,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- TIME MODAL — used for shift start/end and break logging -->
-<div class="overlay hidden" id="shift-action-overlay">
-  <div class="modal">
-    <div class="modal-logo">CMC <span>Rocks</span></div>
-    <div class="modal-sub" id="shift-action-sub">Log Time</div>
-    <h2 id="shift-action-title">Select Time</h2>
-    <div class="time-toggle">
-      <div class="time-toggle-btn active" id="time-now-btn" onclick="selectTimeMode('now')">Now</div>
-      <div class="time-toggle-btn" id="time-manual-btn" onclick="selectTimeMode('manual')">Manual</div>
-    </div>
-    <div id="manual-time-wrap" style="display:none">
-      <label>Enter Time</label>
-      <input type="time" id="manual-time-input">
-    </div>
-    <button class="btn btn-green" onclick="confirmShiftAction()">Confirm</button>
-    <button class="btn secondary" onclick="closeOverlay('shift-action-overlay')">Cancel</button>
-  </div>
-</div>
-
 <div class="overlay hidden" id="pick-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -292,7 +322,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 <script>
 const PROXY='https://cmc-rocks-proxy.8gonula.workers.dev';
 let data=null,currentUser=null,pollTimer=null,activeReturnId=null,pendingSignOut=null;
-let shiftActionPending=null,timeMode='now';
 
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
@@ -534,11 +563,11 @@ function downloadRadioCSV(){
   a.click();URL.revokeObjectURL(url);
 }
 
-// ── STAFF SHIFTS ──
-// Shift data: data.shifts[phone][dateKey] = {
-//   shiftStart, shiftEnd,
-//   breakfast, lunch, dinner   ← each is just a timestamp (when the break was marked done)
-// }
+// ── STAFF SHIFTS (reworked) ──
+// Shift data structure per person per day:
+// { shiftStart, shiftEnd, breakfast, lunch, dinner, status }
+// status: 'off' | 'on' | 'resting' | 'dnd'  (on/off derived from shiftStart/shiftEnd, but status can overlay resting/dnd)
+
 function todayKey(){return new Date().toLocaleDateString('en-AU',{year:'numeric',month:'2-digit',day:'2-digit'}).replace(/\//g,'-');}
 function getShift(phone){
   if(!data.shifts)data.shifts={};
@@ -548,103 +577,161 @@ function getShift(phone){
   return data.shifts[phone][key];
 }
 
+// Returns the display status for a shift object
+function getDisplayStatus(s){
+  if(s.status==='dnd') return 'dnd';
+  if(s.status==='resting') return 'resting';
+  if(s.shiftEnd) return 'ended';
+  if(s.shiftStart) return 'on';
+  return 'off';
+}
+
+function statusLabel(st){
+  return {off:'Off Shift',on:'On Shift',resting:'Resting',dnd:'Do Not Disturb',ended:'Shift Ended'}[st]||'Off Shift';
+}
+function statusHlClass(st){
+  return {off:'hl-off',on:'hl-on',resting:'hl-resting',dnd:'hl-dnd',ended:'hl-ended'}[st]||'hl-off';
+}
+function cardClass(st){
+  return {resting:'status-resting',dnd:'status-dnd',on:'status-on-shift'}[st]||'';
+}
+
 function renderShifts(){
   if(!data)return;
   const el=document.getElementById('shifts-list');
   const crew=getMergedCrew();
   if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.</div>';return;}
+
   el.innerHTML=crew.map(u=>{
     const s=getShift(u.phone);
     const isMe=currentUser&&currentUser.phone===u.phone;
+    const st=getDisplayStatus(s);
 
-    // Status
-    let statusClass='status-off',statusText='Not Started';
-    if(s.shiftEnd){statusClass='status-ended';statusText='Shift Ended';}
-    else if(s.shiftStart){
-      const hoursOn=(Date.now()-s.shiftStart)/(1000*60*60);
-      const hadBreak=s.breakfast||s.lunch||s.dinner;
-      if(hoursOn>=4&&!hadBreak){statusClass='status-needs-break';statusText='Needs Break!';}
-      else{statusClass='status-on';statusText='On Shift';}
+    // Shift times line
+    let timeInfo='';
+    if(s.shiftStart){
+      timeInfo+=`<span class="t-label">Start: </span><span class="t-val">${formatTimeOnly(s.shiftStart)}</span>`;
+      if(s.shiftEnd) timeInfo+=`&ensp;<span class="t-label">End: </span><span class="t-val">${formatTimeOnly(s.shiftEnd)}</span>`;
     }
+    // Meal completions
+    const meals=['breakfast','lunch','dinner'];
+    const mealInfo=meals.map(m=>{
+      if(s[m]) return `<span class="meal-done">&#10003; ${cap(m)} ${formatTimeOnly(s[m])}</span>`;
+      return `<span class="meal-none">${cap(m)}</span>`;
+    }).join('&ensp;');
 
-    // Shift time line
-    const shiftLine=s.shiftStart
-      ?`Shift: <span>${formatTimeOnly(s.shiftStart)}${s.shiftEnd?' – '+formatTimeOnly(s.shiftEnd):' → now'}</span>`
-      :'<span style="color:var(--dust)">Not on shift</span>';
+    const hasTimeInfo=timeInfo||s.shiftStart;
 
-    // Break pills
-    const breakPills=['breakfast','lunch','dinner'].map(b=>{
-      const done=!!s[b];
-      return `<span class="break-pill ${done?'break-pill-done':'break-pill-none'}">
-        ${done?'✓':''} ${b.charAt(0).toUpperCase()+b.slice(1)}${done?' '+formatTimeOnly(s[b]):''}
-      </span>`;
-    }).join('');
-
-    // Buttons — only for current user
-    let actions='';
+    // Build buttons — only interactive for current user
+    let btns='';
     if(isMe){
-      if(!s.shiftStart){
-        actions=`<button class="btn btn-green btn-sm" onclick="openShiftAction('shiftStart','Start Shift')">Start Shift</button>`;
-      } else if(!s.shiftEnd){
-        const breakBtns=['breakfast','lunch','dinner']
-          .filter(b=>!s[b])
-          .map(b=>`<button class="btn btn-sm" style="background:rgba(243,159,52,0.25);color:var(--gold);border:1px solid rgba(243,159,52,0.4)" onclick="openShiftAction('${b}','${b.charAt(0).toUpperCase()+b.slice(1)} Break Done')">&#10003; ${b.charAt(0).toUpperCase()+b.slice(1)}</button>`)
-          .join('');
-        actions=breakBtns+`<button class="btn btn-sm" style="background:rgba(245,66,23,0.25);color:var(--rust);border:1px solid rgba(245,66,23,0.4)" onclick="openShiftAction('shiftEnd','End Shift')">End Shift</button>`;
-      }
+      // Row 1: On Shift / Off Shift
+      const onActive=st==='on'||st==='resting'||st==='dnd';
+      const offActive=st==='ended';
+      btns+=`<div class="shift-btn-grid row-2">
+        <button class="sbtn sbtn-on-shift${onActive?' active':''}" onclick="setShiftStatus('shiftStart')" ${onActive?'disabled':''}>
+          ${onActive?'&#9679; On Shift':'Start Shift'}
+        </button>
+        <button class="sbtn sbtn-off-shift${offActive?' active':''}" onclick="setShiftStatus('shiftEnd')" ${offActive||!s.shiftStart?'disabled':''}>
+          ${offActive?'&#10003; Off Shift':'End Shift'}
+        </button>
+      </div>`;
+
+      // Row 2: Breakfast / Lunch / Dinner
+      btns+=`<div class="shift-btn-grid row-3" style="margin-top:0.4rem">
+        ${meals.map(m=>`<button class="sbtn sbtn-${m}${s[m]?' active':''}" onclick="setMeal('${m}')" ${s[m]?'disabled':''}>
+          ${s[m]?'&#10003; '+cap(m):cap(m)}
+        </button>`).join('')}
+      </div>`;
+
+      // Row 3: Resting / Do Not Disturb
+      const restActive=st==='resting';
+      const dndActive=st==='dnd';
+      btns+=`<div class="shift-btn-grid row-2" style="margin-top:0.4rem">
+        <button class="sbtn sbtn-resting${restActive?' active':''}" onclick="setOverlayStatus('resting')">
+          ${restActive?'&#9675; Resting':'Resting'}
+        </button>
+        <button class="sbtn sbtn-dnd${dndActive?' active':''}" onclick="setOverlayStatus('dnd')">
+          ${dndActive?'&#9888; Do Not Disturb':'Do Not Disturb'}
+        </button>
+      </div>`;
     }
 
-    return `<div class="staff-card">
+    return `<div class="staff-card ${cardClass(st)}">
       <div class="staff-card-header">
-        <div style="display:flex;align-items:center;gap:0.6rem">
+        <div class="staff-name-row">
           <div class="crew-avatar" style="width:28px;height:28px;font-size:0.8rem">${initials(u.name)}</div>
-          <div class="staff-card-name">${u.name}${isMe?' <span style="font-size:0.62rem;color:var(--dust);font-family:Barlow,sans-serif;font-weight:400">(you)</span>':''}</div>
+          <div>
+            <span class="staff-card-name">${u.name}</span>
+            ${isMe?'<span class="staff-you-tag"> (you)</span>':''}
+          </div>
         </div>
-        <span class="staff-status-badge ${statusClass}">${statusText}</span>
+        <span class="staff-status-highlight ${statusHlClass(st)}">${statusLabel(st)}</span>
       </div>
-      <div class="staff-shift-time">${shiftLine}</div>
-      <div class="break-pills">${breakPills}</div>
-      ${actions?`<div class="staff-actions">${actions}</div>`:''}
+      ${hasTimeInfo||s.breakfast||s.lunch||s.dinner?`<div class="staff-time-info">
+        ${timeInfo?`<div>${timeInfo}</div>`:''}
+        <div style="margin-top:0.2rem">${mealInfo}</div>
+      </div>`:''}
+      ${btns}
     </div>`;
   }).join('');
 }
 
-function openShiftAction(field,label){
-  shiftActionPending={field,label};
-  document.getElementById('shift-action-sub').textContent=label;
-  document.getElementById('shift-action-title').textContent='Select Time';
-  selectTimeMode('now');
-  const now=new Date();
-  document.getElementById('manual-time-input').value=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-  openOverlay('shift-action-overlay');
-}
-function selectTimeMode(mode){
-  timeMode=mode;
-  document.getElementById('time-now-btn').classList.toggle('active',mode==='now');
-  document.getElementById('time-manual-btn').classList.toggle('active',mode==='manual');
-  document.getElementById('manual-time-wrap').style.display=mode==='manual'?'block':'none';
-}
-async function confirmShiftAction(){
-  if(!shiftActionPending||!currentUser)return;
-  let ts;
-  if(timeMode==='now'){ts=Date.now();}
-  else{
-    const val=document.getElementById('manual-time-input').value;
-    if(!val){alert('Please enter a time.');return;}
-    const [h,m]=val.split(':').map(Number);
-    const d=new Date();d.setHours(h,m,0,0);ts=d.getTime();
-  }
+// Set shiftStart or shiftEnd with current time
+async function setShiftStatus(field){
+  if(!currentUser)return;
+  const s=getShift(currentUser.phone);
+  // Prevent re-starting if already on shift, or ending if already ended
+  if(field==='shiftStart'&&s.shiftStart) return;
+  if(field==='shiftEnd'&&s.shiftEnd) return;
+  if(field==='shiftEnd'&&!s.shiftStart) return;
+  const ts=Date.now();
+  const key=todayKey();
   if(!data.shifts)data.shifts={};
   if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
-  const key=todayKey();
   if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={};
-  // For shifts: store timestamp directly on the field
-  // For breaks (breakfast/lunch/dinner): store timestamp directly — single tap, no start/end
-  data.shifts[currentUser.phone][key][shiftActionPending.field]=ts;
-  closeOverlay('shift-action-overlay');
-  shiftActionPending=null;
+  data.shifts[currentUser.phone][key][field]=ts;
+  // Clear overlay status when going on shift
+  if(field==='shiftStart'){
+    data.shifts[currentUser.phone][key].status='on';
+  }
+  if(field==='shiftEnd'){
+    data.shifts[currentUser.phone][key].status='off';
+  }
   renderShifts();
   await pushData(`Shift update: ${currentUser.name}`,'shift-save-indicator');
+}
+
+// Mark a meal as completed now
+async function setMeal(meal){
+  if(!currentUser)return;
+  const key=todayKey();
+  if(!data.shifts)data.shifts={};
+  if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
+  if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={};
+  if(data.shifts[currentUser.phone][key][meal]) return; // already done
+  data.shifts[currentUser.phone][key][meal]=Date.now();
+  renderShifts();
+  await pushData(`${meal} marked: ${currentUser.name}`,'shift-save-indicator');
+}
+
+// Toggle overlay statuses (resting / dnd) — tap again to clear
+async function setOverlayStatus(status){
+  if(!currentUser)return;
+  const key=todayKey();
+  if(!data.shifts)data.shifts={};
+  if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
+  if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={};
+  const current=data.shifts[currentUser.phone][key].status;
+  // Toggle: tap same = clear back to 'on' (if on shift) or 'off'
+  const s=data.shifts[currentUser.phone][key];
+  if(current===status){
+    data.shifts[currentUser.phone][key].status=s.shiftStart&&!s.shiftEnd?'on':'off';
+  } else {
+    data.shifts[currentUser.phone][key].status=status;
+  }
+  renderShifts();
+  await pushData(`Status update: ${currentUser.name}`,'shift-save-indicator');
 }
 
 // ── REGISTRATION ──
@@ -717,6 +804,7 @@ function showApp(){
   document.getElementById('header-name').textContent=currentUser.name.split(' ')[0];
   if(data){renderRadios();renderShifts();}
 }
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
 function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
 function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'});}
 function formatTimeOnly(ts){if(!ts)return'';return new Date(ts).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'});}
