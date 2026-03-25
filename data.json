@@ -1,12 +1,27 @@
 {
-  "crew": [],
+  "crew": [
+    {
+      "name": "Rhys Barclay",
+      "phone": "0452511922",
+      "id": "1774441530986"
+    }
+  ],
   "todos": [],
   "announcements": [],
   "emergency": {
     "contacts": [
-      { "role": "Site Emergency", "number": "000" },
-      { "role": "Festival Medical", "number": "TBC" },
-      { "role": "Site Manager", "number": "TBC" }
+      {
+        "role": "Site Emergency",
+        "number": "000"
+      },
+      {
+        "role": "Festival Medical",
+        "number": "TBC"
+      },
+      {
+        "role": "Site Manager",
+        "number": "TBC"
+      }
     ]
   },
   "timetables": [],
