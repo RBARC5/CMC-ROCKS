@@ -49,43 +49,13 @@
     },
     {
       "action": "out",
-      "siteId": "S 2",
-      "deptId": "8",
+      "siteId": "SITE 228",
+      "deptId": "Traffic 8",
       "by": "Rhys Barclay",
-      "time": 1774439810576,
+      "time": 1774440005658,
       "condition": "Good",
       "notes": "",
-      "id": "1774439810576"
-    },
-    {
-      "action": "in",
-      "siteId": "S 2",
-      "deptId": "8",
-      "by": "Rhys Barclay",
-      "time": 1774439846420,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774439846420"
-    },
-    {
-      "action": "out",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774439866174,
-      "condition": "Minor wear",
-      "notes": "",
-      "id": "1774439866174"
-    },
-    {
-      "action": "in",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774439874026,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774439874026"
+      "id": "1774440005658"
     }
   ]
 }
