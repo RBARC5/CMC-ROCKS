@@ -171,24 +171,16 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 #map-fs-overlay.hidden{display:none}
 #map-fs-overlay img{max-width:100%;max-height:100%;object-fit:contain;touch-action:pinch-zoom}
 #map-fs-close{position:absolute;top:1rem;right:1rem;background:rgba(26,25,21,0.9);border:1px solid var(--border);border-radius:3px;color:var(--cream);font-size:1rem;padding:0.4rem 0.8rem;cursor:pointer;font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em}
-/* GATE COUNTDOWN */
-.gate-countdown-block{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1.1rem 1rem;margin-bottom:1.2rem;text-align:center}
-.gate-countdown-block.state-open{border-color:rgba(157,152,18,0.5);background:rgba(157,152,18,0.05)}
-.gate-countdown-block.state-closed{border-color:rgba(243,159,52,0.35)}
-.gate-countdown-block.state-done{border-color:rgba(160,136,80,0.2)}
-.gcd-label{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);margin-bottom:0.3rem}
-.gcd-gate-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.06em;color:var(--cream);margin-bottom:0.5rem}
-.gcd-timer{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:0.08em;line-height:1;color:var(--gold)}
-.gcd-timer.open{color:var(--olive)}
-.gcd-timer.done{color:var(--dust);font-size:1.2rem}
-.gcd-sublabel{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dust);margin-top:0.3rem}
-/* GATE CARDS */
-.gate-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:0.85rem 1rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.75rem}
-.gate-card.gate-open{border-color:rgba(157,152,18,0.4)}
-.gate-card.gate-closed{border-color:rgba(245,66,23,0.3)}
-.gate-status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+/* GATE CARDS — inline countdown */
+.gate-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:0.85rem 1rem;margin-bottom:0.6rem}
+.gate-card.gate-open{border-color:rgba(157,152,18,0.45);background:rgba(157,152,18,0.03)}
+.gate-card.gate-closed{border-color:rgba(245,66,23,0.25)}
+.gate-card.gate-past{border-color:rgba(160,136,80,0.15);opacity:0.55}
+.gate-card-top{display:flex;align-items:center;gap:0.75rem}
+.gate-status-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:2px}
 .gate-open .gate-status-dot{background:var(--olive)}
 .gate-closed .gate-status-dot{background:var(--rust)}
+.gate-past .gate-status-dot{background:rgba(160,136,80,0.4)}
 .gate-info{flex:1;min-width:0}
 .gate-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;letter-spacing:0.06em;color:var(--cream)}
 .gate-times{font-size:0.75rem;color:var(--dust);font-family:'Barlow Condensed',sans-serif;letter-spacing:0.06em;margin-top:0.15rem}
@@ -197,6 +189,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .gate-status-pill{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2px;flex-shrink:0}
 .gate-open .gate-status-pill{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
 .gate-closed .gate-status-pill{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
+.gate-past .gate-status-pill{background:rgba(160,136,80,0.1);color:rgba(160,136,80,0.5);border:1px solid rgba(160,136,80,0.15)}
+/* Per-gate countdown strip */
+.gate-countdown{margin-top:0.6rem;padding-top:0.5rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.gate-cd-label{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust)}
+.gate-cd-timer{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:0.06em;line-height:1}
+.gate-cd-timer.cd-opening{color:var(--gold)}
+.gate-cd-timer.cd-closing{color:var(--olive)}
+.gate-cd-timer.cd-past{color:rgba(160,136,80,0.35);font-size:0.75rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;text-transform:uppercase}
 /* GATE EDITOR */
 .gate-editor{background:rgba(244,233,211,0.03);border:1px solid var(--border);border-radius:6px;padding:1rem;margin-bottom:0.6rem}
 .gate-editor-row{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.5rem}
@@ -422,10 +422,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
         <button id="camp-edit-btn" class="btn btn-sm" style="background:rgba(0,72,255,0.25);border:1px solid rgba(0,72,255,0.4);color:#7fa8ff;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;padding:0.35rem 0.75rem;border-radius:3px;white-space:nowrap" onclick="openPinFor('camping')">&#128274; Edit</button>
       </div>
 
-      <!-- Gate Countdown -->
-      <div id="gate-countdown-wrap"></div>
-
-      <!-- Map -->
       <div class="radio-section-label">Campground Map</div>
       <div class="camp-map-wrap" id="camp-map-wrap">
         <div class="camp-map-placeholder" id="camp-map-placeholder">
@@ -435,7 +431,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
         </div>
       </div>
 
-      <!-- Gate times -->
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem">
         <div class="radio-section-label" style="margin:0;border:none">Gate Times</div>
         <span id="camp-edit-mode-tag" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);padding:0.15rem 0.5rem;border:1px solid rgba(243,159,52,0.3);border-radius:2px">Edit Mode</span>
@@ -456,9 +451,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 const PROXY='https://cmc-rocks-proxy.8gonula.workers.dev';
 const MANAGER_PIN='1234';
 const CAMP_MAP_URL='campmap.webp';
-// Gate open times keyed to each gate name — date string format: 'YYYY-MM-DD'
-// The countdown uses the gate's open time on its date to calculate the target.
-// Dates are hardcoded for the 2026 festival: Wed 18 Mar – Sun 22 Mar
 const GATE_DATES={
   'Camping — Wed 18 March':'2026-03-18',
   'Camping — Thu 19 March':'2026-03-19',
@@ -509,7 +501,6 @@ function startPolling(){
   pollTimer=setInterval(async()=>{await fetchData();renderRadios();renderShifts();renderCamping();},8000);
 }
 
-// ── MAP ──
 function loadMapImage(){
   const img=new Image();
   img.onload=()=>{
@@ -524,7 +515,6 @@ function loadMapImage(){
 function openMapFS(){document.getElementById('map-fs-img').src=CAMP_MAP_URL;document.getElementById('map-fs-overlay').classList.remove('hidden');}
 function closeMapFS(){document.getElementById('map-fs-overlay').classList.add('hidden');}
 
-// ── CLOCK ──
 function startClock(){if(clockTimer)clearInterval(clockTimer);tickClock();clockTimer=setInterval(tickClock,1000);}
 function tickClock(){
   const now=new Date();
@@ -534,16 +524,14 @@ function tickClock(){
   if(de)de.textContent=now.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
 }
 
-// ── GATE COUNTDOWN ──
+// ── GATE COUNTDOWN HELPERS ──
 function gateOpenTs(gate){
   const dateStr=GATE_DATES[gate.name];if(!dateStr||!gate.open)return null;
-  const [h,m]=gate.open.split(':').map(Number);
-  const d=new Date(dateStr);d.setHours(h,m,0,0);return d.getTime();
+  const [h,m]=gate.open.split(':').map(Number);const d=new Date(dateStr);d.setHours(h,m,0,0);return d.getTime();
 }
 function gateCloseTs(gate){
   const dateStr=GATE_DATES[gate.name];if(!dateStr||!gate.close)return null;
-  const [h,m]=gate.close.split(':').map(Number);
-  const d=new Date(dateStr);d.setHours(h,m,0,0);return d.getTime();
+  const [h,m]=gate.close.split(':').map(Number);const d=new Date(dateStr);d.setHours(h,m,0,0);return d.getTime();
 }
 function padT(n){return String(n).padStart(2,'0');}
 function fmtCountdown(ms){
@@ -562,56 +550,30 @@ function startCountdown(){
   tickCountdown();countdownTimer=setInterval(tickCountdown,1000);
 }
 
+// Updates only the countdown elements inside already-rendered gate cards
 function tickCountdown(){
-  const wrap=document.getElementById('gate-countdown-wrap');if(!wrap)return;
-  const gates=(data&&data.gates)||[];
   const now=Date.now();
-
-  // Find the next gate that has a known date mapping
-  const gatesWithDates=gates.filter(g=>GATE_DATES[g.name]&&g.open);
-
-  if(!gatesWithDates.length){wrap.innerHTML='';return;}
-
-  // Find currently open gate first
-  const openGate=gatesWithDates.find(g=>{
-    const o=gateOpenTs(g);const c=gateCloseTs(g);
-    return o&&c&&now>=o&&now<c;
+  document.querySelectorAll('.gate-cd-timer').forEach(el=>{
+    const idx=el.dataset.idx;const gates=(data&&data.gates)||[];const g=gates[idx];if(!g)return;
+    const openTs=gateOpenTs(g);const closeTs=gateCloseTs(g);
+    if(!openTs){el.textContent='';return;}
+    if(now<openTs){
+      // Counting down to open
+      el.className='gate-cd-timer cd-opening';
+      el.previousElementSibling.textContent='Opens in';
+      el.textContent=fmtCountdown(openTs-now);
+    }else if(closeTs&&now<closeTs){
+      // Currently open — counting down to close
+      el.className='gate-cd-timer cd-closing';
+      el.previousElementSibling.textContent='Closes in';
+      el.textContent=fmtCountdown(closeTs-now);
+    }else{
+      // Past
+      el.className='gate-cd-timer cd-past';
+      el.previousElementSibling.textContent='';
+      el.textContent='Closed';
+    }
   });
-
-  if(openGate){
-    const closeTs=gateCloseTs(openGate);
-    const remaining=closeTs-now;
-    wrap.innerHTML=`<div class="gate-countdown-block state-open">
-      <div class="gcd-label">Gates Currently Open</div>
-      <div class="gcd-gate-name">${openGate.name}</div>
-      <div class="gcd-timer open">${fmtCountdown(remaining)}</div>
-      <div class="gcd-sublabel">until gates close</div>
-    </div>`;
-    return;
-  }
-
-  // Find next upcoming gate to open
-  const upcoming=gatesWithDates
-    .map(g=>({g,ts:gateOpenTs(g)}))
-    .filter(({ts})=>ts&&ts>now)
-    .sort((a,b)=>a.ts-b.ts)[0];
-
-  if(upcoming){
-    const diff=upcoming.ts-now;
-    wrap.innerHTML=`<div class="gate-countdown-block state-closed">
-      <div class="gcd-label">Next Gate Opens</div>
-      <div class="gcd-gate-name">${upcoming.g.name}</div>
-      <div class="gcd-timer">${fmtCountdown(diff)}</div>
-      <div class="gcd-sublabel">at ${upcoming.g.open}</div>
-    </div>`;
-    return;
-  }
-
-  // All gates have passed
-  wrap.innerHTML=`<div class="gate-countdown-block state-done">
-    <div class="gcd-timer done">Festival Complete</div>
-    <div class="gcd-sublabel">All camping gates have closed</div>
-  </div>`;
 }
 
 async function pushData(msg,indId){
@@ -967,23 +929,41 @@ function renderCamping(){
   if(campEditMode){
     el.innerHTML=gates.map((g,i)=>buildGateEditor(g,i)).join('');
   }else{
-    el.innerHTML=gates.map(g=>{
-      const isOpen=g.status==='open';
-      return `<div class="gate-card ${isOpen?'gate-open':'gate-closed'}">
-        <div class="gate-status-dot"></div>
-        <div class="gate-info">
-          <div class="gate-name">${g.name}</div>
-          <div class="gate-times">
-            <span style="color:var(--dust)">Open: </span><span>${g.open||'—'}</span>
-            &ensp;<span style="color:var(--dust)">Close: </span><span>${g.close||'—'}</span>
+    const now=Date.now();
+    el.innerHTML=gates.map((g,i)=>{
+      const openTs=gateOpenTs(g);const closeTs=gateCloseTs(g);
+      // Determine card state
+      let cardState='gate-closed';
+      if(openTs&&closeTs&&now>=openTs&&now<closeTs) cardState='gate-open';
+      else if(closeTs&&now>=closeTs) cardState='gate-past';
+      const isPast=cardState==='gate-past';
+      const isOpen=cardState==='gate-open';
+      const pillText=isOpen?'Open':isPast?'Closed':'Closed';
+      // Countdown strip — only show if date is known
+      const hasCd=!!GATE_DATES[g.name]&&!!g.open;
+      const cdStrip=hasCd?`<div class="gate-countdown">
+        <span class="gate-cd-label" style="font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust)"></span>
+        <span class="gate-cd-timer" data-idx="${i}"></span>
+      </div>`:'';
+      return `<div class="gate-card ${cardState}">
+        <div class="gate-card-top">
+          <div class="gate-status-dot"></div>
+          <div class="gate-info">
+            <div class="gate-name">${g.name}</div>
+            <div class="gate-times">
+              <span style="color:var(--dust)">Open: </span><span>${g.open||'—'}</span>
+              &ensp;<span style="color:var(--dust)">Close: </span><span>${g.close||'—'}</span>
+            </div>
+            ${g.notes?`<div class="gate-notes">${g.notes}</div>`:''}
           </div>
-          ${g.notes?`<div class="gate-notes">${g.notes}</div>`:''}
+          <span class="gate-status-pill">${pillText}</span>
         </div>
-        <span class="gate-status-pill">${isOpen?'Open':'Closed'}</span>
+        ${cdStrip}
       </div>`;
     }).join('');
+    // Immediately populate countdowns
+    tickCountdown();
   }
-  tickCountdown();
 }
 function buildGateEditor(g,i){
   return `<div class="gate-editor" id="gate-editor-${i}">
