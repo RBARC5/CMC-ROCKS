@@ -66,6 +66,16 @@
       "condition": "Good",
       "notes": "",
       "id": "1774439846420"
+    },
+    {
+      "action": "out",
+      "siteId": "S123",
+      "deptId": "t2",
+      "by": "Rhys Barclay",
+      "time": 1774439866174,
+      "condition": "Minor wear",
+      "notes": "",
+      "id": "1774439866174"
     }
   ]
 }
