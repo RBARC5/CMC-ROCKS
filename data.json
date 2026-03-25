@@ -19,14 +19,14 @@
       "status": "closed",
       "open": "09:00",
       "close": "21:00",
-      "notes": "Campers only"
+      "notes": ""
     },
     {
       "name": "Camping — Thu 19 March",
       "status": "closed",
       "open": "09:00",
       "close": "21:00",
-      "notes": "Campers only"
+      "notes": ""
     },
     {
       "name": "Camping — Fri 20 March",
@@ -47,14 +47,7 @@
       "status": "closed",
       "open": "09:00",
       "close": "17:00",
-      "notes": ""
-    },
-    {
-      "name": "Camping — Mon 23 March",
-      "status": "closed",
-      "open": "",
-      "close": "12:00",
-      "notes": "Close out day"
+      "notes": "Campers can start leaving from 10:30pm"
     }
   ]
 }
