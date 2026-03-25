@@ -1,12 +1,27 @@
 {
-  "crew": [],
+  "crew": [
+    {
+      "name": "Emily",
+      "phone": "0481186116",
+      "id": "1774438732298"
+    }
+  ],
   "todos": [],
   "announcements": [],
   "emergency": {
     "contacts": [
-      { "role": "Site Emergency", "number": "000" },
-      { "role": "Festival Medical", "number": "TBC" },
-      { "role": "Site Manager", "number": "TBC" }
+      {
+        "role": "Site Emergency",
+        "number": "000"
+      },
+      {
+        "role": "Festival Medical",
+        "number": "TBC"
+      },
+      {
+        "role": "Site Manager",
+        "number": "TBC"
+      }
     ]
   },
   "timetables": [],
