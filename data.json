@@ -56,6 +56,16 @@
       "condition": "Good",
       "notes": "",
       "id": "1774440005658"
+    },
+    {
+      "action": "in",
+      "siteId": "SITE 228",
+      "deptId": "Traffic 8",
+      "by": "Rhys Barclay",
+      "time": 1774440018970,
+      "condition": "Good",
+      "notes": "",
+      "id": "1774440018970"
     }
   ]
 }
