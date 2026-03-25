@@ -36,6 +36,16 @@
       "condition": "Good",
       "notes": "",
       "id": "1774438957467"
+    },
+    {
+      "action": "fault",
+      "siteId": "S123",
+      "deptId": "t2",
+      "by": "Rhys Barclay",
+      "time": 1774439174182,
+      "condition": "Faulty / Not working",
+      "notes": "Ant snapped off",
+      "id": "1774439174182"
     }
   ]
 }
