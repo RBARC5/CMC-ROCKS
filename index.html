@@ -84,13 +84,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .fault-warning-box .fw-radio{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.18em;color:var(--gold);margin-bottom:0.6rem}
 .fault-warning-box .fw-reported{font-size:0.72rem;color:var(--dust);margin-bottom:0.4rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.08em;text-transform:uppercase}
 .fault-warning-box .fw-message{font-size:0.9rem;color:var(--cream);line-height:1.5;background:rgba(0,0,0,0.2);border-radius:3px;padding:0.6rem 0.8rem;font-style:italic}
-
-/* ── LIVE CLOCK ── */
+/* CLOCK */
 #shift-clock{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:0.06em;color:var(--cream);text-align:center;line-height:1;margin-bottom:0.2rem}
 #shift-date{font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);text-align:center;margin-bottom:1.2rem}
 .clock-block{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1rem 1rem 0.8rem;margin-bottom:1rem}
-
-/* ── STAFF SHIFTS ── */
+/* STAFF SHIFTS */
 .staff-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1rem 1rem 0.8rem;margin-bottom:0.75rem;transition:border-color 0.2s}
 .staff-card.status-resting{border-color:rgba(243,159,52,0.45);background:rgba(243,159,52,0.04)}
 .staff-card.status-dnd{border-color:rgba(245,66,23,0.55);background:rgba(245,66,23,0.05)}
@@ -105,7 +103,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .hl-resting{background:rgba(243,159,52,0.2);color:var(--gold);border:1px solid rgba(243,159,52,0.4)}
 .hl-dnd{background:rgba(245,66,23,0.2);color:var(--rust);border:1px solid rgba(245,66,23,0.4);animation:pulse-dnd 2s ease-in-out infinite}
 @keyframes pulse-dnd{0%,100%{opacity:1}50%{opacity:0.55}}
-.hl-ended{background:rgba(160,136,80,0.12);color:var(--dust);border:1px solid rgba(160,136,80,0.2)}
 .staff-time-info{font-size:0.75rem;color:var(--dust);margin-bottom:0.7rem;line-height:1.8;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.05em}
 .t-val{color:var(--cream);font-weight:600}
 .meal-done{color:var(--olive)}
@@ -139,8 +136,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .manual-time-row.visible{display:flex}
 .manual-time-row input[type=time]{margin-bottom:0;flex:1;font-size:0.9rem;padding:0.4rem 0.6rem}
 .manual-time-row .sbtn{font-size:0.7rem;padding:0.4rem 0.7rem;width:auto;white-space:nowrap}
-
-/* ── PIN ── */
+/* PIN */
 .pin-dots{display:flex;gap:0.6rem;justify-content:center;margin:1.2rem 0}
 .pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(244,233,211,0.15);border:1px solid var(--border);transition:background 0.15s}
 .pin-dot.filled{background:var(--rust);border-color:var(--rust)}
@@ -149,8 +145,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .pin-key:hover{background:rgba(244,233,211,0.12)}
 .pin-key:active{background:rgba(245,66,23,0.25)}
 .pin-error{color:var(--rust);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;letter-spacing:0.15em;text-align:center;min-height:1.2em;margin-bottom:0.5rem}
-
-/* ── HISTORY REPORT ── */
+/* HISTORY REPORT */
 .report-header{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;color:var(--cream);margin-bottom:0.3rem}
 .report-date-filter{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
 .report-date-filter label{margin-bottom:0;font-size:0.65rem}
@@ -164,8 +159,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .rpt-name{font-weight:600;color:var(--cream)}
 .rpt-meal-done{color:var(--olive)}
 .rpt-meal-none{color:rgba(160,136,80,0.3)}
-
-/* ── CAMPING TAB ── */
+/* CAMPING */
 .camp-map-wrap{position:relative;width:100%;border-radius:6px;overflow:hidden;border:1px solid var(--border);margin-bottom:1.2rem;background:var(--panel);touch-action:pinch-zoom}
 .camp-map-wrap img{width:100%;height:auto;display:block;cursor:zoom-in}
 .camp-map-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:220px;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.15em;text-align:center;padding:2rem;gap:0.5rem}
@@ -173,15 +167,22 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .camp-map-placeholder .map-hint{font-size:0.7rem;color:rgba(160,136,80,0.5)}
 .map-fullscreen-btn{position:absolute;bottom:0.6rem;right:0.6rem;background:rgba(26,25,21,0.85);border:1px solid var(--border);border-radius:3px;color:var(--dust);font-size:0.75rem;padding:0.3rem 0.55rem;cursor:pointer;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em;backdrop-filter:blur(4px)}
 .map-fullscreen-btn:hover{color:var(--cream);border-color:var(--cream)}
-
-/* Map fullscreen overlay */
 #map-fs-overlay{position:fixed;inset:0;z-index:150;background:#000;display:flex;align-items:center;justify-content:center}
 #map-fs-overlay.hidden{display:none}
 #map-fs-overlay img{max-width:100%;max-height:100%;object-fit:contain;touch-action:pinch-zoom}
 #map-fs-close{position:absolute;top:1rem;right:1rem;background:rgba(26,25,21,0.9);border:1px solid var(--border);border-radius:3px;color:var(--cream);font-size:1rem;padding:0.4rem 0.8rem;cursor:pointer;font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em}
-
-/* Gate cards */
-.gate-section-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);margin:0 0 0.6rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border)}
+/* GATE COUNTDOWN */
+.gate-countdown-block{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1.1rem 1rem;margin-bottom:1.2rem;text-align:center}
+.gate-countdown-block.state-open{border-color:rgba(157,152,18,0.5);background:rgba(157,152,18,0.05)}
+.gate-countdown-block.state-closed{border-color:rgba(243,159,52,0.35)}
+.gate-countdown-block.state-done{border-color:rgba(160,136,80,0.2)}
+.gcd-label{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);margin-bottom:0.3rem}
+.gcd-gate-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.06em;color:var(--cream);margin-bottom:0.5rem}
+.gcd-timer{font-family:'Bebas Neue',sans-serif;font-size:2.4rem;letter-spacing:0.08em;line-height:1;color:var(--gold)}
+.gcd-timer.open{color:var(--olive)}
+.gcd-timer.done{color:var(--dust);font-size:1.2rem}
+.gcd-sublabel{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dust);margin-top:0.3rem}
+/* GATE CARDS */
 .gate-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:0.85rem 1rem;margin-bottom:0.6rem;display:flex;align-items:center;gap:0.75rem}
 .gate-card.gate-open{border-color:rgba(157,152,18,0.4)}
 .gate-card.gate-closed{border-color:rgba(245,66,23,0.3)}
@@ -196,16 +197,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .gate-status-pill{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;padding:0.15rem 0.5rem;border-radius:2px;flex-shrink:0}
 .gate-open .gate-status-pill{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
 .gate-closed .gate-status-pill{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
-
-/* Gate editor (manager mode) */
+/* GATE EDITOR */
 .gate-editor{background:rgba(244,233,211,0.03);border:1px solid var(--border);border-radius:6px;padding:1rem;margin-bottom:0.6rem}
 .gate-editor-row{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.5rem}
-.gate-editor-row.row-3{grid-template-columns:1fr 1fr 1fr}
 .gate-editor input,.gate-editor select,.gate-editor textarea{margin-bottom:0;font-size:0.9rem;padding:0.5rem 0.7rem}
 .gate-editor textarea{min-height:44px;resize:none}
 .gate-editor-label{font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust);margin-bottom:0.25rem;display:block}
 .gate-editor-actions{display:flex;gap:0.4rem;margin-top:0.5rem}
-.camp-edit-bar{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
 </style>
 </head>
 <body>
@@ -215,7 +213,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   <div class="boot-sub">Crew Portal</div>
 </div>
 
-<!-- REGISTRATION -->
 <div class="overlay hidden" id="reg-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -234,7 +231,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- FAULT WARNING -->
 <div class="overlay hidden" id="fault-warn-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -251,7 +247,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO OUT -->
 <div class="overlay hidden" id="radio-out-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -276,7 +271,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO IN -->
 <div class="overlay hidden" id="radio-in-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -287,7 +281,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO RETURN DETAIL -->
 <div class="overlay hidden" id="radio-ret-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -305,7 +298,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- WHO ARE YOU -->
 <div class="overlay hidden" id="pick-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -325,7 +317,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- PIN ENTRY (shared — context set before opening) -->
 <div class="overlay hidden" id="pin-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -348,7 +339,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- HISTORY REPORT -->
 <div class="overlay hidden" id="history-overlay">
   <div class="modal" style="max-width:640px">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -371,7 +361,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- MAP FULLSCREEN -->
 <div id="map-fs-overlay" class="hidden">
   <button id="map-fs-close" onclick="closeMapFS()">&#10005; Close</button>
   <img id="map-fs-img" src="" alt="Camp Map">
@@ -395,7 +384,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
   <div id="content">
 
-    <!-- RADIOS TAB -->
     <div class="tab-section active" id="tab-radios">
       <div style="display:flex;align-items:center;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
         <div class="section-title" style="margin:0;padding:0;border:none">2-Way Radios</div>
@@ -410,7 +398,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       <div id="radio-history-section"></div>
     </div>
 
-    <!-- SHIFTS TAB -->
     <div class="tab-section" id="tab-shifts">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
         <div style="display:flex;align-items:center;gap:0.5rem">
@@ -426,7 +413,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       <div id="shifts-list"><div class="loading-text">Loading...</div></div>
     </div>
 
-    <!-- CAMPING TAB -->
     <div class="tab-section" id="tab-camping">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
         <div style="display:flex;align-items:center;gap:0.5rem">
@@ -436,7 +422,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
         <button id="camp-edit-btn" class="btn btn-sm" style="background:rgba(0,72,255,0.25);border:1px solid rgba(0,72,255,0.4);color:#7fa8ff;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;padding:0.35rem 0.75rem;border-radius:3px;white-space:nowrap" onclick="openPinFor('camping')">&#128274; Edit</button>
       </div>
 
-      <!-- Map section -->
+      <!-- Gate Countdown -->
+      <div id="gate-countdown-wrap"></div>
+
+      <!-- Map -->
       <div class="radio-section-label">Campground Map</div>
       <div class="camp-map-wrap" id="camp-map-wrap">
         <div class="camp-map-placeholder" id="camp-map-placeholder">
@@ -446,7 +435,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
         </div>
       </div>
 
-      <!-- Gate times section -->
+      <!-- Gate times -->
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem">
         <div class="radio-section-label" style="margin:0;border:none">Gate Times</div>
         <span id="camp-edit-mode-tag" style="display:none;font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);padding:0.15rem 0.5rem;border:1px solid rgba(243,159,52,0.3);border-radius:2px">Edit Mode</span>
@@ -466,12 +455,20 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 <script>
 const PROXY='https://cmc-rocks-proxy.8gonula.workers.dev';
 const MANAGER_PIN='1234';
-const CAMP_MAP_URL='campmap.webp'; // filename in repo root
-let data=null,currentUser=null,pollTimer=null,clockTimer=null,activeReturnId=null,pendingSignOut=null;
-let pinBuffer='',pinContext=''; // pinContext: 'history' | 'camping'
-let campEditMode=false;
+const CAMP_MAP_URL='campmap.webp';
+// Gate open times keyed to each gate name — date string format: 'YYYY-MM-DD'
+// The countdown uses the gate's open time on its date to calculate the target.
+// Dates are hardcoded for the 2026 festival: Wed 18 Mar – Sun 22 Mar
+const GATE_DATES={
+  'Camping — Wed 18 March':'2026-03-18',
+  'Camping — Thu 19 March':'2026-03-19',
+  'Camping — Fri 20 March':'2026-03-20',
+  'Camping — Sat 21 March':'2026-03-21',
+  'Camping — Sun 22 March':'2026-03-22'
+};
+let data=null,currentUser=null,pollTimer=null,clockTimer=null,countdownTimer=null;
+let activeReturnId=null,pendingSignOut=null,pinBuffer='',pinContext='',campEditMode=false;
 
-// ── UTILITIES ──
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
 function loadLocalCrew(){try{return JSON.parse(localStorage.getItem('cmcCrew'))||[]}catch{return[]}}
@@ -496,7 +493,7 @@ async function init(){
   }else{
     await fetchData();document.getElementById('boot-screen').classList.add('hidden');openOverlay('reg-overlay');
   }
-  startPolling();startClock();loadMapImage();
+  startPolling();startClock();loadMapImage();startCountdown();
 }
 
 async function fetchData(){
@@ -512,28 +509,22 @@ function startPolling(){
   pollTimer=setInterval(async()=>{await fetchData();renderRadios();renderShifts();renderCamping();},8000);
 }
 
-// ── MAP IMAGE ──
+// ── MAP ──
 function loadMapImage(){
   const img=new Image();
   img.onload=()=>{
     const wrap=document.getElementById('camp-map-wrap');
     document.getElementById('camp-map-placeholder').style.display='none';
-    const imgEl=document.createElement('img');
-    imgEl.src=CAMP_MAP_URL;imgEl.alt='Campground Map';imgEl.style.width='100%';
-    const btn=document.createElement('button');btn.className='map-fullscreen-btn';btn.textContent='⛶ Full Screen';
-    btn.onclick=()=>openMapFS();
+    const imgEl=document.createElement('img');imgEl.src=CAMP_MAP_URL;imgEl.alt='Campground Map';imgEl.style.width='100%';
+    const btn=document.createElement('button');btn.className='map-fullscreen-btn';btn.textContent='⛶ Full Screen';btn.onclick=()=>openMapFS();
     wrap.appendChild(imgEl);wrap.appendChild(btn);
   };
-  img.onerror=()=>{}; // placeholder stays
-  img.src=CAMP_MAP_URL;
+  img.onerror=()=>{};img.src=CAMP_MAP_URL;
 }
-function openMapFS(){
-  document.getElementById('map-fs-img').src=CAMP_MAP_URL;
-  document.getElementById('map-fs-overlay').classList.remove('hidden');
-}
+function openMapFS(){document.getElementById('map-fs-img').src=CAMP_MAP_URL;document.getElementById('map-fs-overlay').classList.remove('hidden');}
 function closeMapFS(){document.getElementById('map-fs-overlay').classList.add('hidden');}
 
-// ── LIVE CLOCK ──
+// ── CLOCK ──
 function startClock(){if(clockTimer)clearInterval(clockTimer);tickClock();clockTimer=setInterval(tickClock,1000);}
 function tickClock(){
   const now=new Date();
@@ -541,6 +532,86 @@ function tickClock(){
   const el=document.getElementById('shift-clock'),de=document.getElementById('shift-date');
   if(el)el.textContent=`${h}:${m}:${s}`;
   if(de)de.textContent=now.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+
+// ── GATE COUNTDOWN ──
+function gateOpenTs(gate){
+  const dateStr=GATE_DATES[gate.name];if(!dateStr||!gate.open)return null;
+  const [h,m]=gate.open.split(':').map(Number);
+  const d=new Date(dateStr);d.setHours(h,m,0,0);return d.getTime();
+}
+function gateCloseTs(gate){
+  const dateStr=GATE_DATES[gate.name];if(!dateStr||!gate.close)return null;
+  const [h,m]=gate.close.split(':').map(Number);
+  const d=new Date(dateStr);d.setHours(h,m,0,0);return d.getTime();
+}
+function padT(n){return String(n).padStart(2,'0');}
+function fmtCountdown(ms){
+  if(ms<=0)return'00:00:00';
+  const totalSec=Math.floor(ms/1000);
+  const d=Math.floor(totalSec/86400);
+  const h=Math.floor((totalSec%86400)/3600);
+  const min=Math.floor((totalSec%3600)/60);
+  const s=totalSec%60;
+  if(d>0)return`${d}d ${padT(h)}:${padT(min)}:${padT(s)}`;
+  return`${padT(h)}:${padT(min)}:${padT(s)}`;
+}
+
+function startCountdown(){
+  if(countdownTimer)clearInterval(countdownTimer);
+  tickCountdown();countdownTimer=setInterval(tickCountdown,1000);
+}
+
+function tickCountdown(){
+  const wrap=document.getElementById('gate-countdown-wrap');if(!wrap)return;
+  const gates=(data&&data.gates)||[];
+  const now=Date.now();
+
+  // Find the next gate that has a known date mapping
+  const gatesWithDates=gates.filter(g=>GATE_DATES[g.name]&&g.open);
+
+  if(!gatesWithDates.length){wrap.innerHTML='';return;}
+
+  // Find currently open gate first
+  const openGate=gatesWithDates.find(g=>{
+    const o=gateOpenTs(g);const c=gateCloseTs(g);
+    return o&&c&&now>=o&&now<c;
+  });
+
+  if(openGate){
+    const closeTs=gateCloseTs(openGate);
+    const remaining=closeTs-now;
+    wrap.innerHTML=`<div class="gate-countdown-block state-open">
+      <div class="gcd-label">Gates Currently Open</div>
+      <div class="gcd-gate-name">${openGate.name}</div>
+      <div class="gcd-timer open">${fmtCountdown(remaining)}</div>
+      <div class="gcd-sublabel">until gates close</div>
+    </div>`;
+    return;
+  }
+
+  // Find next upcoming gate to open
+  const upcoming=gatesWithDates
+    .map(g=>({g,ts:gateOpenTs(g)}))
+    .filter(({ts})=>ts&&ts>now)
+    .sort((a,b)=>a.ts-b.ts)[0];
+
+  if(upcoming){
+    const diff=upcoming.ts-now;
+    wrap.innerHTML=`<div class="gate-countdown-block state-closed">
+      <div class="gcd-label">Next Gate Opens</div>
+      <div class="gcd-gate-name">${upcoming.g.name}</div>
+      <div class="gcd-timer">${fmtCountdown(diff)}</div>
+      <div class="gcd-sublabel">at ${upcoming.g.open}</div>
+    </div>`;
+    return;
+  }
+
+  // All gates have passed
+  wrap.innerHTML=`<div class="gate-countdown-block state-done">
+    <div class="gcd-timer done">Festival Complete</div>
+    <div class="gcd-sublabel">All camping gates have closed</div>
+  </div>`;
 }
 
 async function pushData(msg,indId){
@@ -554,14 +625,12 @@ async function pushData(msg,indId){
     showSaveStatus('ok',id);
   }catch(e){console.error('pushData error:',e);showSaveStatus('err',id);}
 }
-
 function showSaveStatus(state,id){
   const el=document.getElementById(id||'save-indicator');if(!el)return;
   if(state==='saving'){el.className='save-status';el.textContent='Saving...';el.style.color='var(--dust)';}
   else if(state==='ok'){el.className='save-status save-ok';el.textContent='Saved ✓';setTimeout(()=>{el.textContent='';el.className='';},4000);}
   else{el.className='save-status save-err';el.textContent='Save failed';setTimeout(()=>{el.textContent='';el.className='';},6000);}
 }
-
 function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
 function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 function showTab(id,btn){
@@ -811,7 +880,7 @@ async function setOverlayStatus(status){
   renderShifts();await pushData(`Status: ${currentUser.name}`,'shift-save-indicator');
 }
 
-// ── PIN (shared, context-aware) ──
+// ── PIN ──
 function openPinFor(ctx){pinContext=ctx;pinReset();document.getElementById('pin-title').textContent=ctx==='camping'?'Enter PIN to Edit':'Enter PIN to View History';openOverlay('pin-overlay');}
 function pinReset(){pinBuffer='';updatePinDots();document.getElementById('pin-error').textContent='';}
 function pinKey(k){if(pinBuffer.length>=4)return;pinBuffer+=k;updatePinDots();if(pinBuffer.length===4)setTimeout(checkPin,120);}
@@ -893,13 +962,9 @@ function printShiftReport(){
 // ── CAMPING TAB ──
 function renderCamping(){
   if(!data)return;
-  const gates=data.gates||[];
-  const el=document.getElementById('gates-list');
-  if(!gates.length&&!campEditMode){
-    el.innerHTML='<div class="empty-state">No gates added yet.</div>';return;
-  }
+  const gates=data.gates||[];const el=document.getElementById('gates-list');
+  if(!gates.length&&!campEditMode){el.innerHTML='<div class="empty-state">No gates added yet.</div>';return;}
   if(campEditMode){
-    // Render editable gate editors
     el.innerHTML=gates.map((g,i)=>buildGateEditor(g,i)).join('');
   }else{
     el.innerHTML=gates.map(g=>{
@@ -918,8 +983,8 @@ function renderCamping(){
       </div>`;
     }).join('');
   }
+  tickCountdown();
 }
-
 function buildGateEditor(g,i){
   return `<div class="gate-editor" id="gate-editor-${i}">
     <div class="gate-editor-row">
@@ -941,23 +1006,9 @@ function buildGateEditor(g,i){
     </div>
   </div>`;
 }
-
-function updateGateField(i,field,val){
-  if(!data.gates)data.gates=[];
-  if(data.gates[i])data.gates[i][field]=val;
-}
-
-function addGateEditor(){
-  if(!data.gates)data.gates=[];
-  data.gates.push({name:'',status:'closed',open:'',close:'',notes:''});
-  renderCamping();
-}
-
-function removeGate(i){
-  if(!data.gates)return;
-  data.gates.splice(i,1);renderCamping();
-}
-
+function updateGateField(i,field,val){if(!data.gates)data.gates=[];if(data.gates[i])data.gates[i][field]=val;}
+function addGateEditor(){if(!data.gates)data.gates=[];data.gates.push({name:'',status:'closed',open:'',close:'',notes:''});renderCamping();}
+function removeGate(i){if(!data.gates)return;data.gates.splice(i,1);renderCamping();}
 function enterCampEditMode(){
   campEditMode=true;
   document.getElementById('camp-edit-mode-tag').style.display='inline-block';
@@ -966,7 +1017,6 @@ function enterCampEditMode(){
   document.getElementById('camp-edit-done-wrap').style.display='block';
   renderCamping();
 }
-
 async function exitCampEditMode(){
   campEditMode=false;
   document.getElementById('camp-edit-mode-tag').style.display='none';
@@ -974,7 +1024,6 @@ async function exitCampEditMode(){
   document.getElementById('gate-add-btn-wrap').style.display='none';
   document.getElementById('camp-edit-done-wrap').style.display='none';
   if(!data.gates)data.gates=[];
-  // Filter out any blank gates
   data.gates=data.gates.filter(g=>g.name.trim());
   renderCamping();
   await pushData('Update gate times','camp-save-indicator');
