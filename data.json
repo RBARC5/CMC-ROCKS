@@ -91,6 +91,16 @@
       "condition": "Good",
       "notes": "",
       "id": "1774440091409"
+    },
+    {
+      "action": "out",
+      "siteId": "SITE 228",
+      "deptId": "Traffic 8",
+      "by": "Emily Godfrey",
+      "time": 1774440492149,
+      "condition": "Good",
+      "notes": "",
+      "id": "1774440492149"
     }
   ]
 }
