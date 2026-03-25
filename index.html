@@ -110,7 +110,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .loan-ids .dept-id{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.78rem;letter-spacing:0.14em;color:var(--gold);margin-top:0.1rem}
 .loan-meta{font-size:0.75rem;color:var(--dust);line-height:1.6;margin-top:0.5rem}
 .loan-meta strong{color:var(--cream)}
-.fault-pill{display:inline-block;background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.45);border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.15rem 0.5rem;margin-top:0.4rem;display:block}
+.fault-pill{display:block;background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.45);border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.15rem 0.5rem;margin-top:0.4rem}
 .history-table{width:100%;border-collapse:collapse;font-size:0.78rem;margin-top:0.5rem}
 .history-table th{text-align:left;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust);padding:0.4rem 0.5rem;border-bottom:1px solid var(--border)}
 .history-table td{padding:0.5rem 0.5rem;border-bottom:1px solid rgba(244,233,211,0.05);vertical-align:top;line-height:1.4}
@@ -119,12 +119,26 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 
 .loading-text{text-align:center;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.2em;padding:2rem}
 .empty-state{text-align:center;color:var(--dust);font-size:0.85rem;padding:2rem 1rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em}
+
+/* Loading screen shown while JS checks localStorage */
+#boot-screen{position:fixed;inset:0;z-index:300;background:var(--char);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.8rem}
+#boot-screen.hidden{display:none}
+.boot-logo{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--cream);letter-spacing:0.08em}
+.boot-logo span{color:var(--rust)}
+.boot-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--dust)}
 </style>
 </head>
 <body>
 <div id="stripe-top"></div>
 
-<div class="overlay" id="reg-overlay">
+<!-- Boot screen — shown instantly, hidden once JS decides what to show -->
+<div id="boot-screen">
+  <div class="boot-logo">CMC <span>Rocks</span></div>
+  <div class="boot-sub">Crew Portal</div>
+</div>
+
+<!-- Registration overlay — starts hidden, only shown if no user in localStorage -->
+<div class="overlay hidden" id="reg-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
     <div class="modal-sub">Crew Portal &mdash; QLD</div>
@@ -272,19 +286,12 @@ const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/data.json`;
 const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/data.json`;
 let data=null,currentUser=null,pollTimer=null,activeReturnId=null;
 
-// ── LOCAL STORAGE HELPERS ──
+// ── LOCAL STORAGE ──
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
-
-// Local crew cache — persists across visits even when GitHub write fails
 function loadLocalCrew(){try{return JSON.parse(localStorage.getItem('cmcCrew'))||[]}catch{return[]}}
-function saveLocalCrew(crew){localStorage.setItem('cmcCrew',JSON.stringify(crew))}
-function addLocalCrew(user){
-  const crew=loadLocalCrew();
-  if(!crew.find(c=>c.phone===user.phone)){crew.push(user);saveLocalCrew(crew);}
-}
-
-// Merged crew list: GitHub data.json + local cache (deduplicated by phone)
+function saveLocalCrew(c){localStorage.setItem('cmcCrew',JSON.stringify(c))}
+function addLocalCrew(u){const c=loadLocalCrew();if(!c.find(x=>x.phone===u.phone)){c.push(u);saveLocalCrew(c);}}
 function getMergedCrew(){
   const remote=(data&&data.crew)?data.crew:[];
   const local=loadLocalCrew();
@@ -294,20 +301,34 @@ function getMergedCrew(){
 }
 
 // ── INIT ──
+// Check localStorage synchronously BEFORE any async work
+// This decides immediately whether to show boot→app or boot→register
 async function init(){
-  // Load user from localStorage FIRST before anything else
-  currentUser=loadUser();
-  await fetchData();
+  currentUser=loadUser(); // synchronous — instant
+
   if(currentUser){
+    // Known browser — go straight to app, hide boot screen
     showApp();
+    document.getElementById('boot-screen').classList.add('hidden');
+    // Load data in background and refresh
+    await fetchData();
+    renderAll();
   } else {
+    // Unknown browser — load data first then show registration
+    await fetchData();
+    document.getElementById('boot-screen').classList.add('hidden');
     openOverlay('reg-overlay');
   }
+
   startPolling();
 }
 
 async function fetchData(){
-  try{const r=await fetch(RAW+'?t='+Date.now());data=await r.json();}catch(e){console.error(e);}
+  try{const r=await fetch(RAW+'?t='+Date.now());data=await r.json();}catch(e){
+    // If fetch fails, use empty structure so app still works
+    if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
+    console.warn('Fetch failed, using cached/empty data');
+  }
 }
 function startPolling(){
   if(pollTimer)clearInterval(pollTimer);
@@ -340,9 +361,11 @@ function showPickList(){
 }
 function renderPickList(elId,onSelect){
   const el=document.getElementById(elId);
-  // Use merged crew (GitHub + local cache)
   const crew=getMergedCrew();
-  if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.<br><small style="opacity:0.6">Register using the form.</small></div>';return;}
+  if(!crew.length){
+    el.innerHTML='<div class="empty-state">No crew registered yet.<br><small style="opacity:0.6">Register using the form.</small></div>';
+    return;
+  }
   el.innerHTML=crew.map(u=>`<div class="crew-list-item" onclick='_pick(${JSON.stringify(u)},"${elId}")'>
     <div class="crew-avatar">${initials(u.name)}</div>
     <div><div class="crew-name">${u.name}</div><div class="crew-phone">${u.phone}</div></div>
@@ -355,10 +378,8 @@ async function submitReg(){
   const phone=document.getElementById('reg-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
-  // Save to localStorage immediately — works even without GitHub write access
-  saveUser(user);
-  addLocalCrew(user);
-  // Also try to push to GitHub (will fail silently until proxy is set up)
+  saveUser(user);      // save to this browser's localStorage
+  addLocalCrew(user);  // save to local crew cache
   if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('reg-overlay');
@@ -370,7 +391,7 @@ function showApp(){
   document.getElementById('app').style.display='block';
   document.getElementById('header-avatar').textContent=initials(currentUser.name);
   document.getElementById('header-name').textContent=currentUser.name.split(' ')[0];
-  renderAll();
+  if(data)renderAll();
 }
 function showPickOverlay(){
   openOverlay('pick-overlay');
