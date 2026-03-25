@@ -11,11 +11,5 @@
   },
   "timetables": [],
   "signins": [],
-  "radios": [
-    { "id": "R001", "siteId": "S01", "deptId": "Traffic-1", "status": "available", "condition": "Good", "faultNote": "", "log": [] },
-    { "id": "R002", "siteId": "S01", "deptId": "Traffic-2", "status": "available", "condition": "Good", "faultNote": "", "log": [] },
-    { "id": "R003", "siteId": "S01", "deptId": "Traffic-3", "status": "available", "condition": "Good", "faultNote": "", "log": [] },
-    { "id": "R004", "siteId": "S02", "deptId": "Traffic-4", "status": "available", "condition": "Good", "faultNote": "", "log": [] },
-    { "id": "R005", "siteId": "S02", "deptId": "Traffic-5", "status": "available", "condition": "Good", "faultNote": "", "log": [] }
-  ]
+  "radioLog": []
 }

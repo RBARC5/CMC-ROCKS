@@ -6,154 +6,142 @@
 <title>CMC Rocks Crew</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;600&display=swap" rel="stylesheet">
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-:root {
-  --rust:#F54217; --gold:#F39F34; --olive:#9D9812; --cobalt:#0048FF;
-  --cream:#F4E9D3; --char:#22221F; --dust:#A08850;
-  --panel:#1A1915; --border:rgba(244,233,211,0.1);
-  --red:#C0392B;
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rust:#F54217;--gold:#F39F34;--olive:#9D9812;--cobalt:#0048FF;
+  --cream:#F4E9D3;--char:#22221F;--dust:#A08850;
+  --panel:#1A1915;--border:rgba(244,233,211,0.1);
 }
-html,body { width:100%; min-height:100%; background:var(--char); color:var(--cream); font-family:'Barlow',sans-serif; overflow-x:hidden; }
-#stripe-top { position:fixed; top:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--rust) 0%,var(--gold) 33%,var(--olive) 55%,var(--cobalt) 75%,var(--rust) 100%); background-size:300% 100%; z-index:200; animation:stripe 5s linear infinite; }
+html,body{width:100%;min-height:100%;background:var(--char);color:var(--cream);font-family:'Barlow',sans-serif;overflow-x:hidden}
+#stripe-top{position:fixed;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--rust) 0%,var(--gold) 33%,var(--olive) 55%,var(--cobalt) 75%,var(--rust) 100%);background-size:300% 100%;z-index:200;animation:stripe 5s linear infinite}
 @keyframes stripe{0%{background-position:0% 0%}100%{background-position:300% 0%}}
 
-/* OVERLAY */
-.overlay { position:fixed; inset:0; z-index:100; background:rgba(22,20,14,0.92); display:flex; align-items:center; justify-content:center; padding:1.5rem; backdrop-filter:blur(4px); overflow-y:auto; }
-.overlay.hidden { display:none; }
-.modal { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:2rem; width:100%; max-width:420px; position:relative; }
-.modal-logo { font-family:'Bebas Neue',sans-serif; font-size:2.4rem; color:var(--cream); letter-spacing:0.06em; line-height:1; margin-bottom:0.2rem; }
-.modal-logo span { color:var(--rust); }
-.modal-sub { font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--dust); margin-bottom:1.8rem; }
-.modal h2 { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:1rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--gold); margin-bottom:1.2rem; }
-label { display:block; font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.72rem; letter-spacing:0.28em; text-transform:uppercase; color:var(--dust); margin-bottom:0.35rem; }
-input[type=text],input[type=tel],select,textarea { width:100%; background:rgba(244,233,211,0.06); border:1px solid var(--border); border-radius:3px; color:var(--cream); font-family:'Barlow',sans-serif; font-size:1rem; padding:0.65rem 0.9rem; margin-bottom:1rem; outline:none; transition:border-color 0.2s; }
-select option { background:var(--panel); color:var(--cream); }
-textarea { resize:vertical; min-height:70px; }
-input:focus,select:focus,textarea:focus { border-color:var(--rust); }
-.btn { display:block; width:100%; padding:0.75rem; background:var(--rust); color:#fff; border:none; border-radius:3px; font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:0.18em; cursor:pointer; transition:background 0.2s; }
-.btn:hover { background:#d93610; }
-.btn.secondary { background:transparent; border:1px solid var(--border); color:var(--dust); font-size:0.82rem; margin-top:0.75rem; letter-spacing:0.22em; }
-.btn.secondary:hover { border-color:var(--gold); color:var(--gold); }
-.btn-green { background:var(--olive) !important; }
-.btn-green:hover { background:#7a7709 !important; }
-.btn-gold { background:var(--gold) !important; color:var(--char) !important; }
-.btn-gold:hover { background:#d4882a !important; }
-.btn-sm { padding:0.4rem 0.8rem; font-size:0.78rem; width:auto; display:inline-block; }
+.overlay{position:fixed;inset:0;z-index:100;background:rgba(22,20,14,0.93);display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.5rem;backdrop-filter:blur(4px);overflow-y:auto}
+.overlay.hidden{display:none}
+.modal{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:2rem;width:100%;max-width:420px;margin:auto}
+.modal-logo{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;color:var(--cream);letter-spacing:0.06em;line-height:1;margin-bottom:0.2rem}
+.modal-logo span{color:var(--rust)}
+.modal-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--dust);margin-bottom:1.6rem}
+.modal h2{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:1rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
+label{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--dust);margin-bottom:0.35rem}
+input[type=text],input[type=tel],select,textarea{width:100%;background:rgba(244,233,211,0.06);border:1px solid var(--border);border-radius:3px;color:var(--cream);font-family:'Barlow',sans-serif;font-size:1rem;padding:0.65rem 0.9rem;margin-bottom:1rem;outline:none;transition:border-color 0.2s}
+select option{background:var(--panel);color:var(--cream)}
+textarea{resize:vertical;min-height:70px}
+input:focus,select:focus,textarea:focus{border-color:var(--rust)}
+.btn{display:block;width:100%;padding:0.75rem;background:var(--rust);color:#fff;border:none;border-radius:3px;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:0.18em;cursor:pointer;transition:background 0.2s}
+.btn:hover{background:#d93610}
+.btn.secondary{background:transparent;border:1px solid var(--border);color:var(--dust);font-size:0.82rem;margin-top:0.75rem;letter-spacing:0.22em}
+.btn.secondary:hover{border-color:var(--gold);color:var(--gold)}
+.btn-green{background:var(--olive)!important}
+.btn-green:hover{background:#7a7709!important}
+.btn-gold{background:var(--gold)!important;color:var(--char)!important}
+.btn-gold:hover{background:#d4882a!important}
+.btn-blue{background:var(--cobalt)!important;color:#fff!important}
+.btn-blue:hover{background:#0035cc!important}
+.btn-sm{padding:0.4rem 0.8rem;font-size:0.78rem;width:auto;display:inline-block}
 
-/* CREW LIST */
-.crew-list { max-height:260px; overflow-y:auto; margin-bottom:1rem; border:1px solid var(--border); border-radius:3px; }
-.crew-list-item { padding:0.75rem 1rem; cursor:pointer; border-bottom:1px solid var(--border); transition:background 0.15s; display:flex; align-items:center; gap:0.75rem; }
-.crew-list-item:last-child { border-bottom:none; }
-.crew-list-item:hover { background:rgba(245,66,23,0.12); }
-.crew-list-item .crew-name { font-weight:600; font-size:0.95rem; }
-.crew-list-item .crew-phone { font-size:0.8rem; color:var(--dust); }
-.crew-avatar { width:34px; height:34px; border-radius:50%; background:var(--rust); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:1rem; flex-shrink:0; }
+.crew-list{max-height:260px;overflow-y:auto;margin-bottom:1rem;border:1px solid var(--border);border-radius:3px}
+.crew-list-item{padding:0.75rem 1rem;cursor:pointer;border-bottom:1px solid var(--border);transition:background 0.15s;display:flex;align-items:center;gap:0.75rem}
+.crew-list-item:last-child{border-bottom:none}
+.crew-list-item:hover{background:rgba(245,66,23,0.12)}
+.crew-list-item .crew-name{font-weight:600;font-size:0.95rem}
+.crew-list-item .crew-phone{font-size:0.8rem;color:var(--dust)}
+.crew-avatar{width:34px;height:34px;border-radius:50%;background:var(--rust);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1rem;flex-shrink:0}
 
-/* HEADER */
-#app-header { position:sticky; top:4px; z-index:50; background:rgba(26,25,21,0.95); border-bottom:1px solid var(--border); backdrop-filter:blur(8px); padding:0.75rem 1rem; display:flex; align-items:center; justify-content:space-between; }
-.header-logo { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:0.08em; color:var(--cream); }
-.header-logo span { color:var(--rust); }
-.header-user { display:flex; align-items:center; gap:0.5rem; cursor:pointer; }
-.header-user .mini-avatar { width:30px; height:30px; border-radius:50%; background:var(--rust); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:0.9rem; }
-.header-user .user-name { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.85rem; letter-spacing:0.08em; color:var(--cream); }
-.not-you { font-size:0.65rem; color:var(--dust); letter-spacing:0.06em; }
+#app-header{position:sticky;top:4px;z-index:50;background:rgba(26,25,21,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.header-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.08em;color:var(--cream)}
+.header-logo span{color:var(--rust)}
+.header-user{display:flex;align-items:center;gap:0.5rem;cursor:pointer}
+.header-user .mini-avatar{width:30px;height:30px;border-radius:50%;background:var(--rust);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:0.9rem}
+.header-user .user-name{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:0.08em;color:var(--cream)}
+.not-you{font-size:0.65rem;color:var(--dust);letter-spacing:0.06em}
 
-/* NAV */
-#nav-tabs { display:flex; overflow-x:auto; border-bottom:1px solid var(--border); background:var(--panel); -webkit-overflow-scrolling:touch; scrollbar-width:none; }
-#nav-tabs::-webkit-scrollbar { display:none; }
-.tab-btn { flex-shrink:0; padding:0.85rem 1.1rem; background:none; border:none; border-bottom:2px solid transparent; color:var(--dust); font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.8rem; letter-spacing:0.2em; text-transform:uppercase; cursor:pointer; transition:color 0.2s,border-color 0.2s; }
-.tab-btn.active { color:var(--rust); border-bottom-color:var(--rust); }
-.tab-btn:hover { color:var(--cream); }
+#nav-tabs{display:flex;overflow-x:auto;border-bottom:1px solid var(--border);background:var(--panel);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+#nav-tabs::-webkit-scrollbar{display:none}
+.tab-btn{flex-shrink:0;padding:0.85rem 1.1rem;background:none;border:none;border-bottom:2px solid transparent;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;transition:color 0.2s,border-color 0.2s}
+.tab-btn.active{color:var(--rust);border-bottom-color:var(--rust)}
+.tab-btn:hover{color:var(--cream)}
 
-/* CONTENT */
-#content { padding:1.2rem 1rem 5rem; max-width:680px; margin:0 auto; }
-.section { display:none; }
-.section.active { display:block; }
-.section-title { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; letter-spacing:0.08em; color:var(--cream); margin-bottom:1rem; padding-bottom:0.5rem; border-bottom:1px solid var(--border); }
+#content{padding:1.2rem 1rem 5rem;max-width:680px;margin:0 auto}
+.section{display:none}
+.section.active{display:block}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.08em;color:var(--cream);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
 
 /* TODO */
-.todo-item { display:flex; align-items:flex-start; gap:0.75rem; padding:0.85rem; background:var(--panel); border:1px solid var(--border); border-radius:4px; margin-bottom:0.5rem; cursor:pointer; transition:background 0.15s; }
-.todo-item:hover { background:rgba(244,233,211,0.04); }
-.todo-item.done { opacity:0.45; }
-.todo-check { width:20px; height:20px; border-radius:3px; border:1.5px solid var(--dust); flex-shrink:0; display:flex; align-items:center; justify-content:center; margin-top:1px; transition:background 0.15s,border-color 0.15s; }
-.todo-item.done .todo-check { background:var(--olive); border-color:var(--olive); }
-.todo-check-icon { display:none; }
-.todo-item.done .todo-check-icon { display:block; }
-.todo-text { font-size:0.95rem; line-height:1.4; }
-.todo-meta { font-size:0.72rem; color:var(--dust); margin-top:0.2rem; }
-.add-row { display:flex; gap:0.5rem; margin-top:1rem; }
-.add-row input { flex:1; margin:0; padding:0.6rem 0.8rem; font-size:0.9rem; }
-.add-row .btn { width:auto; padding:0.6rem 1rem; font-size:0.9rem; }
+.todo-item{display:flex;align-items:flex-start;gap:0.75rem;padding:0.85rem;background:var(--panel);border:1px solid var(--border);border-radius:4px;margin-bottom:0.5rem;cursor:pointer;transition:background 0.15s}
+.todo-item:hover{background:rgba(244,233,211,0.04)}
+.todo-item.done{opacity:0.45}
+.todo-check{width:20px;height:20px;border-radius:3px;border:1.5px solid var(--dust);flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:1px;transition:background 0.15s,border-color 0.15s}
+.todo-item.done .todo-check{background:var(--olive);border-color:var(--olive)}
+.todo-check-icon{display:none}
+.todo-item.done .todo-check-icon{display:block}
+.todo-text{font-size:0.95rem;line-height:1.4}
+.todo-meta{font-size:0.72rem;color:var(--dust);margin-top:0.2rem}
+.add-row{display:flex;gap:0.5rem;margin-top:1rem}
+.add-row input{flex:1;margin:0;padding:0.6rem 0.8rem;font-size:0.9rem}
+.add-row .btn{width:auto;padding:0.6rem 1rem;font-size:0.9rem}
 
-/* SIGN IN/OUT */
-.signin-card { background:var(--panel); border:1px solid var(--border); border-radius:4px; padding:1.2rem; margin-bottom:0.5rem; display:flex; align-items:center; justify-content:space-between; }
-.signin-info .sname { font-weight:600; font-size:0.95rem; }
-.signin-info .stime { font-size:0.75rem; color:var(--dust); margin-top:0.15rem; }
-.signin-badge { font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; padding:0.25rem 0.65rem; border-radius:2px; }
-.badge-in  { background:rgba(157,152,18,0.25); color:var(--olive); border:1px solid rgba(157,152,18,0.4); }
-.badge-out { background:rgba(245,66,23,0.15);  color:var(--rust);  border:1px solid rgba(245,66,23,0.3); }
-.my-signin-btn { display:flex; gap:0.5rem; margin-bottom:1.2rem; }
-.my-signin-btn .btn { font-size:0.9rem; padding:0.7rem; }
+/* CREW SIGN IN */
+.signin-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1.2rem;margin-bottom:0.5rem;display:flex;align-items:center;justify-content:space-between}
+.signin-info .sname{font-weight:600;font-size:0.95rem}
+.signin-info .stime{font-size:0.75rem;color:var(--dust);margin-top:0.15rem}
+.signin-badge{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;padding:0.25rem 0.65rem;border-radius:2px}
+.badge-in{background:rgba(157,152,18,0.25);color:var(--olive);border:1px solid rgba(157,152,18,0.4)}
+.badge-out{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
+.my-signin-btn{display:flex;gap:0.5rem;margin-bottom:1.2rem}
+.my-signin-btn .btn{font-size:0.9rem;padding:0.7rem}
 
 /* EMERGENCY */
-.emerg-card { background:rgba(245,66,23,0.1); border:1px solid rgba(245,66,23,0.3); border-radius:4px; padding:1rem; margin-bottom:0.6rem; display:flex; justify-content:space-between; align-items:center; }
-.emerg-role { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.85rem; letter-spacing:0.12em; color:var(--dust); }
-.emerg-num  { font-family:'Bebas Neue',sans-serif; font-size:1.4rem; letter-spacing:0.08em; color:var(--rust); }
+.emerg-card{background:rgba(245,66,23,0.1);border:1px solid rgba(245,66,23,0.3);border-radius:4px;padding:1rem;margin-bottom:0.6rem;display:flex;justify-content:space-between;align-items:center}
+.emerg-role{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:0.12em;color:var(--dust)}
+.emerg-num{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;color:var(--rust)}
 
 /* CONTACTS */
-.contact-card { background:var(--panel); border:1px solid var(--border); border-radius:4px; padding:0.85rem 1rem; margin-bottom:0.5rem; display:flex; align-items:center; gap:0.75rem; }
-.contact-info .cname { font-weight:600; font-size:0.95rem; }
-.contact-num { margin-left:auto; font-family:'Barlow Condensed',sans-serif; font-weight:600; color:var(--gold); font-size:0.9rem; }
+.contact-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:0.85rem 1rem;margin-bottom:0.5rem;display:flex;align-items:center;gap:0.75rem}
+.contact-info .cname{font-weight:600;font-size:0.95rem}
+.contact-num{margin-left:auto;font-family:'Barlow Condensed',sans-serif;font-weight:600;color:var(--gold);font-size:0.9rem}
 
 /* TIMETABLE */
-.tt-card { background:var(--panel); border:1px solid var(--border); border-radius:4px; padding:1rem; margin-bottom:0.8rem; }
-.tt-route { font-family:'Bebas Neue',sans-serif; font-size:1.2rem; color:var(--gold); margin-bottom:0.5rem; }
-.tt-row { display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px solid var(--border); font-size:0.88rem; }
-.tt-row:last-child { border-bottom:none; }
-.tt-time { color:var(--rust); font-family:'Barlow Condensed',sans-serif; font-weight:600; }
+.tt-card{background:var(--panel);border:1px solid var(--border);border-radius:4px;padding:1rem;margin-bottom:0.8rem}
+.tt-route{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.5rem}
+.tt-row{display:flex;justify-content:space-between;padding:0.4rem 0;border-bottom:1px solid var(--border);font-size:0.88rem}
+.tt-row:last-child{border-bottom:none}
+.tt-time{color:var(--rust);font-family:'Barlow Condensed',sans-serif;font-weight:600}
 
 /* RADIO */
-.radio-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:0.75rem; margin-bottom:1.2rem; }
-.radio-card { background:var(--panel); border:1px solid var(--border); border-radius:6px; padding:1rem; position:relative; }
-.radio-card.status-out { border-color:rgba(243,159,52,0.4); background:rgba(243,159,52,0.05); }
-.radio-card.status-fault { border-color:rgba(192,57,43,0.6); background:rgba(192,57,43,0.08); }
-.radio-header { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:0.6rem; }
-.radio-ids { }
-.radio-site-id { font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.08em; color:var(--cream); line-height:1; }
-.radio-dept-id { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.8rem; letter-spacing:0.15em; color:var(--gold); margin-top:0.1rem; }
-.radio-status-badge { font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; padding:0.2rem 0.55rem; border-radius:2px; flex-shrink:0; }
-.rs-available { background:rgba(157,152,18,0.2); color:var(--olive); border:1px solid rgba(157,152,18,0.35); }
-.rs-out       { background:rgba(243,159,52,0.2); color:var(--gold); border:1px solid rgba(243,159,52,0.35); }
-.rs-fault     { background:rgba(192,57,43,0.25); color:#e74c3c; border:1px solid rgba(192,57,43,0.5); }
-.radio-meta { font-size:0.75rem; color:var(--dust); margin-bottom:0.75rem; line-height:1.5; }
-.radio-fault-banner { background:rgba(192,57,43,0.18); border:1px solid rgba(192,57,43,0.4); border-radius:3px; padding:0.5rem 0.7rem; margin-bottom:0.7rem; font-size:0.78rem; color:#e74c3c; }
-.radio-fault-banner strong { display:block; font-family:'Barlow Condensed',sans-serif; letter-spacing:0.12em; text-transform:uppercase; font-size:0.7rem; margin-bottom:0.2rem; }
-.radio-actions { display:flex; gap:0.5rem; }
-.radio-log-toggle { font-size:0.7rem; color:var(--dust); cursor:pointer; margin-top:0.5rem; text-decoration:underline; }
-.radio-log { display:none; margin-top:0.6rem; border-top:1px solid var(--border); padding-top:0.6rem; }
-.radio-log.open { display:block; }
-.log-entry { font-size:0.72rem; color:var(--dust); padding:0.3rem 0; border-bottom:1px solid rgba(244,233,211,0.05); line-height:1.4; }
-.log-entry:last-child { border-bottom:none; }
-.log-entry .le-action { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; }
-.le-out  { color:var(--gold); }
-.le-in   { color:var(--olive); }
-.le-fault { color:#e74c3c; }
+.radio-toolbar{display:flex;gap:0.6rem;margin-bottom:1.2rem;flex-wrap:wrap}
+.radio-section-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);margin:1.2rem 0 0.5rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border)}
 
-/* FAULT WARNING MODAL */
-.fault-warning { background:rgba(192,57,43,0.15); border:1px solid rgba(192,57,43,0.5); border-radius:4px; padding:1rem; margin-bottom:1rem; }
-.fault-warning h3 { font-family:'Barlow Condensed',sans-serif; font-weight:700; font-size:0.9rem; letter-spacing:0.18em; text-transform:uppercase; color:#e74c3c; margin-bottom:0.4rem; }
-.fault-warning p { font-size:0.85rem; color:var(--cream); line-height:1.5; }
+/* Active loans */
+.loan-card{background:var(--panel);border:1px solid rgba(243,159,52,0.35);border-radius:5px;padding:1rem;margin-bottom:0.6rem}
+.loan-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem}
+.loan-ids .site-id{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:0.08em;color:var(--cream);line-height:1}
+.loan-ids .dept-id{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.78rem;letter-spacing:0.14em;color:var(--gold);margin-top:0.1rem}
+.loan-meta{font-size:0.75rem;color:var(--dust);line-height:1.6;margin-bottom:0.7rem}
+.loan-meta strong{color:var(--cream)}
+.fault-pill{display:inline-block;background:rgba(192,57,43,0.25);color:#e74c3c;border:1px solid rgba(192,57,43,0.45);border-radius:2px;font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.15rem 0.5rem;margin-bottom:0.5rem}
 
-/* UTILS */
-.loading-text { text-align:center; color:var(--dust); font-family:'Barlow Condensed',sans-serif; font-size:0.85rem; letter-spacing:0.2em; padding:2rem; }
-.empty-state { text-align:center; color:var(--dust); font-size:0.85rem; padding:2rem 1rem; font-family:'Barlow Condensed',sans-serif; letter-spacing:0.1em; }
-.radio-section-label { font-family:'Barlow Condensed',sans-serif; font-weight:600; font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--dust); margin:1rem 0 0.5rem; }
+/* History table */
+.history-table{width:100%;border-collapse:collapse;font-size:0.78rem;margin-top:0.5rem}
+.history-table th{text-align:left;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.68rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--dust);padding:0.4rem 0.5rem;border-bottom:1px solid var(--border)}
+.history-table td{padding:0.5rem 0.5rem;border-bottom:1px solid rgba(244,233,211,0.05);vertical-align:top;line-height:1.4}
+.history-table tr:last-child td{border-bottom:none}
+.ht-out{color:var(--gold)}
+.ht-in{color:var(--olive)}
+.ht-fault{color:#e74c3c}
+
+.loading-text{text-align:center;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.2em;padding:2rem}
+.empty-state{text-align:center;color:var(--dust);font-size:0.85rem;padding:2rem 1rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em}
+
+.fault-warning{background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.5);border-radius:4px;padding:1rem;margin-bottom:1rem}
+.fault-warning h3{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9rem;letter-spacing:0.18em;text-transform:uppercase;color:#e74c3c;margin-bottom:0.4rem}
+.fault-warning p{font-size:0.85rem;color:var(--cream);line-height:1.5}
 </style>
 </head>
 <body>
 <div id="stripe-top"></div>
 
-<!-- REGISTRATION OVERLAY -->
+<!-- REGISTRATION -->
 <div class="overlay" id="reg-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -178,25 +166,23 @@ input:focus,select:focus,textarea:focus { border-color:var(--rust); }
 <div class="overlay hidden" id="radio-out-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
-    <div class="modal-sub">Sign Out Radio</div>
-    <div id="radio-fault-warn" style="display:none" class="fault-warning">
-      <h3>&#9888; Fault Reported</h3>
-      <p id="radio-fault-warn-text"></p>
-    </div>
-    <div id="radio-out-form">
-      <h2 id="radio-out-title">Radio Details</h2>
-      <label>Condition</label>
-      <select id="ro-condition">
-        <option value="Good">Good</option>
-        <option value="Minor wear">Minor wear</option>
-        <option value="Damaged">Damaged</option>
-        <option value="Faulty / Not working">Faulty / Not working</option>
-      </select>
-      <label>Any issues to note? <span style="color:var(--dust);font-size:0.7em">(optional)</span></label>
-      <textarea id="ro-notes" placeholder="Describe any issues..."></textarea>
-      <button class="btn btn-gold" onclick="confirmSignOut()">Confirm Sign Out</button>
-      <button class="btn secondary" onclick="closeRadioOut()">Cancel</button>
-    </div>
+    <div class="modal-sub">Sign Out 2-Way Radio</div>
+    <h2>Radio Details</h2>
+    <label>Site ID</label>
+    <input type="text" id="ro-siteid" placeholder="e.g. S01" autocomplete="off">
+    <label>Department ID</label>
+    <input type="text" id="ro-deptid" placeholder="e.g. Traffic-1" autocomplete="off">
+    <label>Condition</label>
+    <select id="ro-condition">
+      <option value="Good">Good</option>
+      <option value="Minor wear">Minor wear</option>
+      <option value="Damaged">Damaged</option>
+      <option value="Faulty / Not working">Faulty / Not working</option>
+    </select>
+    <label>Any issues to note? <span style="color:var(--dust);font-size:0.7em">(optional)</span></label>
+    <textarea id="ro-notes" placeholder="Describe any issues before taking the radio..."></textarea>
+    <button class="btn btn-gold" onclick="confirmRadioOut()">Confirm Sign Out</button>
+    <button class="btn secondary" onclick="closeOverlay('radio-out-overlay')">Cancel</button>
   </div>
 </div>
 
@@ -204,19 +190,30 @@ input:focus,select:focus,textarea:focus { border-color:var(--rust); }
 <div class="overlay hidden" id="radio-in-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
-    <div class="modal-sub">Return Radio</div>
-    <h2 id="radio-in-title">Return Details</h2>
-    <label>Condition on return</label>
-    <select id="ri-condition">
+    <div class="modal-sub">Return 2-Way Radio</div>
+    <h2 id="radio-in-title">Select Radio to Return</h2>
+    <div id="radio-return-list"></div>
+    <button class="btn secondary" onclick="closeOverlay('radio-in-overlay')">Cancel</button>
+  </div>
+</div>
+
+<!-- RADIO RETURN DETAILS MODAL -->
+<div class="overlay hidden" id="radio-ret-overlay">
+  <div class="modal">
+    <div class="modal-logo">CMC <span>Rocks</span></div>
+    <div class="modal-sub">Return Details</div>
+    <h2 id="radio-ret-title">Return Radio</h2>
+    <label>Condition on Return</label>
+    <select id="rr-condition">
       <option value="Good">Good</option>
       <option value="Minor wear">Minor wear</option>
       <option value="Damaged">Damaged</option>
       <option value="Faulty / Not working">Faulty / Not working</option>
     </select>
     <label>Any issues to report? <span style="color:var(--dust);font-size:0.7em">(optional)</span></label>
-    <textarea id="ri-issues" placeholder="Report any problems experienced..."></textarea>
-    <button class="btn btn-green" onclick="confirmReturn()">Confirm Return</button>
-    <button class="btn secondary" onclick="closeRadioIn()">Cancel</button>
+    <textarea id="rr-issues" placeholder="Report any problems experienced with this radio..."></textarea>
+    <button class="btn btn-green" onclick="confirmRadioReturn()">Confirm Return</button>
+    <button class="btn secondary" onclick="closeOverlay('radio-ret-overlay')">Cancel</button>
   </div>
 </div>
 
@@ -232,7 +229,6 @@ input:focus,select:focus,textarea:focus { border-color:var(--rust); }
       </div>
     </div>
   </div>
-
   <div id="nav-tabs">
     <button class="tab-btn active" onclick="showTab('todo',this)">To-Do</button>
     <button class="tab-btn" onclick="showTab('signin',this)">Sign In/Out</button>
@@ -241,10 +237,8 @@ input:focus,select:focus,textarea:focus { border-color:var(--rust); }
     <button class="tab-btn" onclick="showTab('contacts',this)">Contacts</button>
     <button class="tab-btn" onclick="showTab('emergency',this)">Emergency</button>
   </div>
-
   <div id="content">
 
-    <!-- TO-DO -->
     <div class="section active" id="tab-todo">
       <div class="section-title">Task List</div>
       <div id="todo-list"><div class="loading-text">Loading...</div></div>
@@ -254,7 +248,6 @@ input:focus,select:focus,textarea:focus { border-color:var(--rust); }
       </div>
     </div>
 
-    <!-- SIGN IN/OUT -->
     <div class="section" id="tab-signin">
       <div class="section-title">Sign In / Out</div>
       <div class="my-signin-btn">
@@ -264,25 +257,27 @@ input:focus,select:focus,textarea:focus { border-color:var(--rust); }
       <div id="signin-list"><div class="loading-text">Loading...</div></div>
     </div>
 
-    <!-- RADIOS -->
     <div class="section" id="tab-radios">
       <div class="section-title">2-Way Radios</div>
-      <div id="radio-list"><div class="loading-text">Loading...</div></div>
+      <div class="radio-toolbar">
+        <button class="btn btn-gold btn-sm" onclick="openOverlay('radio-out-overlay')">&#43; Sign Out Radio</button>
+        <button class="btn btn-green btn-sm" onclick="openReturnModal()">Return Radio</button>
+        <button class="btn btn-blue btn-sm" onclick="downloadRadioCSV()">&#8595; Download History</button>
+      </div>
+      <div id="radio-active-section"></div>
+      <div id="radio-history-section"></div>
     </div>
 
-    <!-- BUS TIMETABLE -->
     <div class="section" id="tab-timetable">
       <div class="section-title">Bus Timetables</div>
       <div id="tt-list"><div class="loading-text">Loading...</div></div>
     </div>
 
-    <!-- CONTACTS -->
     <div class="section" id="tab-contacts">
       <div class="section-title">Crew Contacts</div>
       <div id="contact-list"><div class="loading-text">Loading...</div></div>
     </div>
 
-    <!-- EMERGENCY -->
     <div class="section" id="tab-emergency">
       <div class="section-title">Emergency Info</div>
       <div id="emerg-list"><div class="loading-text">Loading...</div></div>
@@ -297,35 +292,27 @@ input:focus,select:focus,textarea:focus { border-color:var(--rust); }
     <div class="modal-logo">CMC <span>Rocks</span></div>
     <div class="modal-sub">Who are you?</div>
     <div class="crew-list" id="pick-overlay-list"></div>
-    <button class="btn secondary" onclick="document.getElementById('pick-overlay').classList.add('hidden')">Cancel</button>
+    <button class="btn secondary" onclick="closeOverlay('pick-overlay')">Cancel</button>
   </div>
 </div>
 
 <script>
-const OWNER='RBARC5', REPO='CMC-ROCKS';
+const OWNER='RBARC5',REPO='CMC-ROCKS';
 const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/data.json`;
 const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/data.json`;
-
-let data=null, currentUser=null, pollTimer=null;
-let activeRadioId=null;
+let data=null,currentUser=null,pollTimer=null,activeReturnId=null;
 
 async function init(){
   currentUser=loadUser();
   await fetchData();
-  if(currentUser){ showApp(); }
-  else { document.getElementById('reg-overlay').classList.remove('hidden'); }
+  if(currentUser) showApp();
+  else openOverlay('reg-overlay');
   startPolling();
 }
-function loadUser(){ try{ return JSON.parse(localStorage.getItem('cmcUser')); }catch{ return null; } }
-function saveUser(u){ localStorage.setItem('cmcUser',JSON.stringify(u)); currentUser=u; }
-
-async function fetchData(){
-  try{ const r=await fetch(RAW+'?t='+Date.now()); data=await r.json(); }catch(e){ console.error(e); }
-}
-function startPolling(){
-  if(pollTimer) clearInterval(pollTimer);
-  pollTimer=setInterval(async()=>{ await fetchData(); renderAll(); },10000);
-}
+function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
+function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
+async function fetchData(){try{const r=await fetch(RAW+'?t='+Date.now());data=await r.json()}catch(e){console.error(e)}}
+function startPolling(){if(pollTimer)clearInterval(pollTimer);pollTimer=setInterval(async()=>{await fetchData();renderAll()},10000)}
 async function pushData(msg){
   try{
     const meta=await fetch(API,{headers:{'Accept':'application/vnd.github.v3+json'}});
@@ -333,9 +320,11 @@ async function pushData(msg){
     const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
     const resp=await fetch(API,{method:'PUT',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({message:msg,content,sha:mj.sha})});
-    if(!resp.ok) console.warn('Push failed - proxy needed');
-  }catch(e){ console.warn(e); }
+    if(!resp.ok)console.warn('Push failed - proxy needed for writes');
+  }catch(e){console.warn(e)}
 }
+function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
+function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 
 // REGISTRATION
 function showRegForm(){
@@ -347,34 +336,28 @@ function showPickList(){
   document.getElementById('reg-form').style.display='none';
   document.getElementById('pick-form').style.display='block';
   document.getElementById('reg-title').textContent='Select Your Name';
-  renderPickList('pick-list',(u)=>{
-    saveUser(u);
-    document.getElementById('reg-overlay').classList.add('hidden');
-    showApp();
-  });
+  renderPickList('pick-list',u=>{saveUser(u);closeOverlay('reg-overlay');showApp()});
 }
 function renderPickList(elId,onSelect){
   const el=document.getElementById(elId);
   const crew=(data&&data.crew)?data.crew:[];
-  if(!crew.length){ el.innerHTML='<div class="empty-state">No crew registered yet.</div>'; return; }
-  el.innerHTML=crew.map(u=>`
-    <div class="crew-list-item" onclick='_pickCrew(${JSON.stringify(u)},"${elId}")'>
-      <div class="crew-avatar">${initials(u.name)}</div>
-      <div><div class="crew-name">${u.name}</div><div class="crew-phone">${u.phone}</div></div>
-    </div>`).join('');
-  el._onSelect=onSelect;
+  if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.</div>';return}
+  el.innerHTML=crew.map(u=>`<div class="crew-list-item" onclick='_pick(${JSON.stringify(u)},"${elId}")'>
+    <div class="crew-avatar">${initials(u.name)}</div>
+    <div><div class="crew-name">${u.name}</div><div class="crew-phone">${u.phone}</div></div>
+  </div>`).join('');
+  el._cb=onSelect;
 }
-function _pickCrew(u,id){ const el=document.getElementById(id); if(el&&el._onSelect) el._onSelect(u); }
+function _pick(u,id){const el=document.getElementById(id);if(el&&el._cb)el._cb(u)}
 async function submitReg(){
   const name=document.getElementById('reg-name').value.trim();
   const phone=document.getElementById('reg-phone').value.trim();
-  if(!name||!phone){ alert('Please enter your name and phone number.'); return; }
+  if(!name||!phone){alert('Please enter your name and phone number.');return}
   const user={name,phone,id:Date.now().toString()};
   saveUser(user);
-  if(!data) data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radios:[]};
-  if(!data.crew.find(c=>c.phone===phone)){ data.crew.push(user); await pushData(`Register: ${name}`); }
-  document.getElementById('reg-overlay').classList.add('hidden');
-  showApp();
+  if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
+  if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`)}
+  closeOverlay('reg-overlay');showApp();
 }
 
 // APP
@@ -385,10 +368,9 @@ function showApp(){
   renderAll();
 }
 function showPickOverlay(){
-  document.getElementById('pick-overlay').classList.remove('hidden');
-  renderPickList('pick-overlay-list',(u)=>{
-    saveUser(u);
-    document.getElementById('pick-overlay').classList.add('hidden');
+  openOverlay('pick-overlay');
+  renderPickList('pick-overlay-list',u=>{
+    saveUser(u);closeOverlay('pick-overlay');
     document.getElementById('header-avatar').textContent=initials(u.name);
     document.getElementById('header-name').textContent=u.name.split(' ')[0];
     renderAll();
@@ -398,260 +380,258 @@ function showTab(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
-  if(btn) btn.classList.add('active');
+  if(btn)btn.classList.add('active');
 }
 function renderAll(){
-  if(!data) return;
-  renderTodos(); renderSignins(); renderRadios(); renderTimetables(); renderContacts(); renderEmergency();
+  if(!data)return;
+  renderTodos();renderSignins();renderRadios();renderTimetables();renderContacts();renderEmergency();
 }
 
 // TODO
 function renderTodos(){
   const el=document.getElementById('todo-list');
   const todos=data.todos||[];
-  if(!todos.length){ el.innerHTML='<div class="empty-state">No tasks yet. Add one below.</div>'; return; }
+  if(!todos.length){el.innerHTML='<div class="empty-state">No tasks yet. Add one below.</div>';return}
   el.innerHTML=todos.map((t,i)=>`
     <div class="todo-item ${t.done?'done':''}" onclick="toggleTodo(${i})">
-      <div class="todo-check">
-        <svg class="todo-check-icon" width="12" height="12" viewBox="0 0 12 12">
-          <polyline points="1.5,6 4.5,9 10.5,3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-      </div>
+      <div class="todo-check"><svg class="todo-check-icon" width="12" height="12" viewBox="0 0 12 12">
+        <polyline points="1.5,6 4.5,9 10.5,3" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg></div>
       <div><div class="todo-text">${t.text}</div>
       <div class="todo-meta">${t.done?'Done by '+(t.doneBy||'crew'):'Added by '+(t.addedBy||'crew')}</div></div>
     </div>`).join('');
 }
 async function toggleTodo(i){
-  if(!data.todos[i]) return;
+  if(!data.todos[i])return;
   data.todos[i].done=!data.todos[i].done;
   data.todos[i].doneBy=currentUser?currentUser.name:'crew';
-  renderTodos(); await pushData(`Toggle todo: ${data.todos[i].text}`);
+  renderTodos();await pushData(`Toggle todo: ${data.todos[i].text}`);
 }
 async function addTodo(){
   const inp=document.getElementById('new-todo');
-  const text=inp.value.trim(); if(!text) return; inp.value='';
-  if(!data.todos) data.todos=[];
+  const text=inp.value.trim();if(!text)return;inp.value='';
+  if(!data.todos)data.todos=[];
   data.todos.push({text,done:false,addedBy:currentUser?currentUser.name:'crew',id:Date.now().toString()});
-  renderTodos(); await pushData(`Add todo: ${text}`);
+  renderTodos();await pushData(`Add todo: ${text}`);
 }
 
 // CREW SIGN IN/OUT
 function renderSignins(){
   const el=document.getElementById('signin-list');
-  const signins=data.signins||[];
-  if(!signins.length){ el.innerHTML='<div class="empty-state">No sign-ins recorded yet.</div>'; return; }
-  el.innerHTML=[...signins].sort((a,b)=>b.time-a.time).map(s=>`
+  const s=data.signins||[];
+  if(!s.length){el.innerHTML='<div class="empty-state">No sign-ins recorded yet.</div>';return}
+  el.innerHTML=[...s].sort((a,b)=>b.time-a.time).map(s=>`
     <div class="signin-card">
       <div class="signin-info"><div class="sname">${s.name}</div><div class="stime">${formatTime(s.time)}</div></div>
       <span class="signin-badge ${s.type==='in'?'badge-in':'badge-out'}">${s.type==='in'?'Signed In':'Signed Out'}</span>
     </div>`).join('');
 }
 async function doSignIn(){
-  if(!currentUser) return;
-  if(!data.signins) data.signins=[];
+  if(!currentUser)return;
+  if(!data.signins)data.signins=[];
   data.signins.push({name:currentUser.name,phone:currentUser.phone,type:'in',time:Date.now()});
-  renderSignins(); await pushData(`Sign in: ${currentUser.name}`);
+  renderSignins();await pushData(`Sign in: ${currentUser.name}`);
 }
 async function doSignOut(){
-  if(!currentUser) return;
-  if(!data.signins) data.signins=[];
+  if(!currentUser)return;
+  if(!data.signins)data.signins=[];
   data.signins.push({name:currentUser.name,phone:currentUser.phone,type:'out',time:Date.now()});
-  renderSignins(); await pushData(`Sign out: ${currentUser.name}`);
+  renderSignins();await pushData(`Sign out: ${currentUser.name}`);
 }
 
 // ── RADIOS ──
 function renderRadios(){
-  const el=document.getElementById('radio-list');
-  const radios=data.radios||[];
-  if(!radios.length){ el.innerHTML='<div class="empty-state">No radios registered.</div>'; return; }
+  const log=data.radioLog||[];
+  // Active loans = sign-outs with no matching return after them
+  const active=getActiveLoans(log);
+  const activeEl=document.getElementById('radio-active-section');
+  const histEl=document.getElementById('radio-history-section');
 
-  // Group by site ID
-  const groups={};
-  radios.forEach(r=>{ if(!groups[r.siteId]) groups[r.siteId]=[]; groups[r.siteId].push(r); });
-
-  let html='';
-  for(const site in groups){
-    html+=`<div class="radio-section-label">Site ${site}</div><div class="radio-grid">`;
-    html+=groups[site].map(r=>radioCardHTML(r)).join('');
-    html+='</div>';
-  }
-  el.innerHTML=html;
-}
-
-function radioCardHTML(r){
-  const statusClass = r.status==='fault'?'status-fault': r.status==='out'?'status-out':'';
-  const badgeClass  = r.status==='fault'?'rs-fault': r.status==='out'?'rs-out':'rs-available';
-  const badgeText   = r.status==='fault'?'FAULT': r.status==='out'?'SIGNED OUT':'AVAILABLE';
-
-  const lastLog = r.log&&r.log.length ? r.log[r.log.length-1] : null;
-  let metaLine = '';
-  if(r.status==='out'&&lastLog){
-    metaLine=`Signed out by <strong>${lastLog.by}</strong> at ${formatTime(lastLog.time)}`;
-    if(lastLog.condition) metaLine+=` &bull; Condition: ${lastLog.condition}`;
-  } else if(r.status==='available'&&lastLog){
-    metaLine=`Last returned by <strong>${lastLog.by}</strong> at ${formatTime(lastLog.time)}`;
-  } else if(r.status==='fault'&&lastLog){
-    metaLine=`Fault reported by <strong>${lastLog.by}</strong> at ${formatTime(lastLog.time)}`;
-  }
-
-  const faultBanner = (r.status==='fault'&&r.faultNote) ?
-    `<div class="radio-fault-banner"><strong>&#9888; Fault Reported</strong>${r.faultNote}</div>` : '';
-
-  let actionBtn = '';
-  if(r.status==='available'){
-    actionBtn=`<button class="btn btn-gold btn-sm" onclick="openSignOut('${r.id}')">Sign Out</button>`;
-  } else if(r.status==='out'){
-    // Only the person who signed it out can return it, or anyone
-    actionBtn=`<button class="btn btn-green btn-sm" onclick="openReturn('${r.id}')">Return Radio</button>`;
-  } else if(r.status==='fault'){
-    actionBtn=`<button class="btn btn-sm" style="background:rgba(192,57,43,0.4);color:#e74c3c;border:1px solid rgba(192,57,43,0.5)" onclick="openSignOut('${r.id}')">Override &amp; Sign Out</button>`;
-  }
-
-  const logEntries = (r.log||[]).slice().reverse().slice(0,5).map(e=>{
-    const cls = e.action==='out'?'le-out': e.action==='in'?'le-in':'le-fault';
-    const actionLabel = e.action==='out'?'SIGNED OUT': e.action==='in'?'RETURNED':'FAULT';
-    return `<div class="log-entry">
-      <span class="le-action ${cls}">${actionLabel}</span> &bull; ${e.by} &bull; ${formatTime(e.time)}
-      ${e.condition?`<br>Condition: ${e.condition}`:''}
-      ${e.notes?`<br>Notes: ${e.notes}`:''}
-    </div>`;
-  }).join('');
-
-  return `
-  <div class="radio-card ${statusClass}" id="rcard-${r.id}">
-    <div class="radio-header">
-      <div class="radio-ids">
-        <div class="radio-site-id">${r.siteId}</div>
-        <div class="radio-dept-id">${r.deptId}</div>
-      </div>
-      <span class="radio-status-badge ${badgeClass}">${badgeText}</span>
-    </div>
-    ${faultBanner}
-    ${metaLine?`<div class="radio-meta">${metaLine}</div>`:''}
-    <div class="radio-actions">${actionBtn}</div>
-    ${logEntries?`<div class="radio-log-toggle" onclick="toggleLog('${r.id}')">Show history</div>
-    <div class="radio-log" id="rlog-${r.id}">${logEntries}</div>`:''}
-  </div>`;
-}
-
-function toggleLog(id){
-  const el=document.getElementById('rlog-'+id);
-  if(!el) return;
-  el.classList.toggle('open');
-  const toggle=el.previousElementSibling;
-  if(toggle) toggle.textContent=el.classList.contains('open')?'Hide history':'Show history';
-}
-
-function openSignOut(id){
-  const radio=data.radios.find(r=>r.id===id);
-  if(!radio) return;
-  activeRadioId=id;
-  const warnEl=document.getElementById('radio-fault-warn');
-  const warnText=document.getElementById('radio-fault-warn-text');
-  if(radio.status==='fault'&&radio.faultNote){
-    warnEl.style.display='block';
-    warnText.textContent=radio.faultNote;
+  // Active loans
+  if(!active.length){
+    activeEl.innerHTML='<div class="radio-section-label">Currently Signed Out</div><div class="empty-state" style="padding:1rem">No radios currently signed out.</div>';
   } else {
-    warnEl.style.display='none';
+    activeEl.innerHTML='<div class="radio-section-label">Currently Signed Out</div>'+
+      active.map(e=>{
+        const fault=e.condition==='Faulty / Not working'||e.notes;
+        return `<div class="loan-card">
+          <div class="loan-header">
+            <div class="loan-ids">
+              <div class="site-id">${e.siteId}</div>
+              <div class="dept-id">${e.deptId}</div>
+            </div>
+          </div>
+          ${fault?`<div class="fault-pill">&#9888; Issue noted on sign-out</div>`:''}
+          <div class="loan-meta">
+            Signed out by <strong>${e.by}</strong><br>
+            ${formatTime(e.time)}<br>
+            Condition: ${e.condition}
+            ${e.notes?`<br>Notes: ${e.notes}`:''}
+          </div>
+        </div>`;
+      }).join('');
   }
-  document.getElementById('radio-out-title').textContent=`Sign Out: ${radio.siteId} / ${radio.deptId}`;
-  document.getElementById('ro-condition').value='Good';
-  document.getElementById('ro-notes').value='';
-  document.getElementById('radio-out-overlay').classList.remove('hidden');
-}
-function closeRadioOut(){ document.getElementById('radio-out-overlay').classList.add('hidden'); activeRadioId=null; }
 
-async function confirmSignOut(){
-  if(!activeRadioId||!currentUser) return;
-  const idx=data.radios.findIndex(r=>r.id===activeRadioId);
-  if(idx===-1) return;
+  // Full history
+  if(!log.length){
+    histEl.innerHTML='<div class="radio-section-label">Full History</div><div class="empty-state" style="padding:1rem">No history yet.</div>';
+  } else {
+    const rows=[...log].reverse().map(e=>{
+      const cls=e.action==='out'?'ht-out':e.action==='in'?'ht-in':'ht-fault';
+      const label=e.action==='out'?'SIGN OUT':e.action==='in'?'RETURN':'FAULT';
+      return `<tr>
+        <td class="${cls}" style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em">${label}</td>
+        <td>${e.siteId} / ${e.deptId}</td>
+        <td>${e.by}</td>
+        <td>${formatTime(e.time)}</td>
+        <td>${e.condition||''}</td>
+        <td>${e.notes||''}</td>
+      </tr>`;
+    }).join('');
+    histEl.innerHTML=`<div class="radio-section-label">Full History</div>
+      <div style="overflow-x:auto">
+      <table class="history-table">
+        <thead><tr><th>Action</th><th>Radio</th><th>By</th><th>Time</th><th>Condition</th><th>Notes</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table></div>`;
+  }
+}
+
+function getActiveLoans(log){
+  // For each unique radio (siteId+deptId), find if last action is 'out'
+  const radios={};
+  log.forEach(e=>{
+    const key=e.siteId+'|'+e.deptId;
+    if(!radios[key])radios[key]=[];
+    radios[key].push(e);
+  });
+  const active=[];
+  for(const key in radios){
+    const entries=radios[key];
+    const last=entries[entries.length-1];
+    if(last.action==='out')active.push(last);
+  }
+  return active;
+}
+
+async function confirmRadioOut(){
+  if(!currentUser)return;
+  const siteId=document.getElementById('ro-siteid').value.trim().toUpperCase();
+  const deptId=document.getElementById('ro-deptid').value.trim();
   const condition=document.getElementById('ro-condition').value;
   const notes=document.getElementById('ro-notes').value.trim();
-  const isFault=condition==='Faulty / Not working';
-  const entry={action:'out',by:currentUser.name,time:Date.now(),condition,notes};
-  if(!data.radios[idx].log) data.radios[idx].log=[];
-  data.radios[idx].log.push(entry);
-  data.radios[idx].status=isFault?'fault':'out';
-  data.radios[idx].condition=condition;
-  if(isFault||notes){ data.radios[idx].faultNote=notes||`Marked as ${condition}`; }
-  closeRadioOut();
+  if(!siteId||!deptId){alert('Please enter both Site ID and Department ID.');return}
+  if(!data.radioLog)data.radioLog=[];
+  data.radioLog.push({action:'out',siteId,deptId,by:currentUser.name,time:Date.now(),condition,notes,id:Date.now().toString()});
+  document.getElementById('ro-siteid').value='';
+  document.getElementById('ro-deptid').value='';
+  document.getElementById('ro-condition').value='Good';
+  document.getElementById('ro-notes').value='';
+  closeOverlay('radio-out-overlay');
   renderRadios();
-  await pushData(`Radio ${activeRadioId||data.radios[idx].deptId} signed out by ${currentUser.name}`);
+  await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`);
 }
 
-function openReturn(id){
-  const radio=data.radios.find(r=>r.id===id);
-  if(!radio) return;
-  activeRadioId=id;
-  document.getElementById('radio-in-title').textContent=`Return: ${radio.siteId} / ${radio.deptId}`;
-  document.getElementById('ri-condition').value='Good';
-  document.getElementById('ri-issues').value='';
-  document.getElementById('radio-in-overlay').classList.remove('hidden');
+function openReturnModal(){
+  const log=data.radioLog||[];
+  const active=getActiveLoans(log);
+  const el=document.getElementById('radio-return-list');
+  if(!active.length){
+    el.innerHTML='<div class="empty-state">No radios currently signed out.</div>';
+  } else {
+    el.innerHTML=active.map(e=>`
+      <div class="loan-card" style="cursor:pointer;margin-bottom:0.5rem" onclick="selectReturn('${e.siteId}','${e.deptId}')">
+        <div class="loan-ids"><div class="site-id">${e.siteId}</div><div class="dept-id">${e.deptId}</div></div>
+        <div class="loan-meta" style="margin-top:0.4rem">Signed out by <strong>${e.by}</strong> &bull; ${formatTime(e.time)}</div>
+      </div>`).join('');
+  }
+  openOverlay('radio-in-overlay');
 }
-function closeRadioIn(){ document.getElementById('radio-in-overlay').classList.add('hidden'); activeRadioId=null; }
 
-async function confirmReturn(){
-  if(!activeRadioId||!currentUser) return;
-  const idx=data.radios.findIndex(r=>r.id===activeRadioId);
-  if(idx===-1) return;
-  const condition=document.getElementById('ri-condition').value;
-  const issues=document.getElementById('ri-issues').value.trim();
+function selectReturn(siteId,deptId){
+  activeReturnId={siteId,deptId};
+  document.getElementById('radio-ret-title').textContent=`Return: ${siteId} / ${deptId}`;
+  document.getElementById('rr-condition').value='Good';
+  document.getElementById('rr-issues').value='';
+  closeOverlay('radio-in-overlay');
+  openOverlay('radio-ret-overlay');
+}
+
+async function confirmRadioReturn(){
+  if(!activeReturnId||!currentUser)return;
+  const condition=document.getElementById('rr-condition').value;
+  const issues=document.getElementById('rr-issues').value.trim();
   const isFault=condition==='Faulty / Not working'||issues.length>0;
-  const entry={action: isFault?'fault':'in', by:currentUser.name, time:Date.now(), condition, notes:issues};
-  if(!data.radios[idx].log) data.radios[idx].log=[];
-  data.radios[idx].log.push(entry);
-  data.radios[idx].status=isFault?'fault':'available';
-  data.radios[idx].condition=condition;
-  data.radios[idx].faultNote=isFault?(issues||`Returned as ${condition}`):`Returned in good condition`;
-  if(!isFault) data.radios[idx].faultNote='';
-  closeRadioIn();
+  if(!data.radioLog)data.radioLog=[];
+  data.radioLog.push({
+    action:isFault?'fault':'in',
+    siteId:activeReturnId.siteId,
+    deptId:activeReturnId.deptId,
+    by:currentUser.name,
+    time:Date.now(),
+    condition,
+    notes:issues,
+    id:Date.now().toString()
+  });
+  closeOverlay('radio-ret-overlay');
+  activeReturnId=null;
   renderRadios();
-  await pushData(`Radio ${data.radios[idx].deptId} returned by ${currentUser.name}`);
+  await pushData(`Radio returned by ${currentUser.name}`);
+}
+
+function downloadRadioCSV(){
+  const log=data.radioLog||[];
+  if(!log.length){alert('No radio history to download.');return}
+  const headers=['Action','Site ID','Dept ID','By','Date/Time','Condition','Notes'];
+  const rows=log.map(e=>[
+    e.action==='out'?'Sign Out':e.action==='in'?'Return':'Fault/Return',
+    e.siteId,e.deptId,e.by,
+    formatTime(e.time),
+    e.condition||'',
+    (e.notes||'').replace(/,/g,';')
+  ]);
+  const csv=[headers,...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
+  const blob=new Blob([csv],{type:'text/csv'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`CMC-Rocks-Radio-History-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();URL.revokeObjectURL(url);
 }
 
 // TIMETABLE
 function renderTimetables(){
   const el=document.getElementById('tt-list');
   const tt=data.timetables||[];
-  if(!tt.length){ el.innerHTML='<div class="empty-state">No timetables added yet.</div>'; return; }
-  el.innerHTML=tt.map(route=>`
-    <div class="tt-card">
-      <div class="tt-route">${route.name}</div>
-      ${route.times.map(t=>`<div class="tt-row"><span>${t.label}</span><span class="tt-time">${t.time}</span></div>`).join('')}
-    </div>`).join('');
+  if(!tt.length){el.innerHTML='<div class="empty-state">No timetables added yet.</div>';return}
+  el.innerHTML=tt.map(r=>`<div class="tt-card"><div class="tt-route">${r.name}</div>
+    ${r.times.map(t=>`<div class="tt-row"><span>${t.label}</span><span class="tt-time">${t.time}</span></div>`).join('')}
+  </div>`).join('');
 }
 
 // CONTACTS
 function renderContacts(){
   const el=document.getElementById('contact-list');
-  const contacts=(data.emergency&&data.emergency.contacts)?data.emergency.contacts:[];
-  const filtered=contacts.filter(c=>c.number!=='000');
-  if(!filtered.length){ el.innerHTML='<div class="empty-state">No contacts added yet.</div>'; return; }
-  el.innerHTML=filtered.map(c=>`
-    <div class="contact-card">
-      <div class="crew-avatar">${initials(c.role)}</div>
-      <div class="contact-info"><div class="cname">${c.role}</div></div>
-      <a class="contact-num" href="tel:${c.number}">${c.number}</a>
-    </div>`).join('');
+  const c=(data.emergency&&data.emergency.contacts)?data.emergency.contacts.filter(c=>c.number!=='000'):[];
+  if(!c.length){el.innerHTML='<div class="empty-state">No contacts added yet.</div>';return}
+  el.innerHTML=c.map(c=>`<div class="contact-card">
+    <div class="crew-avatar">${initials(c.role)}</div>
+    <div class="contact-info"><div class="cname">${c.role}</div></div>
+    <a class="contact-num" href="tel:${c.number}">${c.number}</a>
+  </div>`).join('');
 }
 
 // EMERGENCY
 function renderEmergency(){
   const el=document.getElementById('emerg-list');
-  const contacts=(data.emergency&&data.emergency.contacts)?data.emergency.contacts:[];
-  if(!contacts.length){ el.innerHTML='<div class="empty-state">No emergency info added yet.</div>'; return; }
-  el.innerHTML=contacts.map(c=>`
-    <a href="tel:${c.number}" style="text-decoration:none">
-      <div class="emerg-card">
-        <div class="emerg-role">${c.role}</div>
-        <div class="emerg-num">${c.number}</div>
-      </div>
-    </a>`).join('');
+  const c=(data.emergency&&data.emergency.contacts)?data.emergency.contacts:[];
+  if(!c.length){el.innerHTML='<div class="empty-state">No emergency info added yet.</div>';return}
+  el.innerHTML=c.map(c=>`<a href="tel:${c.number}" style="text-decoration:none">
+    <div class="emerg-card"><div class="emerg-role">${c.role}</div><div class="emerg-num">${c.number}</div></div>
+  </a>`).join('');
 }
 
-// UTILS
-function initials(name){ if(!name) return '?'; return name.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2); }
-function formatTime(ts){ if(!ts) return ''; return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'}); }
+function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2)}
+function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'})}
 
 init();
 </script>
