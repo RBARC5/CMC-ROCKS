@@ -71,8 +71,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .save-ok{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
 .save-err{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
 #pick-overlay-reg{display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:1.2rem}
-/* Prefill hint shown under dept id when auto-filled */
 .prefill-hint{font-size:0.7rem;color:var(--olive);margin-top:-0.6rem;margin-bottom:0.8rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em}
+
+/* FAULT WARNING MODAL */
+.fault-warning-box{background:rgba(192,57,43,0.15);border:1px solid rgba(192,57,43,0.55);border-radius:5px;padding:1.2rem;margin-bottom:1.4rem}
+.fault-warning-box .fw-title{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:0.08em;color:#e74c3c;margin-bottom:0.3rem}
+.fault-warning-box .fw-radio{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.8rem;letter-spacing:0.18em;color:var(--gold);margin-bottom:0.6rem}
+.fault-warning-box .fw-reported{font-size:0.72rem;color:var(--dust);margin-bottom:0.4rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.08em;text-transform:uppercase}
+.fault-warning-box .fw-message{font-size:0.9rem;color:var(--cream);line-height:1.5;background:rgba(0,0,0,0.2);border-radius:3px;padding:0.6rem 0.8rem;font-style:italic}
 </style>
 </head>
 <body>
@@ -102,20 +108,37 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- RADIO SIGN OUT — with smart dropdown -->
+<!-- FAULT WARNING — shown before sign-out if radio has fault logged -->
+<div class="overlay hidden" id="fault-warn-overlay">
+  <div class="modal">
+    <div class="modal-logo">CMC <span>Rocks</span></div>
+    <div class="modal-sub">&#9888; Fault Warning</div>
+    <div class="fault-warning-box">
+      <div class="fw-title">&#9888; This Radio Has a Fault</div>
+      <div class="fw-radio" id="fw-radio-id"></div>
+      <div class="fw-reported" id="fw-reported-by"></div>
+      <div class="fw-message" id="fw-message"></div>
+    </div>
+    <p style="font-size:0.85rem;color:var(--dust);margin-bottom:1.2rem;line-height:1.5">
+      This radio was reported as faulty. Are you sure you want to sign it out?
+    </p>
+    <button class="btn" onclick="proceedAfterFaultWarning()" style="background:rgba(192,57,43,0.7);border:1px solid rgba(192,57,43,0.8)">
+      I Understand — Sign Out Anyway
+    </button>
+    <button class="btn secondary" onclick="closeOverlay('fault-warn-overlay')">Cancel</button>
+  </div>
+</div>
+
+<!-- RADIO SIGN OUT -->
 <div class="overlay hidden" id="radio-out-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
     <div class="modal-sub">Sign Out 2-Way Radio</div>
     <h2>Radio Details</h2>
-
-    <!-- Known radios dropdown -->
     <label>Select Radio</label>
     <select id="ro-known" onchange="onKnownRadioSelect()">
       <option value="">-- Select or enter new below --</option>
     </select>
-
-    <!-- Manual entry — shown when "new" selected or no history -->
     <div id="ro-manual">
       <label>Site ID</label>
       <input type="text" id="ro-siteid" placeholder="e.g. S01" autocomplete="off" oninput="onSiteIdInput()">
@@ -123,7 +146,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       <input type="text" id="ro-deptid" placeholder="e.g. Traffic-1" autocomplete="off">
       <div id="ro-prefill-hint" class="prefill-hint" style="display:none">&#10003; Auto-filled from history</div>
     </div>
-
     <label>Condition</label>
     <select id="ro-condition">
       <option value="Good">Good</option>
@@ -220,6 +242,8 @@ const RAW   = 'https://raw.githubusercontent.com/RBARC5/CMC-ROCKS/main/data.json
 
 let data=null, currentUser=null, pollTimer=null, activeReturnId=null;
 let writeLockUntil=0;
+// Stores sign-out data while user is on the fault warning screen
+let pendingSignOut=null;
 
 function lockWrites(){writeLockUntil=Date.now()+40000;}
 
@@ -236,14 +260,18 @@ function getMergedCrew(){
   return merged;
 }
 
-// Build unique radio lookup from history: siteId -> deptId (fixed pair)
 function getKnownRadios(){
   const log=(data&&data.radioLog)?data.radioLog:[];
   const map={};
-  log.forEach(e=>{
-    if(e.siteId&&e.deptId) map[e.siteId]=e.deptId; // last seen deptId for this siteId
-  });
-  return map; // { 'S01': 'Traffic-1', 'S02': 'Traffic-2', ... }
+  log.forEach(e=>{if(e.siteId&&e.deptId) map[e.siteId]=e.deptId;});
+  return map;
+}
+
+// Returns the last log entry for a given radio, or null
+function getLastEntry(siteId, deptId){
+  const log=(data&&data.radioLog)?data.radioLog:[];
+  const entries=log.filter(e=>e.siteId===siteId&&e.deptId===deptId);
+  return entries.length ? entries[entries.length-1] : null;
 }
 
 async function init(){
@@ -310,19 +338,20 @@ function showSaveStatus(state){
 function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
 function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 
-// ── SIGN OUT MODAL — populate dropdown from history ──
+// ── SIGN OUT MODAL ──
 function openSignOutModal(){
   const known=getKnownRadios();
   const sel=document.getElementById('ro-known');
   sel.innerHTML='<option value="">-- Select or enter new below --</option>';
   Object.entries(known).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([siteId,deptId])=>{
+    const last=getLastEntry(siteId,deptId);
+    const hasFault=last&&last.action==='fault';
     const opt=document.createElement('option');
     opt.value=siteId;
-    opt.textContent=`${siteId}  /  ${deptId}`;
+    opt.textContent=`${siteId}  /  ${deptId}${hasFault?' ⚠ FAULT':'' }`;
     opt.dataset.deptid=deptId;
     sel.appendChild(opt);
   });
-  // Reset fields
   document.getElementById('ro-siteid').value='';
   document.getElementById('ro-deptid').value='';
   document.getElementById('ro-condition').value='Good';
@@ -335,12 +364,10 @@ function onKnownRadioSelect(){
   const sel=document.getElementById('ro-known');
   const opt=sel.options[sel.selectedIndex];
   if(opt.value){
-    // Known radio selected — pre-fill both fields
     document.getElementById('ro-siteid').value=opt.value;
     document.getElementById('ro-deptid').value=opt.dataset.deptid;
     document.getElementById('ro-prefill-hint').style.display='block';
   } else {
-    // "Select or enter new" — clear manual fields
     document.getElementById('ro-siteid').value='';
     document.getElementById('ro-deptid').value='';
     document.getElementById('ro-prefill-hint').style.display='none';
@@ -348,13 +375,11 @@ function onKnownRadioSelect(){
 }
 
 function onSiteIdInput(){
-  // As user types a site ID manually, auto-fill dept ID if we have it in history
   const typed=document.getElementById('ro-siteid').value.trim().toUpperCase();
   const known=getKnownRadios();
   if(known[typed]){
     document.getElementById('ro-deptid').value=known[typed];
     document.getElementById('ro-prefill-hint').style.display='block';
-    // Also sync the dropdown to match
     const sel=document.getElementById('ro-known');
     for(let i=0;i<sel.options.length;i++){
       if(sel.options[i].value===typed){sel.selectedIndex=i;break;}
@@ -362,6 +387,50 @@ function onSiteIdInput(){
   } else {
     document.getElementById('ro-prefill-hint').style.display='none';
   }
+}
+
+// ── CONFIRM SIGN OUT — checks for fault first ──
+async function confirmRadioOut(){
+  if(!currentUser)return;
+  const siteId=document.getElementById('ro-siteid').value.trim().toUpperCase();
+  const deptId=document.getElementById('ro-deptid').value.trim();
+  const condition=document.getElementById('ro-condition').value;
+  const notes=document.getElementById('ro-notes').value.trim();
+  if(!siteId||!deptId){alert('Please select a radio or enter both Site ID and Department ID.');return;}
+
+  // Check if last entry for this radio is a fault
+  const last=getLastEntry(siteId,deptId);
+  if(last&&last.action==='fault'){
+    // Store the sign-out details and show warning
+    pendingSignOut={siteId,deptId,condition,notes};
+    document.getElementById('fw-radio-id').textContent=`${siteId}  /  ${deptId}`;
+    document.getElementById('fw-reported-by').textContent=`Reported by ${last.by} on ${formatTime(last.time)}`;
+    document.getElementById('fw-message').textContent=last.notes||`Returned as: ${last.condition}`;
+    closeOverlay('radio-out-overlay');
+    openOverlay('fault-warn-overlay');
+    return;
+  }
+
+  // No fault — proceed directly
+  await doSignOut(siteId,deptId,condition,notes);
+}
+
+// Called when user clicks "I Understand — Sign Out Anyway" on the fault warning
+async function proceedAfterFaultWarning(){
+  closeOverlay('fault-warn-overlay');
+  if(!pendingSignOut)return;
+  const {siteId,deptId,condition,notes}=pendingSignOut;
+  pendingSignOut=null;
+  await doSignOut(siteId,deptId,condition,notes);
+}
+
+async function doSignOut(siteId,deptId,condition,notes){
+  lockWrites();
+  if(!data.radioLog)data.radioLog=[];
+  data.radioLog.push({action:'out',siteId,deptId,by:currentUser.name,time:Date.now(),condition,notes,id:Date.now().toString()});
+  closeOverlay('radio-out-overlay');
+  renderRadios();
+  await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`);
 }
 
 // ── REGISTRATION ──
@@ -482,21 +551,6 @@ function getActiveLoans(log){
   const radios={};
   log.forEach(e=>{const k=e.siteId+'|'+e.deptId;if(!radios[k])radios[k]=[];radios[k].push(e);});
   return Object.values(radios).map(entries=>entries[entries.length-1]).filter(e=>e.action==='out');
-}
-
-async function confirmRadioOut(){
-  if(!currentUser)return;
-  lockWrites();
-  const siteId=document.getElementById('ro-siteid').value.trim().toUpperCase();
-  const deptId=document.getElementById('ro-deptid').value.trim();
-  const condition=document.getElementById('ro-condition').value;
-  const notes=document.getElementById('ro-notes').value.trim();
-  if(!siteId||!deptId){alert('Please select a radio or enter both Site ID and Department ID.');return;}
-  if(!data.radioLog)data.radioLog=[];
-  data.radioLog.push({action:'out',siteId,deptId,by:currentUser.name,time:Date.now(),condition,notes,id:Date.now().toString()});
-  closeOverlay('radio-out-overlay');
-  renderRadios();
-  await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`);
 }
 
 function openReturnModal(){
