@@ -4,6 +4,11 @@
       "name": "Rhys Barclay",
       "phone": "0452511922",
       "id": "1774438783759"
+    },
+    {
+      "name": "Emily Godfrey",
+      "phone": "0481186116",
+      "id": "1774440478285"
     }
   ],
   "todos": [],
@@ -86,46 +91,6 @@
       "condition": "Good",
       "notes": "",
       "id": "1774440091409"
-    },
-    {
-      "action": "out",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774440354682,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774440354682"
-    },
-    {
-      "action": "fault",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774440362803,
-      "condition": "Faulty / Not working",
-      "notes": "",
-      "id": "1774440362803"
-    },
-    {
-      "action": "out",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774440376071,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774440376071"
-    },
-    {
-      "action": "in",
-      "siteId": "S123",
-      "deptId": "t2",
-      "by": "Rhys Barclay",
-      "time": 1774440383802,
-      "condition": "Good",
-      "notes": "",
-      "id": "1774440383802"
     }
   ]
 }
