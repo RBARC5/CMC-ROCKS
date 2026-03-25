@@ -4,15 +4,31 @@
   "announcements": [],
   "emergency": {
     "contacts": [
-      { "role": "Site Emergency", "number": "000" },
-      { "role": "Festival Medical", "number": "TBC" },
-      { "role": "Site Manager", "number": "TBC" }
+      {
+        "role": "Site Emergency",
+        "number": "000"
+      },
+      {
+        "role": "Festival Medical",
+        "number": "TBC"
+      },
+      {
+        "role": "Site Manager",
+        "number": "TBC"
+      }
     ]
   },
   "timetables": [],
   "signins": [],
   "radioLog": [],
-  "shifts": {},
+  "shifts": {
+    "0452511922": {
+      "26-03-2026": {
+        "sessions": [],
+        "status": "off"
+      }
+    }
+  },
   "gates": [
     {
       "name": "Camping — Wed 18 March",
