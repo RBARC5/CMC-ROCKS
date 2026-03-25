@@ -96,6 +96,16 @@
       "condition": "Good",
       "notes": "",
       "id": "1774440354682"
+    },
+    {
+      "action": "fault",
+      "siteId": "S123",
+      "deptId": "t2",
+      "by": "Rhys Barclay",
+      "time": 1774440362803,
+      "condition": "Faulty / Not working",
+      "notes": "",
+      "id": "1774440362803"
     }
   ]
 }
