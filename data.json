@@ -4,11 +4,6 @@
       "name": "Rhys Barclay",
       "phone": "0452511922",
       "id": "1774438783759"
-    },
-    {
-      "name": "Emily Godfrey",
-      "phone": "0481186116",
-      "id": "1774440478285"
     }
   ],
   "todos": [],
@@ -96,11 +91,11 @@
       "action": "out",
       "siteId": "SITE 228",
       "deptId": "Traffic 8",
-      "by": "Emily Godfrey",
-      "time": 1774440492149,
+      "by": "Rhys Barclay",
+      "time": 1774440593470,
       "condition": "Good",
       "notes": "",
-      "id": "1774440492149"
+      "id": "1774440593470"
     }
   ]
 }
