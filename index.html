@@ -15,13 +15,11 @@
 html,body{width:100%;min-height:100%;background:var(--char);color:var(--cream);font-family:'Barlow',sans-serif;overflow-x:hidden}
 #stripe-top{position:fixed;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--rust) 0%,var(--gold) 33%,var(--olive) 55%,var(--cobalt) 75%,var(--rust) 100%);background-size:300% 100%;z-index:200;animation:stripe 5s linear infinite}
 @keyframes stripe{0%{background-position:0% 0%}100%{background-position:300% 0%}}
-
 #boot-screen{position:fixed;inset:0;z-index:300;background:var(--char);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.8rem}
 #boot-screen.hidden{display:none}
 .boot-logo{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--cream);letter-spacing:0.08em}
 .boot-logo span{color:var(--rust)}
 .boot-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--dust)}
-
 .overlay{position:fixed;inset:0;z-index:100;background:rgba(22,20,14,0.93);display:flex;align-items:flex-start;justify-content:center;padding:2rem 1.5rem;backdrop-filter:blur(4px);overflow-y:auto}
 .overlay.hidden{display:none}
 .modal{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:2rem;width:100%;max-width:420px;margin:auto}
@@ -38,14 +36,10 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .btn:hover{background:#d93610}
 .btn.secondary{background:transparent;border:1px solid var(--border);color:var(--dust);font-size:0.82rem;margin-top:0.75rem;letter-spacing:0.22em}
 .btn.secondary:hover{border-color:var(--gold);color:var(--gold)}
-.btn-green{background:var(--olive)!important}
-.btn-green:hover{background:#7a7709!important}
-.btn-gold{background:var(--gold)!important;color:var(--char)!important}
-.btn-gold:hover{background:#d4882a!important}
-.btn-blue{background:var(--cobalt)!important;color:#fff!important}
-.btn-blue:hover{background:#0035cc!important}
+.btn-green{background:var(--olive)!important}.btn-green:hover{background:#7a7709!important}
+.btn-gold{background:var(--gold)!important;color:var(--char)!important}.btn-gold:hover{background:#d4882a!important}
+.btn-blue{background:var(--cobalt)!important;color:#fff!important}.btn-blue:hover{background:#0035cc!important}
 .btn-sm{padding:0.4rem 0.8rem;font-size:0.78rem;width:auto;display:inline-block}
-
 .crew-list{max-height:260px;overflow-y:auto;margin-bottom:1rem;border:1px solid var(--border);border-radius:3px}
 .crew-list-item{padding:0.75rem 1rem;cursor:pointer;border-bottom:1px solid var(--border);transition:background 0.15s;display:flex;align-items:center;gap:0.75rem}
 .crew-list-item:last-child{border-bottom:none}
@@ -53,7 +47,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .crew-list-item .crew-name{font-weight:600;font-size:0.95rem}
 .crew-list-item .crew-phone{font-size:0.8rem;color:var(--dust)}
 .crew-avatar{width:34px;height:34px;border-radius:50%;background:var(--rust);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1rem;flex-shrink:0}
-
 #app-header{position:sticky;top:4px;z-index:50;background:rgba(26,25,21,0.95);border-bottom:1px solid var(--border);backdrop-filter:blur(8px);padding:0.75rem 1rem;display:flex;align-items:center;justify-content:space-between}
 .header-logo{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:0.08em;color:var(--cream)}
 .header-logo span{color:var(--rust)}
@@ -61,10 +54,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .header-user .mini-avatar{width:30px;height:30px;border-radius:50%;background:var(--rust);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:0.9rem}
 .header-user .user-name{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.85rem;letter-spacing:0.08em;color:var(--cream)}
 .not-you{font-size:0.65rem;color:var(--dust);letter-spacing:0.06em}
-
 #content{padding:1.2rem 1rem 5rem;max-width:680px;margin:0 auto}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:0.08em;color:var(--cream);margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)}
-
 .radio-toolbar{display:flex;gap:0.6rem;margin-bottom:1.2rem;flex-wrap:wrap}
 .radio-section-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);margin:1.2rem 0 0.5rem;padding-bottom:0.3rem;border-bottom:1px solid var(--border)}
 .loan-card{background:var(--panel);border:1px solid rgba(243,159,52,0.35);border-radius:5px;padding:1rem;margin-bottom:0.6rem}
@@ -78,7 +69,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .history-table td{padding:0.5rem 0.5rem;border-bottom:1px solid rgba(244,233,211,0.05);vertical-align:top;line-height:1.4}
 .history-table tr:last-child td{border-bottom:none}
 .ht-out{color:var(--gold)}.ht-in{color:var(--olive)}.ht-fault{color:#e74c3c}
-
 .loading-text{text-align:center;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.2em;padding:2rem}
 .empty-state{text-align:center;color:var(--dust);font-size:0.85rem;padding:2rem 1rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em}
 .save-status{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.3rem 0.8rem;border-radius:2px;margin-left:0.5rem;display:inline-block}
@@ -89,7 +79,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 </head>
 <body>
 <div id="stripe-top"></div>
-
 <div id="boot-screen">
   <div class="boot-logo">CMC <span>Rocks</span></div>
   <div class="boot-sub">Radio Register</div>
@@ -215,14 +204,13 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 </div>
 
 <script>
-// ── PROXY CONFIG ──
-// All reads and writes go through the Cloudflare Worker — no token exposed in browser
 const PROXY = 'https://cmc-rocks-proxy.8gonula.workers.dev';
 const RAW   = 'https://raw.githubusercontent.com/RBARC5/CMC-ROCKS/main/data.json';
 
 let data=null, currentUser=null, pollTimer=null, activeReturnId=null;
+// Blocks poll from overwriting local data while a write is pending or CDN hasn't caught up
+let writeLockUntil=0;
 
-// ── LOCAL STORAGE ──
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
 function loadLocalCrew(){try{return JSON.parse(localStorage.getItem('cmcCrew'))||[]}catch{return[]}}
@@ -236,7 +224,6 @@ function getMergedCrew(){
   return merged;
 }
 
-// ── INIT ──
 async function init(){
   currentUser=loadUser();
   if(currentUser){
@@ -252,8 +239,9 @@ async function init(){
   startPolling();
 }
 
-// ── DATA FETCH — reads from raw GitHub (public, no auth needed) ──
 async function fetchData(){
+  // Don't overwrite local data if a write just happened — CDN takes ~30s to update
+  if(Date.now() < writeLockUntil) return;
   try{
     const r=await fetch(RAW+'?t='+Date.now());
     data=await r.json();
@@ -265,20 +253,21 @@ async function fetchData(){
 
 function startPolling(){
   if(pollTimer)clearInterval(pollTimer);
-  pollTimer=setInterval(async()=>{await fetchData();renderRadios();},10000);
+  pollTimer=setInterval(async()=>{
+    await fetchData();
+    renderRadios();
+  },10000);
 }
 
-// ── DATA WRITE — goes through Cloudflare Worker proxy ──
 async function pushData(msg){
   showSaveStatus('saving');
+  // Lock polling for 35 seconds after write to let GitHub CDN propagate
+  writeLockUntil=Date.now()+35000;
   try{
-    // Step 1: get current SHA via proxy GET
     const metaResp=await fetch(PROXY,{headers:{'Accept':'application/json'}});
     const meta=await metaResp.json();
     const sha=meta.sha;
-    if(!sha){throw new Error('No SHA returned from proxy');}
-
-    // Step 2: PUT updated data via proxy
+    if(!sha) throw new Error('No SHA from proxy');
     const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
     const resp=await fetch(PROXY,{
       method:'PUT',
@@ -287,11 +276,12 @@ async function pushData(msg){
     });
     if(!resp.ok){
       const err=await resp.text();
-      throw new Error(`Proxy PUT failed: ${resp.status} ${err}`);
+      throw new Error(`PUT failed: ${resp.status} ${err}`);
     }
     showSaveStatus('ok');
   }catch(e){
     console.error('pushData error:',e);
+    writeLockUntil=0; // release lock on failure so next poll can try again
     showSaveStatus('err');
   }
 }
@@ -300,14 +290,13 @@ function showSaveStatus(state){
   const el=document.getElementById('save-indicator');
   if(!el)return;
   if(state==='saving'){el.className='save-status';el.textContent='Saving...';el.style.color='var(--dust)';}
-  else if(state==='ok'){el.className='save-status save-ok';el.textContent='Saved';setTimeout(()=>{el.textContent='';el.className='';},3000);}
-  else{el.className='save-status save-err';el.textContent='Save failed';setTimeout(()=>{el.textContent='';el.className='';},5000);}
+  else if(state==='ok'){el.className='save-status save-ok';el.textContent='Saved ✓';setTimeout(()=>{el.textContent='';el.className='';},4000);}
+  else{el.className='save-status save-err';el.textContent='Save failed';setTimeout(()=>{el.textContent='';el.className='';},6000);}
 }
 
 function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
 function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 
-// ── REGISTRATION ──
 function showRegForm(){
   document.getElementById('reg-form').style.display='block';
   document.getElementById('pick-form').style.display='none';
@@ -341,7 +330,6 @@ async function submitReg(){
   closeOverlay('reg-overlay');showApp();
 }
 
-// ── PICK OVERLAY ──
 function showPickOverlay(){
   hidePickOverlayReg();
   openOverlay('pick-overlay');
@@ -376,7 +364,6 @@ async function submitPickOverlayReg(){
   document.getElementById('header-name').textContent=user.name.split(' ')[0];
 }
 
-// ── APP ──
 function showApp(){
   document.getElementById('app').style.display='block';
   document.getElementById('header-avatar').textContent=initials(currentUser.name);
@@ -384,14 +371,12 @@ function showApp(){
   if(data)renderRadios();
 }
 
-// ── RADIOS ──
 function renderRadios(){
   if(!data)return;
   const log=data.radioLog||[];
   const active=getActiveLoans(log);
   const activeEl=document.getElementById('radio-active-section');
   const histEl=document.getElementById('radio-history-section');
-
   if(!active.length){
     activeEl.innerHTML='<div class="radio-section-label">Currently Signed Out</div><div class="empty-state" style="padding:1rem">No radios currently signed out.</div>';
   } else {
@@ -405,7 +390,6 @@ function renderRadios(){
         </div>`;
       }).join('');
   }
-
   if(!log.length){
     histEl.innerHTML='<div class="radio-section-label">Full History</div><div class="empty-state" style="padding:1rem">No history yet.</div>';
   } else {
@@ -425,13 +409,11 @@ function renderRadios(){
       </table></div>`;
   }
 }
-
 function getActiveLoans(log){
   const radios={};
   log.forEach(e=>{const k=e.siteId+'|'+e.deptId;if(!radios[k])radios[k]=[];radios[k].push(e);});
   return Object.values(radios).map(entries=>entries[entries.length-1]).filter(e=>e.action==='out');
 }
-
 async function confirmRadioOut(){
   if(!currentUser)return;
   const siteId=document.getElementById('ro-siteid').value.trim().toUpperCase();
@@ -449,7 +431,6 @@ async function confirmRadioOut(){
   renderRadios();
   await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`);
 }
-
 function openReturnModal(){
   const active=getActiveLoans(data.radioLog||[]);
   const el=document.getElementById('radio-return-list');
@@ -464,7 +445,6 @@ function openReturnModal(){
   }
   openOverlay('radio-in-overlay');
 }
-
 function selectReturn(siteId,deptId){
   activeReturnId={siteId,deptId};
   document.getElementById('radio-ret-title').textContent=`Return: ${siteId} / ${deptId}`;
@@ -473,7 +453,6 @@ function selectReturn(siteId,deptId){
   closeOverlay('radio-in-overlay');
   openOverlay('radio-ret-overlay');
 }
-
 async function confirmRadioReturn(){
   if(!activeReturnId||!currentUser)return;
   const condition=document.getElementById('rr-condition').value;
@@ -486,7 +465,6 @@ async function confirmRadioReturn(){
   renderRadios();
   await pushData(`Radio returned by ${currentUser.name}`);
 }
-
 function downloadRadioCSV(){
   const log=data.radioLog||[];
   if(!log.length){alert('No radio history to download.');return;}
@@ -502,10 +480,8 @@ function downloadRadioCSV(){
   a.href=url;a.download=`CMC-Rocks-Radio-History-${new Date().toISOString().slice(0,10)}.csv`;
   a.click();URL.revokeObjectURL(url);
 }
-
 function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
 function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'});}
-
 init();
 </script>
 </body>
