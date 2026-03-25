@@ -120,24 +120,24 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .loading-text{text-align:center;color:var(--dust);font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:0.2em;padding:2rem}
 .empty-state{text-align:center;color:var(--dust);font-size:0.85rem;padding:2rem 1rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em}
 
-/* Loading screen shown while JS checks localStorage */
 #boot-screen{position:fixed;inset:0;z-index:300;background:var(--char);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:0.8rem}
 #boot-screen.hidden{display:none}
 .boot-logo{font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--cream);letter-spacing:0.08em}
 .boot-logo span{color:var(--rust)}
 .boot-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--dust)}
+
+/* Inline reg form inside pick overlay */
+#pick-overlay-reg{display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:1.2rem}
 </style>
 </head>
 <body>
 <div id="stripe-top"></div>
 
-<!-- Boot screen — shown instantly, hidden once JS decides what to show -->
 <div id="boot-screen">
   <div class="boot-logo">CMC <span>Rocks</span></div>
   <div class="boot-sub">Crew Portal</div>
 </div>
 
-<!-- Registration overlay — starts hidden, only shown if no user in localStorage -->
 <div class="overlay hidden" id="reg-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -271,12 +271,27 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- PICK OVERLAY — with inline new registration form -->
 <div class="overlay hidden" id="pick-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
-    <div class="modal-sub">Who are you?</div>
-    <div class="crew-list" id="pick-overlay-list"></div>
-    <button class="btn secondary" onclick="closeOverlay('pick-overlay')">Cancel</button>
+    <div class="modal-sub" id="pick-overlay-sub">Who are you?</div>
+    <!-- Pick from list -->
+    <div id="pick-overlay-list-wrap">
+      <div class="crew-list" id="pick-overlay-list"></div>
+      <button class="btn" onclick="showPickOverlayReg()">&#43; Register New Person</button>
+      <button class="btn secondary" onclick="closeOverlay('pick-overlay')">Cancel</button>
+    </div>
+    <!-- Inline new registration -->
+    <div id="pick-overlay-reg">
+      <h2>New Registration</h2>
+      <label>Full Name</label>
+      <input type="text" id="por-name" placeholder="Your name" autocomplete="name">
+      <label>Phone Number</label>
+      <input type="tel" id="por-phone" placeholder="04xx xxx xxx" autocomplete="tel">
+      <button class="btn" onclick="submitPickOverlayReg()">Join Crew</button>
+      <button class="btn secondary" onclick="hidePickOverlayReg()">&#8592; Back to List</button>
+    </div>
   </div>
 </div>
 
@@ -286,7 +301,6 @@ const RAW=`https://raw.githubusercontent.com/${OWNER}/${REPO}/main/data.json`;
 const API=`https://api.github.com/repos/${OWNER}/${REPO}/contents/data.json`;
 let data=null,currentUser=null,pollTimer=null,activeReturnId=null;
 
-// ── LOCAL STORAGE ──
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
 function loadLocalCrew(){try{return JSON.parse(localStorage.getItem('cmcCrew'))||[]}catch{return[]}}
@@ -300,34 +314,25 @@ function getMergedCrew(){
   return merged;
 }
 
-// ── INIT ──
-// Check localStorage synchronously BEFORE any async work
-// This decides immediately whether to show boot→app or boot→register
 async function init(){
-  currentUser=loadUser(); // synchronous — instant
-
+  currentUser=loadUser();
   if(currentUser){
-    // Known browser — go straight to app, hide boot screen
     showApp();
     document.getElementById('boot-screen').classList.add('hidden');
-    // Load data in background and refresh
     await fetchData();
     renderAll();
   } else {
-    // Unknown browser — load data first then show registration
     await fetchData();
     document.getElementById('boot-screen').classList.add('hidden');
     openOverlay('reg-overlay');
   }
-
   startPolling();
 }
 
 async function fetchData(){
   try{const r=await fetch(RAW+'?t='+Date.now());data=await r.json();}catch(e){
-    // If fetch fails, use empty structure so app still works
     if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
-    console.warn('Fetch failed, using cached/empty data');
+    console.warn('Fetch failed');
   }
 }
 function startPolling(){
@@ -341,13 +346,13 @@ async function pushData(msg){
     const content=btoa(unescape(encodeURIComponent(JSON.stringify(data,null,2))));
     const resp=await fetch(API,{method:'PUT',headers:{'Content-Type':'application/json'},
       body:JSON.stringify({message:msg,content,sha:mj.sha})});
-    if(!resp.ok)console.warn('Push failed - write proxy not yet configured');
+    if(!resp.ok)console.warn('Push failed - proxy not yet configured');
   }catch(e){console.warn('Push error:',e);}
 }
 function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
 function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 
-// ── REGISTRATION ──
+// ── REGISTRATION (initial) ──
 function showRegForm(){
   document.getElementById('reg-form').style.display='block';
   document.getElementById('pick-form').style.display='none';
@@ -363,7 +368,7 @@ function renderPickList(elId,onSelect){
   const el=document.getElementById(elId);
   const crew=getMergedCrew();
   if(!crew.length){
-    el.innerHTML='<div class="empty-state">No crew registered yet.<br><small style="opacity:0.6">Register using the form.</small></div>';
+    el.innerHTML='<div class="empty-state">No crew registered yet.</div>';
     return;
   }
   el.innerHTML=crew.map(u=>`<div class="crew-list-item" onclick='_pick(${JSON.stringify(u)},"${elId}")'>
@@ -378,12 +383,52 @@ async function submitReg(){
   const phone=document.getElementById('reg-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
-  saveUser(user);      // save to this browser's localStorage
-  addLocalCrew(user);  // save to local crew cache
+  saveUser(user);
+  addLocalCrew(user);
   if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('reg-overlay');
   showApp();
+}
+
+// ── PICK OVERLAY (not you?) ──
+function showPickOverlay(){
+  // Reset to list view
+  hidePickOverlayReg();
+  openOverlay('pick-overlay');
+  renderPickList('pick-overlay-list',u=>{
+    saveUser(u);
+    closeOverlay('pick-overlay');
+    document.getElementById('header-avatar').textContent=initials(u.name);
+    document.getElementById('header-name').textContent=u.name.split(' ')[0];
+    renderAll();
+  });
+}
+function showPickOverlayReg(){
+  document.getElementById('pick-overlay-list-wrap').style.display='none';
+  document.getElementById('pick-overlay-reg').style.display='block';
+  document.getElementById('pick-overlay-sub').textContent='New Crew Member';
+  document.getElementById('por-name').value='';
+  document.getElementById('por-phone').value='';
+}
+function hidePickOverlayReg(){
+  document.getElementById('pick-overlay-list-wrap').style.display='block';
+  document.getElementById('pick-overlay-reg').style.display='none';
+  document.getElementById('pick-overlay-sub').textContent='Who are you?';
+}
+async function submitPickOverlayReg(){
+  const name=document.getElementById('por-name').value.trim();
+  const phone=document.getElementById('por-phone').value.trim();
+  if(!name||!phone){alert('Please enter your name and phone number.');return;}
+  const user={name,phone,id:Date.now().toString()};
+  saveUser(user);
+  addLocalCrew(user);
+  if(!data)data={crew:[],todos:[],announcements:[],emergency:{contacts:[]},timetables:[],signins:[],radioLog:[]};
+  if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
+  closeOverlay('pick-overlay');
+  document.getElementById('header-avatar').textContent=initials(user.name);
+  document.getElementById('header-name').textContent=user.name.split(' ')[0];
+  renderAll();
 }
 
 // ── APP ──
@@ -392,15 +437,6 @@ function showApp(){
   document.getElementById('header-avatar').textContent=initials(currentUser.name);
   document.getElementById('header-name').textContent=currentUser.name.split(' ')[0];
   if(data)renderAll();
-}
-function showPickOverlay(){
-  openOverlay('pick-overlay');
-  renderPickList('pick-overlay-list',u=>{
-    saveUser(u);closeOverlay('pick-overlay');
-    document.getElementById('header-avatar').textContent=initials(u.name);
-    document.getElementById('header-name').textContent=u.name.split(' ')[0];
-    renderAll();
-  });
 }
 function showTab(id,btn){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
