@@ -71,6 +71,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .save-ok{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
 .save-err{background:rgba(245,66,23,0.15);color:var(--rust);border:1px solid rgba(245,66,23,0.3)}
 #pick-overlay-reg{display:none;margin-top:1rem;border-top:1px solid var(--border);padding-top:1.2rem}
+/* Prefill hint shown under dept id when auto-filled */
+.prefill-hint{font-size:0.7rem;color:var(--olive);margin-top:-0.6rem;margin-bottom:0.8rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em}
 </style>
 </head>
 <body>
@@ -100,15 +102,28 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- RADIO SIGN OUT — with smart dropdown -->
 <div class="overlay hidden" id="radio-out-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
     <div class="modal-sub">Sign Out 2-Way Radio</div>
     <h2>Radio Details</h2>
-    <label>Site ID</label>
-    <input type="text" id="ro-siteid" placeholder="e.g. S01" autocomplete="off">
-    <label>Department ID</label>
-    <input type="text" id="ro-deptid" placeholder="e.g. Traffic-1" autocomplete="off">
+
+    <!-- Known radios dropdown -->
+    <label>Select Radio</label>
+    <select id="ro-known" onchange="onKnownRadioSelect()">
+      <option value="">-- Select or enter new below --</option>
+    </select>
+
+    <!-- Manual entry — shown when "new" selected or no history -->
+    <div id="ro-manual">
+      <label>Site ID</label>
+      <input type="text" id="ro-siteid" placeholder="e.g. S01" autocomplete="off" oninput="onSiteIdInput()">
+      <label>Department ID</label>
+      <input type="text" id="ro-deptid" placeholder="e.g. Traffic-1" autocomplete="off">
+      <div id="ro-prefill-hint" class="prefill-hint" style="display:none">&#10003; Auto-filled from history</div>
+    </div>
+
     <label>Condition</label>
     <select id="ro-condition">
       <option value="Good">Good</option>
@@ -190,7 +205,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       <span id="save-indicator"></span>
     </div>
     <div class="radio-toolbar">
-      <button class="btn btn-gold btn-sm" onclick="openOverlay('radio-out-overlay')">&#43; Sign Out Radio</button>
+      <button class="btn btn-gold btn-sm" onclick="openSignOutModal()">&#43; Sign Out Radio</button>
       <button class="btn btn-green btn-sm" onclick="openReturnModal()">Return Radio</button>
       <button class="btn btn-blue btn-sm" onclick="downloadRadioCSV()">&#8595; Download History</button>
     </div>
@@ -204,9 +219,8 @@ const PROXY = 'https://cmc-rocks-proxy.8gonula.workers.dev';
 const RAW   = 'https://raw.githubusercontent.com/RBARC5/CMC-ROCKS/main/data.json';
 
 let data=null, currentUser=null, pollTimer=null, activeReturnId=null;
-let writeLockUntil=0; // epoch ms — poll is blocked until this time passes
+let writeLockUntil=0;
 
-// ── LOCK HELPER — call this FIRST before any data mutation or render ──
 function lockWrites(){writeLockUntil=Date.now()+40000;}
 
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
@@ -220,6 +234,16 @@ function getMergedCrew(){
   const merged=[...remote];
   local.forEach(u=>{if(!merged.find(c=>c.phone===u.phone))merged.push(u);});
   return merged;
+}
+
+// Build unique radio lookup from history: siteId -> deptId (fixed pair)
+function getKnownRadios(){
+  const log=(data&&data.radioLog)?data.radioLog:[];
+  const map={};
+  log.forEach(e=>{
+    if(e.siteId&&e.deptId) map[e.siteId]=e.deptId; // last seen deptId for this siteId
+  });
+  return map; // { 'S01': 'Traffic-1', 'S02': 'Traffic-2', ... }
 }
 
 async function init(){
@@ -238,7 +262,7 @@ async function init(){
 }
 
 async function fetchData(){
-  if(Date.now()<writeLockUntil) return; // blocked while write is propagating
+  if(Date.now()<writeLockUntil) return;
   try{
     const r=await fetch(RAW+'?t='+Date.now());
     data=await r.json();
@@ -266,14 +290,11 @@ async function pushData(msg){
       headers:{'Content-Type':'application/json'},
       body:JSON.stringify({message:msg,content,sha})
     });
-    if(!resp.ok){
-      const err=await resp.text();
-      throw new Error(`PUT failed: ${resp.status} ${err}`);
-    }
+    if(!resp.ok){const err=await resp.text();throw new Error(`PUT failed: ${resp.status} ${err}`);}
     showSaveStatus('ok');
   }catch(e){
     console.error('pushData error:',e);
-    writeLockUntil=0; // release lock on failure
+    writeLockUntil=0;
     showSaveStatus('err');
   }
 }
@@ -289,6 +310,61 @@ function showSaveStatus(state){
 function openOverlay(id){document.getElementById(id).classList.remove('hidden')}
 function closeOverlay(id){document.getElementById(id).classList.add('hidden')}
 
+// ── SIGN OUT MODAL — populate dropdown from history ──
+function openSignOutModal(){
+  const known=getKnownRadios();
+  const sel=document.getElementById('ro-known');
+  sel.innerHTML='<option value="">-- Select or enter new below --</option>';
+  Object.entries(known).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([siteId,deptId])=>{
+    const opt=document.createElement('option');
+    opt.value=siteId;
+    opt.textContent=`${siteId}  /  ${deptId}`;
+    opt.dataset.deptid=deptId;
+    sel.appendChild(opt);
+  });
+  // Reset fields
+  document.getElementById('ro-siteid').value='';
+  document.getElementById('ro-deptid').value='';
+  document.getElementById('ro-condition').value='Good';
+  document.getElementById('ro-notes').value='';
+  document.getElementById('ro-prefill-hint').style.display='none';
+  openOverlay('radio-out-overlay');
+}
+
+function onKnownRadioSelect(){
+  const sel=document.getElementById('ro-known');
+  const opt=sel.options[sel.selectedIndex];
+  if(opt.value){
+    // Known radio selected — pre-fill both fields
+    document.getElementById('ro-siteid').value=opt.value;
+    document.getElementById('ro-deptid').value=opt.dataset.deptid;
+    document.getElementById('ro-prefill-hint').style.display='block';
+  } else {
+    // "Select or enter new" — clear manual fields
+    document.getElementById('ro-siteid').value='';
+    document.getElementById('ro-deptid').value='';
+    document.getElementById('ro-prefill-hint').style.display='none';
+  }
+}
+
+function onSiteIdInput(){
+  // As user types a site ID manually, auto-fill dept ID if we have it in history
+  const typed=document.getElementById('ro-siteid').value.trim().toUpperCase();
+  const known=getKnownRadios();
+  if(known[typed]){
+    document.getElementById('ro-deptid').value=known[typed];
+    document.getElementById('ro-prefill-hint').style.display='block';
+    // Also sync the dropdown to match
+    const sel=document.getElementById('ro-known');
+    for(let i=0;i<sel.options.length;i++){
+      if(sel.options[i].value===typed){sel.selectedIndex=i;break;}
+    }
+  } else {
+    document.getElementById('ro-prefill-hint').style.display='none';
+  }
+}
+
+// ── REGISTRATION ──
 function showRegForm(){
   document.getElementById('reg-form').style.display='block';
   document.getElementById('pick-form').style.display='none';
@@ -316,8 +392,7 @@ async function submitReg(){
   const phone=document.getElementById('reg-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
-  lockWrites();
-  saveUser(user);addLocalCrew(user);
+  lockWrites();saveUser(user);addLocalCrew(user);
   if(!data)data={crew:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('reg-overlay');showApp();
@@ -349,8 +424,7 @@ async function submitPickOverlayReg(){
   const phone=document.getElementById('por-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
   const user={name,phone,id:Date.now().toString()};
-  lockWrites();
-  saveUser(user);addLocalCrew(user);
+  lockWrites();saveUser(user);addLocalCrew(user);
   if(!data)data={crew:[],radioLog:[]};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('pick-overlay');
@@ -412,19 +486,14 @@ function getActiveLoans(log){
 
 async function confirmRadioOut(){
   if(!currentUser)return;
-  // Lock FIRST — before any mutation or render
   lockWrites();
   const siteId=document.getElementById('ro-siteid').value.trim().toUpperCase();
   const deptId=document.getElementById('ro-deptid').value.trim();
   const condition=document.getElementById('ro-condition').value;
   const notes=document.getElementById('ro-notes').value.trim();
-  if(!siteId||!deptId){alert('Please enter both Site ID and Department ID.');return;}
+  if(!siteId||!deptId){alert('Please select a radio or enter both Site ID and Department ID.');return;}
   if(!data.radioLog)data.radioLog=[];
   data.radioLog.push({action:'out',siteId,deptId,by:currentUser.name,time:Date.now(),condition,notes,id:Date.now().toString()});
-  document.getElementById('ro-siteid').value='';
-  document.getElementById('ro-deptid').value='';
-  document.getElementById('ro-condition').value='Good';
-  document.getElementById('ro-notes').value='';
   closeOverlay('radio-out-overlay');
   renderRadios();
   await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`);
@@ -456,7 +525,6 @@ function selectReturn(siteId,deptId){
 
 async function confirmRadioReturn(){
   if(!activeReturnId||!currentUser)return;
-  // Lock FIRST — before any mutation or render
   lockWrites();
   const condition=document.getElementById('rr-condition').value;
   const issues=document.getElementById('rr-issues').value.trim();
