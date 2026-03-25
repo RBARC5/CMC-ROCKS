@@ -24,7 +24,7 @@ html,body{width:100%;min-height:100%;background:var(--char);color:var(--cream);f
 .modal-sub{font-family:'Barlow Condensed',sans-serif;font-size:0.7rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--dust);margin-bottom:1.6rem}
 .modal h2{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:1rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
 label{display:block;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.28em;text-transform:uppercase;color:var(--dust);margin-bottom:0.35rem}
-input[type=text],input[type=tel],input[type=time],select,textarea{width:100%;background:rgba(244,233,211,0.06);border:1px solid var(--border);border-radius:3px;color:var(--cream);font-family:'Barlow',sans-serif;font-size:1rem;padding:0.65rem 0.9rem;margin-bottom:1rem;outline:none;transition:border-color 0.2s}
+input[type=text],input[type=tel],input[type=time],input[type=password],select,textarea{width:100%;background:rgba(244,233,211,0.06);border:1px solid var(--border);border-radius:3px;color:var(--cream);font-family:'Barlow',sans-serif;font-size:1rem;padding:0.65rem 0.9rem;margin-bottom:1rem;outline:none;transition:border-color 0.2s}
 input[type=time]::-webkit-calendar-picker-indicator{filter:invert(1);opacity:0.5}
 select option{background:var(--panel);color:var(--cream)}
 textarea{resize:vertical;min-height:70px}
@@ -85,18 +85,20 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .fault-warning-box .fw-reported{font-size:0.72rem;color:var(--dust);margin-bottom:0.4rem;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.08em;text-transform:uppercase}
 .fault-warning-box .fw-message{font-size:0.9rem;color:var(--cream);line-height:1.5;background:rgba(0,0,0,0.2);border-radius:3px;padding:0.6rem 0.8rem;font-style:italic}
 
-/* ── STAFF SHIFTS REWORK ── */
+/* ── LIVE CLOCK ── */
+#shift-clock{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;letter-spacing:0.06em;color:var(--cream);text-align:center;line-height:1;margin-bottom:0.2rem}
+#shift-date{font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--dust);text-align:center;margin-bottom:1.2rem}
+.clock-block{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1rem 1rem 0.8rem;margin-bottom:1rem}
+
+/* ── STAFF SHIFTS ── */
 .staff-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:1rem 1rem 0.8rem;margin-bottom:0.75rem;transition:border-color 0.2s}
 .staff-card.status-resting{border-color:rgba(243,159,52,0.45);background:rgba(243,159,52,0.04)}
 .staff-card.status-dnd{border-color:rgba(245,66,23,0.55);background:rgba(245,66,23,0.05)}
 .staff-card.status-on-shift{border-color:rgba(157,152,18,0.4)}
-
 .staff-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.75rem}
 .staff-name-row{display:flex;align-items:center;gap:0.6rem}
 .staff-card-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.05rem;letter-spacing:0.06em}
 .staff-you-tag{font-size:0.6rem;color:var(--dust);font-family:'Barlow',sans-serif;font-weight:400}
-
-/* Status badge next to name */
 .staff-status-highlight{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;padding:0.18rem 0.55rem;border-radius:2px;white-space:nowrap}
 .hl-off{background:rgba(160,136,80,0.12);color:var(--dust);border:1px solid rgba(160,136,80,0.2)}
 .hl-on{background:rgba(157,152,18,0.2);color:var(--olive);border:1px solid rgba(157,152,18,0.35)}
@@ -104,54 +106,68 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .hl-dnd{background:rgba(245,66,23,0.2);color:var(--rust);border:1px solid rgba(245,66,23,0.4);animation:pulse-dnd 2s ease-in-out infinite}
 @keyframes pulse-dnd{0%,100%{opacity:1}50%{opacity:0.55}}
 .hl-ended{background:rgba(160,136,80,0.12);color:var(--dust);border:1px solid rgba(160,136,80,0.2)}
-
-/* Shift time info */
-.staff-time-info{font-size:0.75rem;color:var(--dust);margin-bottom:0.7rem;line-height:1.7;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.05em}
-.staff-time-info .t-label{color:var(--dust)}
-.staff-time-info .t-val{color:var(--cream);font-weight:600}
-.staff-time-info .meal-done{color:var(--olive)}
-.staff-time-info .meal-none{color:rgba(160,136,80,0.4)}
+.staff-time-info{font-size:0.75rem;color:var(--dust);margin-bottom:0.7rem;line-height:1.8;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.05em}
+.t-val{color:var(--cream);font-weight:600}
+.meal-done{color:var(--olive)}
+.meal-none{color:rgba(160,136,80,0.35)}
+.shift-entries{font-size:0.72rem;color:var(--dust);font-family:'Barlow Condensed',sans-serif;margin-bottom:0.5rem}
+.shift-entry-row{display:flex;gap:1rem;padding:0.2rem 0;border-bottom:1px solid rgba(244,233,211,0.05)}
+.shift-entry-row:last-child{border-bottom:none}
 
 /* Button grid */
 .shift-btn-grid{display:grid;gap:0.4rem;margin-top:0.5rem}
 .shift-btn-grid.row-2{grid-template-columns:1fr 1fr}
 .shift-btn-grid.row-3{grid-template-columns:1fr 1fr 1fr}
-.shift-btn-grid.row-full{grid-template-columns:1fr}
 .sbtn{padding:0.45rem 0.5rem;border:1px solid var(--border);border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;transition:all 0.15s;background:rgba(244,233,211,0.05);color:var(--dust);text-align:center}
 .sbtn:hover{border-color:var(--cream);color:var(--cream)}
-.sbtn:disabled{opacity:0.35;cursor:default;pointer-events:none}
 .sbtn.active{cursor:default}
-
-/* Individual button states */
 .sbtn-on-shift{border-color:rgba(157,152,18,0.4);color:var(--olive)}
 .sbtn-on-shift:hover{background:rgba(157,152,18,0.15);border-color:var(--olive)}
 .sbtn-on-shift.active{background:rgba(157,152,18,0.2);color:var(--olive);border-color:var(--olive)}
-
 .sbtn-off-shift{border-color:rgba(160,136,80,0.25);color:var(--dust)}
 .sbtn-off-shift:hover{background:rgba(160,136,80,0.1);border-color:var(--dust)}
-.sbtn-off-shift.active{background:rgba(160,136,80,0.12);color:var(--cream);border-color:var(--dust)}
-
-.sbtn-breakfast{border-color:rgba(243,159,52,0.3);color:rgba(243,159,52,0.7)}
-.sbtn-breakfast:hover{background:rgba(243,159,52,0.12);border-color:var(--gold)}
-.sbtn-breakfast.active{background:rgba(157,152,18,0.15);color:var(--olive);border-color:rgba(157,152,18,0.4)}
-
-.sbtn-lunch{border-color:rgba(243,159,52,0.3);color:rgba(243,159,52,0.7)}
-.sbtn-lunch:hover{background:rgba(243,159,52,0.12);border-color:var(--gold)}
-.sbtn-lunch.active{background:rgba(157,152,18,0.15);color:var(--olive);border-color:rgba(157,152,18,0.4)}
-
-.sbtn-dinner{border-color:rgba(243,159,52,0.3);color:rgba(243,159,52,0.7)}
-.sbtn-dinner:hover{background:rgba(243,159,52,0.12);border-color:var(--gold)}
-.sbtn-dinner.active{background:rgba(157,152,18,0.15);color:var(--olive);border-color:rgba(157,152,18,0.4)}
-
+.sbtn-breakfast,.sbtn-lunch,.sbtn-dinner{border-color:rgba(243,159,52,0.3);color:rgba(243,159,52,0.7)}
+.sbtn-breakfast:hover,.sbtn-lunch:hover,.sbtn-dinner:hover{background:rgba(243,159,52,0.12);border-color:var(--gold)}
+.sbtn-breakfast.active,.sbtn-lunch.active,.sbtn-dinner.active{background:rgba(157,152,18,0.15);color:var(--olive);border-color:rgba(157,152,18,0.4)}
 .sbtn-resting{border-color:rgba(243,159,52,0.25);color:rgba(243,159,52,0.6)}
 .sbtn-resting:hover{background:rgba(243,159,52,0.1);border-color:var(--gold)}
 .sbtn-resting.active{background:rgba(243,159,52,0.18);color:var(--gold);border-color:var(--gold)}
-
 .sbtn-dnd{border-color:rgba(245,66,23,0.3);color:rgba(245,66,23,0.65)}
 .sbtn-dnd:hover{background:rgba(245,66,23,0.1);border-color:var(--rust)}
 .sbtn-dnd.active{background:rgba(245,66,23,0.18);color:var(--rust);border-color:var(--rust)}
 
-.shift-divider{width:100%;height:1px;background:var(--border);margin:0.5rem 0}
+/* Manual time entry toggle */
+.manual-toggle{font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dust);cursor:pointer;text-align:right;margin-top:0.35rem;margin-bottom:0;text-decoration:underline;display:block}
+.manual-toggle:hover{color:var(--gold)}
+.manual-time-row{display:none;margin-top:0.5rem;gap:0.4rem;align-items:center}
+.manual-time-row.visible{display:flex}
+.manual-time-row input[type=time]{margin-bottom:0;flex:1;font-size:0.9rem;padding:0.4rem 0.6rem}
+.manual-time-row .sbtn{font-size:0.7rem;padding:0.4rem 0.7rem;width:auto;white-space:nowrap}
+
+/* PIN overlay */
+.pin-dots{display:flex;gap:0.6rem;justify-content:center;margin:1.2rem 0}
+.pin-dot{width:14px;height:14px;border-radius:50%;background:rgba(244,233,211,0.15);border:1px solid var(--border);transition:background 0.15s}
+.pin-dot.filled{background:var(--rust);border-color:var(--rust)}
+.pin-keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:0.5rem;margin-bottom:1rem}
+.pin-key{padding:0.85rem;background:rgba(244,233,211,0.06);border:1px solid var(--border);border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;color:var(--cream);cursor:pointer;text-align:center;transition:background 0.12s}
+.pin-key:hover{background:rgba(244,233,211,0.12)}
+.pin-key:active{background:rgba(245,66,23,0.25)}
+.pin-error{color:var(--rust);font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;letter-spacing:0.15em;text-align:center;min-height:1.2em;margin-bottom:0.5rem}
+
+/* History report */
+.report-header{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.08em;color:var(--cream);margin-bottom:0.3rem}
+.report-date-filter{display:flex;gap:0.5rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
+.report-date-filter label{margin-bottom:0;font-size:0.65rem}
+.report-date-filter input[type=date]{margin-bottom:0;padding:0.4rem 0.6rem;font-size:0.85rem;flex:1;min-width:130px}
+.report-person-filter{margin-bottom:1rem}
+.report-person-filter select{margin-bottom:0}
+.rpt-table{width:100%;border-collapse:collapse;font-size:0.78rem}
+.rpt-table th{text-align:left;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--dust);padding:0.4rem 0.5rem;border-bottom:1px solid var(--border)}
+.rpt-table td{padding:0.45rem 0.5rem;border-bottom:1px solid rgba(244,233,211,0.05);vertical-align:middle;line-height:1.4}
+.rpt-table tr:last-child td{border-bottom:none}
+.rpt-name{font-weight:600;color:var(--cream)}
+.rpt-meal-done{color:var(--olive)}
+.rpt-meal-none{color:rgba(160,136,80,0.3)}
 </style>
 </head>
 <body>
@@ -161,6 +177,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   <div class="boot-sub">Crew Portal</div>
 </div>
 
+<!-- REGISTRATION -->
 <div class="overlay hidden" id="reg-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -181,6 +198,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- FAULT WARNING -->
 <div class="overlay hidden" id="fault-warn-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -197,15 +215,14 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- RADIO OUT -->
 <div class="overlay hidden" id="radio-out-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
     <div class="modal-sub">Sign Out 2-Way Radio</div>
     <h2>Radio Details</h2>
     <label>Select Radio</label>
-    <select id="ro-known" onchange="onKnownRadioSelect()">
-      <option value="">-- Select or enter new below --</option>
-    </select>
+    <select id="ro-known" onchange="onKnownRadioSelect()"><option value="">-- Select or enter new below --</option></select>
     <div id="ro-manual">
       <label>Site ID</label>
       <input type="text" id="ro-siteid" placeholder="e.g. S01" autocomplete="off" oninput="onSiteIdInput()">
@@ -215,10 +232,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
     </div>
     <label>Condition</label>
     <select id="ro-condition">
-      <option value="Good">Good</option>
-      <option value="Minor wear">Minor wear</option>
-      <option value="Damaged">Damaged</option>
-      <option value="Faulty / Not working">Faulty / Not working</option>
+      <option value="Good">Good</option><option value="Minor wear">Minor wear</option>
+      <option value="Damaged">Damaged</option><option value="Faulty / Not working">Faulty / Not working</option>
     </select>
     <label>Any issues to note? <span style="color:var(--dust);font-size:0.7em">(optional)</span></label>
     <textarea id="ro-notes" placeholder="Describe any issues before taking the radio..."></textarea>
@@ -227,6 +242,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- RADIO IN -->
 <div class="overlay hidden" id="radio-in-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -237,6 +253,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- RADIO RETURN DETAIL -->
 <div class="overlay hidden" id="radio-ret-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -244,10 +261,8 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
     <h2 id="radio-ret-title">Return Radio</h2>
     <label>Condition on Return</label>
     <select id="rr-condition">
-      <option value="Good">Good</option>
-      <option value="Minor wear">Minor wear</option>
-      <option value="Damaged">Damaged</option>
-      <option value="Faulty / Not working">Faulty / Not working</option>
+      <option value="Good">Good</option><option value="Minor wear">Minor wear</option>
+      <option value="Damaged">Damaged</option><option value="Faulty / Not working">Faulty / Not working</option>
     </select>
     <label>Any issues to report? <span style="color:var(--dust);font-size:0.7em">(optional)</span></label>
     <textarea id="rr-issues" placeholder="Report any problems experienced with this radio..."></textarea>
@@ -256,6 +271,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
+<!-- WHO ARE YOU -->
 <div class="overlay hidden" id="pick-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
@@ -267,13 +283,65 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
     </div>
     <div id="pick-overlay-reg">
       <h2>New Registration</h2>
-      <label>Full Name</label>
-      <input type="text" id="por-name" placeholder="Your name" autocomplete="name">
-      <label>Phone Number</label>
-      <input type="tel" id="por-phone" placeholder="04xx xxx xxx" autocomplete="tel">
+      <label>Full Name</label><input type="text" id="por-name" placeholder="Your name" autocomplete="name">
+      <label>Phone Number</label><input type="tel" id="por-phone" placeholder="04xx xxx xxx" autocomplete="tel">
       <button class="btn" onclick="submitPickOverlayReg()">Join Crew</button>
       <button class="btn secondary" onclick="hidePickOverlayReg()">&#8592; Back to List</button>
     </div>
+  </div>
+</div>
+
+<!-- PIN ENTRY OVERLAY -->
+<div class="overlay hidden" id="pin-overlay">
+  <div class="modal">
+    <div class="modal-logo">CMC <span>Rocks</span></div>
+    <div class="modal-sub">Manager Access</div>
+    <h2>Enter PIN to View History</h2>
+    <div class="pin-dots" id="pin-dots">
+      <div class="pin-dot" id="pd0"></div>
+      <div class="pin-dot" id="pd1"></div>
+      <div class="pin-dot" id="pd2"></div>
+      <div class="pin-dot" id="pd3"></div>
+    </div>
+    <div class="pin-error" id="pin-error"></div>
+    <div class="pin-keypad">
+      <div class="pin-key" onclick="pinKey('1')">1</div>
+      <div class="pin-key" onclick="pinKey('2')">2</div>
+      <div class="pin-key" onclick="pinKey('3')">3</div>
+      <div class="pin-key" onclick="pinKey('4')">4</div>
+      <div class="pin-key" onclick="pinKey('5')">5</div>
+      <div class="pin-key" onclick="pinKey('6')">6</div>
+      <div class="pin-key" onclick="pinKey('7')">7</div>
+      <div class="pin-key" onclick="pinKey('8')">8</div>
+      <div class="pin-key" onclick="pinKey('9')">9</div>
+      <div class="pin-key" onclick="pinClear()" style="font-size:1rem;letter-spacing:0">CLR</div>
+      <div class="pin-key" onclick="pinKey('0')">0</div>
+      <div class="pin-key" onclick="pinBackspace()" style="font-size:1rem;letter-spacing:0">&#9003;</div>
+    </div>
+    <button class="btn secondary" onclick="closeOverlay('pin-overlay');pinReset()">Cancel</button>
+  </div>
+</div>
+
+<!-- HISTORY REPORT OVERLAY -->
+<div class="overlay hidden" id="history-overlay">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-logo">CMC <span>Rocks</span></div>
+    <div class="modal-sub">Shift History Report</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+      <div class="report-header">Shift History</div>
+      <button class="btn btn-blue btn-sm" onclick="printShiftReport()">&#128438; Print</button>
+    </div>
+    <div class="report-date-filter">
+      <div style="flex:1;min-width:130px"><label>From</label><input type="date" id="rpt-from"></div>
+      <div style="flex:1;min-width:130px"><label>To</label><input type="date" id="rpt-to"></div>
+      <button class="btn btn-sm" style="margin-top:1.35rem;white-space:nowrap" onclick="renderReport()">Filter</button>
+    </div>
+    <div class="report-person-filter">
+      <label>Staff Member</label>
+      <select id="rpt-person" onchange="renderReport()"><option value="">All Staff</option></select>
+    </div>
+    <div id="report-body" style="overflow-x:auto;max-height:55vh;overflow-y:auto"></div>
+    <button class="btn secondary" onclick="closeOverlay('history-overlay')">Close</button>
   </div>
 </div>
 
@@ -309,10 +377,20 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
     </div>
 
     <div class="tab-section" id="tab-shifts">
-      <div style="display:flex;align-items:center;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
-        <div class="section-title" style="margin:0;padding:0;border:none">Staff Shifts</div>
-        <span id="shift-save-indicator" style="margin-left:0.5rem"></span>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border)">
+        <div style="display:flex;align-items:center;gap:0.5rem">
+          <div class="section-title" style="margin:0;padding:0;border:none">Staff Shifts</div>
+          <span id="shift-save-indicator"></span>
+        </div>
+        <button class="btn btn-sm" style="background:rgba(0,72,255,0.25);border:1px solid rgba(0,72,255,0.4);color:#7fa8ff;font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;cursor:pointer;padding:0.35rem 0.75rem;border-radius:3px;white-space:nowrap" onclick="openPinOverlay()">&#128274; History</button>
       </div>
+
+      <!-- Live Clock -->
+      <div class="clock-block">
+        <div id="shift-clock">00:00:00</div>
+        <div id="shift-date"></div>
+      </div>
+
       <div id="shifts-list"><div class="loading-text">Loading...</div></div>
     </div>
 
@@ -321,8 +399,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 
 <script>
 const PROXY='https://cmc-rocks-proxy.8gonula.workers.dev';
-let data=null,currentUser=null,pollTimer=null,activeReturnId=null,pendingSignOut=null;
+const MANAGER_PIN='1234'; // Change this PIN as needed
+let data=null,currentUser=null,pollTimer=null,clockTimer=null,activeReturnId=null,pendingSignOut=null;
+let pinBuffer='';
 
+// ── UTILITIES ──
 function loadUser(){try{return JSON.parse(localStorage.getItem('cmcUser'))}catch{return null}}
 function saveUser(u){localStorage.setItem('cmcUser',JSON.stringify(u));currentUser=u}
 function loadLocalCrew(){try{return JSON.parse(localStorage.getItem('cmcCrew'))||[]}catch{return[]}}
@@ -337,15 +418,18 @@ function getMergedCrew(){
 }
 function getKnownRadios(){
   const log=(data&&data.radioLog)?data.radioLog:[];
-  const map={};
-  log.forEach(e=>{if(e.siteId&&e.deptId)map[e.siteId]=e.deptId;});
-  return map;
+  const map={};log.forEach(e=>{if(e.siteId&&e.deptId)map[e.siteId]=e.deptId;});return map;
 }
 function getLastEntry(siteId,deptId){
   const log=(data&&data.radioLog)?data.radioLog:[];
   const entries=log.filter(e=>e.siteId===siteId&&e.deptId===deptId);
   return entries.length?entries[entries.length-1]:null;
 }
+function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
+function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
+function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'});}
+function formatTimeOnly(ts){if(!ts)return'';return new Date(ts).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'});}
+function formatDateOnly(ts){if(!ts)return'';return new Date(ts).toLocaleDateString('en-AU',{weekday:'short',day:'2-digit',month:'short',year:'numeric'});}
 
 async function init(){
   currentUser=loadUser();
@@ -360,6 +444,7 @@ async function init(){
     openOverlay('reg-overlay');
   }
   startPolling();
+  startClock();
 }
 
 async function fetchData(){
@@ -381,6 +466,23 @@ function startPolling(){
   pollTimer=setInterval(async()=>{await fetchData();renderRadios();renderShifts();},8000);
 }
 
+// ── LIVE CLOCK ──
+function startClock(){
+  if(clockTimer)clearInterval(clockTimer);
+  tickClock();
+  clockTimer=setInterval(tickClock,1000);
+}
+function tickClock(){
+  const now=new Date();
+  const h=String(now.getHours()).padStart(2,'0');
+  const m=String(now.getMinutes()).padStart(2,'0');
+  const s=String(now.getSeconds()).padStart(2,'0');
+  const el=document.getElementById('shift-clock');
+  const de=document.getElementById('shift-date');
+  if(el)el.textContent=`${h}:${m}:${s}`;
+  if(de)de.textContent=now.toLocaleDateString('en-AU',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+
 async function pushData(msg,indId){
   const id=indId||'save-indicator';
   showSaveStatus('saving',id);
@@ -400,8 +502,7 @@ async function pushData(msg,indId){
 }
 
 function showSaveStatus(state,id){
-  const el=document.getElementById(id||'save-indicator');
-  if(!el)return;
+  const el=document.getElementById(id||'save-indicator');if(!el)return;
   if(state==='saving'){el.className='save-status';el.textContent='Saving...';el.style.color='var(--dust)';}
   else if(state==='ok'){el.className='save-status save-ok';el.textContent='Saved ✓';setTimeout(()=>{el.textContent='';el.className='';},4000);}
   else{el.className='save-status save-err';el.textContent='Save failed';setTimeout(()=>{el.textContent='';el.className='';},6000);}
@@ -418,46 +519,28 @@ function showTab(id,btn){
 
 // ── RADIOS ──
 function openSignOutModal(){
-  const known=getKnownRadios();
-  const sel=document.getElementById('ro-known');
+  const known=getKnownRadios();const sel=document.getElementById('ro-known');
   sel.innerHTML='<option value="">-- Select or enter new below --</option>';
   Object.entries(known).sort((a,b)=>a[0].localeCompare(b[0])).forEach(([siteId,deptId])=>{
-    const last=getLastEntry(siteId,deptId);
-    const opt=document.createElement('option');
-    opt.value=siteId;
-    opt.textContent=`${siteId}  /  ${deptId}${last&&last.action==='fault'?' ⚠ FAULT':''}`;
-    opt.dataset.deptid=deptId;
-    sel.appendChild(opt);
+    const last=getLastEntry(siteId,deptId);const opt=document.createElement('option');
+    opt.value=siteId;opt.textContent=`${siteId}  /  ${deptId}${last&&last.action==='fault'?' ⚠ FAULT':''}`;
+    opt.dataset.deptid=deptId;sel.appendChild(opt);
   });
-  document.getElementById('ro-siteid').value='';
-  document.getElementById('ro-deptid').value='';
-  document.getElementById('ro-condition').value='Good';
-  document.getElementById('ro-notes').value='';
-  document.getElementById('ro-prefill-hint').style.display='none';
-  openOverlay('radio-out-overlay');
+  document.getElementById('ro-siteid').value='';document.getElementById('ro-deptid').value='';
+  document.getElementById('ro-condition').value='Good';document.getElementById('ro-notes').value='';
+  document.getElementById('ro-prefill-hint').style.display='none';openOverlay('radio-out-overlay');
 }
 function onKnownRadioSelect(){
-  const sel=document.getElementById('ro-known');
-  const opt=sel.options[sel.selectedIndex];
-  if(opt.value){
-    document.getElementById('ro-siteid').value=opt.value;
-    document.getElementById('ro-deptid').value=opt.dataset.deptid;
-    document.getElementById('ro-prefill-hint').style.display='block';
-  } else {
-    document.getElementById('ro-siteid').value='';
-    document.getElementById('ro-deptid').value='';
-    document.getElementById('ro-prefill-hint').style.display='none';
-  }
+  const sel=document.getElementById('ro-known');const opt=sel.options[sel.selectedIndex];
+  if(opt.value){document.getElementById('ro-siteid').value=opt.value;document.getElementById('ro-deptid').value=opt.dataset.deptid;document.getElementById('ro-prefill-hint').style.display='block';}
+  else{document.getElementById('ro-siteid').value='';document.getElementById('ro-deptid').value='';document.getElementById('ro-prefill-hint').style.display='none';}
 }
 function onSiteIdInput(){
-  const typed=document.getElementById('ro-siteid').value.trim().toUpperCase();
-  const known=getKnownRadios();
+  const typed=document.getElementById('ro-siteid').value.trim().toUpperCase();const known=getKnownRadios();
   if(known[typed]){
-    document.getElementById('ro-deptid').value=known[typed];
-    document.getElementById('ro-prefill-hint').style.display='block';
-    const sel=document.getElementById('ro-known');
-    for(let i=0;i<sel.options.length;i++){if(sel.options[i].value===typed){sel.selectedIndex=i;break;}}
-  } else {document.getElementById('ro-prefill-hint').style.display='none';}
+    document.getElementById('ro-deptid').value=known[typed];document.getElementById('ro-prefill-hint').style.display='block';
+    const sel=document.getElementById('ro-known');for(let i=0;i<sel.options.length;i++){if(sel.options[i].value===typed){sel.selectedIndex=i;break;}}
+  }else{document.getElementById('ro-prefill-hint').style.display='none';}
 }
 async function confirmRadioOut(){
   if(!currentUser)return;
@@ -477,11 +560,8 @@ async function confirmRadioOut(){
   await doSignOut(siteId,deptId,condition,notes);
 }
 async function proceedAfterFaultWarning(){
-  closeOverlay('fault-warn-overlay');
-  if(!pendingSignOut)return;
-  const {siteId,deptId,condition,notes}=pendingSignOut;
-  pendingSignOut=null;
-  await doSignOut(siteId,deptId,condition,notes);
+  closeOverlay('fault-warn-overlay');if(!pendingSignOut)return;
+  const {siteId,deptId,condition,notes}=pendingSignOut;pendingSignOut=null;await doSignOut(siteId,deptId,condition,notes);
 }
 async function doSignOut(siteId,deptId,condition,notes){
   if(!data.radioLog)data.radioLog=[];
@@ -490,8 +570,7 @@ async function doSignOut(siteId,deptId,condition,notes){
   await pushData(`Radio ${siteId}/${deptId} signed out by ${currentUser.name}`,'save-indicator');
 }
 function openReturnModal(){
-  const active=getActiveLoans(data.radioLog||[]);
-  const el=document.getElementById('radio-return-list');
+  const active=getActiveLoans(data.radioLog||[]);const el=document.getElementById('radio-return-list');
   el.innerHTML=!active.length?'<div class="empty-state">No radios currently signed out.</div>':
     active.map(e=>`<div class="loan-card" style="cursor:pointer;margin-bottom:0.5rem" onclick="selectReturn('${e.siteId}','${e.deptId}')">
       <div class="loan-ids"><div class="site-id">${e.siteId}</div><div class="dept-id">${e.deptId}</div></div>
@@ -502,8 +581,7 @@ function openReturnModal(){
 function selectReturn(siteId,deptId){
   activeReturnId={siteId,deptId};
   document.getElementById('radio-ret-title').textContent=`Return: ${siteId} / ${deptId}`;
-  document.getElementById('rr-condition').value='Good';
-  document.getElementById('rr-issues').value='';
+  document.getElementById('rr-condition').value='Good';document.getElementById('rr-issues').value='';
   closeOverlay('radio-in-overlay');openOverlay('radio-ret-overlay');
 }
 async function confirmRadioReturn(){
@@ -518,32 +596,25 @@ async function confirmRadioReturn(){
 }
 function renderRadios(){
   if(!data)return;
-  const log=data.radioLog||[];
-  const active=getActiveLoans(log);
-  const activeEl=document.getElementById('radio-active-section');
-  const histEl=document.getElementById('radio-history-section');
+  const log=data.radioLog||[];const active=getActiveLoans(log);
+  const activeEl=document.getElementById('radio-active-section');const histEl=document.getElementById('radio-history-section');
   activeEl.innerHTML='<div class="radio-section-label">Currently Signed Out</div>'+
     (!active.length?'<div class="empty-state" style="padding:1rem">No radios currently signed out.</div>':
-    active.map(e=>{
-      const fault=e.condition==='Faulty / Not working'||e.notes;
-      return `<div class="loan-card">
-        <div class="loan-ids"><div class="site-id">${e.siteId}</div><div class="dept-id">${e.deptId}</div></div>
+    active.map(e=>{const fault=e.condition==='Faulty / Not working'||e.notes;
+      return `<div class="loan-card"><div class="loan-ids"><div class="site-id">${e.siteId}</div><div class="dept-id">${e.deptId}</div></div>
         ${fault?`<div class="fault-pill">&#9888; Issue noted on sign-out</div>`:''}
-        <div class="loan-meta">Signed out by <strong>${e.by}</strong><br>${formatTime(e.time)}<br>Condition: ${e.condition}${e.notes?`<br>Notes: ${e.notes}`:''}</div>
-      </div>`;
+        <div class="loan-meta">Signed out by <strong>${e.by}</strong><br>${formatTime(e.time)}<br>Condition: ${e.condition}${e.notes?`<br>Notes: ${e.notes}`:''}</div></div>`;
     }).join(''));
   if(!log.length){histEl.innerHTML='<div class="radio-section-label">Full History</div><div class="empty-state" style="padding:1rem">No history yet.</div>';return;}
   const rows=[...log].reverse().map(e=>{
     const cls=e.action==='out'?'ht-out':e.action==='in'?'ht-in':'ht-fault';
     const label=e.action==='out'?'SIGN OUT':e.action==='in'?'RETURN':'FAULT';
     return `<tr><td class="${cls}" style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em">${label}</td>
-      <td>${e.siteId} / ${e.deptId}</td><td>${e.by}</td><td>${formatTime(e.time)}</td>
-      <td>${e.condition||''}</td><td>${e.notes||''}</td></tr>`;
+      <td>${e.siteId} / ${e.deptId}</td><td>${e.by}</td><td>${formatTime(e.time)}</td><td>${e.condition||''}</td><td>${e.notes||''}</td></tr>`;
   }).join('');
-  histEl.innerHTML=`<div class="radio-section-label">Full History</div>
-    <div style="overflow-x:auto"><table class="history-table">
-      <thead><tr><th>Action</th><th>Radio</th><th>By</th><th>Time</th><th>Condition</th><th>Notes</th></tr></thead>
-      <tbody>${rows}</tbody></table></div>`;
+  histEl.innerHTML=`<div class="radio-section-label">Full History</div><div style="overflow-x:auto"><table class="history-table">
+    <thead><tr><th>Action</th><th>Radio</th><th>By</th><th>Time</th><th>Condition</th><th>Notes</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
 }
 function getActiveLoans(log){
   const radios={};
@@ -551,204 +622,355 @@ function getActiveLoans(log){
   return Object.values(radios).map(e=>e[e.length-1]).filter(e=>e.action==='out');
 }
 function downloadRadioCSV(){
-  const log=data.radioLog||[];
-  if(!log.length){alert('No radio history to download.');return;}
+  const log=data.radioLog||[];if(!log.length){alert('No radio history to download.');return;}
   const headers=['Action','Site ID','Dept ID','By','Date/Time','Condition','Notes'];
   const rows=log.map(e=>[e.action==='out'?'Sign Out':e.action==='in'?'Return':'Fault/Return',e.siteId,e.deptId,e.by,formatTime(e.time),e.condition||'',(e.notes||'').replace(/,/g,';')]);
   const csv=[headers,...rows].map(r=>r.map(v=>`"${v}"`).join(',')).join('\n');
-  const blob=new Blob([csv],{type:'text/csv'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;a.download=`CMC-Rocks-Radio-History-${new Date().toISOString().slice(0,10)}.csv`;
-  a.click();URL.revokeObjectURL(url);
+  const blob=new Blob([csv],{type:'text/csv'});const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download=`CMC-Rocks-Radio-History-${new Date().toISOString().slice(0,10)}.csv`;a.click();URL.revokeObjectURL(url);
 }
 
-// ── STAFF SHIFTS (reworked) ──
-// Shift data structure per person per day:
-// { shiftStart, shiftEnd, breakfast, lunch, dinner, status }
-// status: 'off' | 'on' | 'resting' | 'dnd'  (on/off derived from shiftStart/shiftEnd, but status can overlay resting/dnd)
+// ── STAFF SHIFTS ──
+// Shift data per person per day is now an ARRAY of sessions:
+// data.shifts[phone][dateKey] = {
+//   sessions: [{start, end}],      // multiple start/end pairs allowed
+//   breakfast, lunch, dinner,       // timestamps (reset after midnight)
+//   status                          // 'on'|'off'|'resting'|'dnd'
+// }
 
-function todayKey(){return new Date().toLocaleDateString('en-AU',{year:'numeric',month:'2-digit',day:'2-digit'}).replace(/\//g,'-');}
-function getShift(phone){
+function todayKey(){
+  const n=new Date();
+  return `${String(n.getDate()).padStart(2,'0')}-${String(n.getMonth()+1).padStart(2,'0')}-${n.getFullYear()}`;
+}
+
+function getShiftDay(phone){
   if(!data.shifts)data.shifts={};
   if(!data.shifts[phone])data.shifts[phone]={};
   const key=todayKey();
-  if(!data.shifts[phone][key])data.shifts[phone][key]={};
+  if(!data.shifts[phone][key])data.shifts[phone][key]={sessions:[],status:'off'};
+  if(!data.shifts[phone][key].sessions)data.shifts[phone][key].sessions=[];
   return data.shifts[phone][key];
 }
 
-// Returns the display status for a shift object
 function getDisplayStatus(s){
   if(s.status==='dnd') return 'dnd';
   if(s.status==='resting') return 'resting';
-  if(s.shiftEnd) return 'ended';
-  if(s.shiftStart) return 'on';
+  // on shift = last session has no end
+  const sess=s.sessions||[];
+  if(sess.length&&!sess[sess.length-1].end) return 'on';
   return 'off';
 }
 
-function statusLabel(st){
-  return {off:'Off Shift',on:'On Shift',resting:'Resting',dnd:'Do Not Disturb',ended:'Shift Ended'}[st]||'Off Shift';
+function isCurrentlyOnShift(s){
+  const sess=s.sessions||[];return sess.length>0&&!sess[sess.length-1].end;
 }
-function statusHlClass(st){
-  return {off:'hl-off',on:'hl-on',resting:'hl-resting',dnd:'hl-dnd',ended:'hl-ended'}[st]||'hl-off';
-}
-function cardClass(st){
-  return {resting:'status-resting',dnd:'status-dnd',on:'status-on-shift'}[st]||'';
-}
+
+function statusLabel(st){return {off:'Off Shift',on:'On Shift',resting:'Resting',dnd:'Do Not Disturb'}[st]||'Off Shift';}
+function statusHlClass(st){return {off:'hl-off',on:'hl-on',resting:'hl-resting',dnd:'hl-dnd'}[st]||'hl-off';}
+function cardClass(st){return {resting:'status-resting',dnd:'status-dnd',on:'status-on-shift'}[st]||'';}
 
 function renderShifts(){
   if(!data)return;
-  const el=document.getElementById('shifts-list');
-  const crew=getMergedCrew();
+  const el=document.getElementById('shifts-list');const crew=getMergedCrew();
   if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.</div>';return;}
+  el.innerHTML=crew.map(u=>buildStaffCard(u)).join('');
+}
 
-  el.innerHTML=crew.map(u=>{
-    const s=getShift(u.phone);
-    const isMe=currentUser&&currentUser.phone===u.phone;
-    const st=getDisplayStatus(s);
+function buildStaffCard(u){
+  const s=getShiftDay(u.phone);
+  const isMe=currentUser&&currentUser.phone===u.phone;
+  const st=getDisplayStatus(s);
+  const sess=s.sessions||[];
+  const meals=['breakfast','lunch','dinner'];
 
-    // Shift times line
-    let timeInfo='';
-    if(s.shiftStart){
-      timeInfo+=`<span class="t-label">Start: </span><span class="t-val">${formatTimeOnly(s.shiftStart)}</span>`;
-      if(s.shiftEnd) timeInfo+=`&ensp;<span class="t-label">End: </span><span class="t-val">${formatTimeOnly(s.shiftEnd)}</span>`;
-    }
-    // Meal completions
-    const meals=['breakfast','lunch','dinner'];
-    const mealInfo=meals.map(m=>{
-      if(s[m]) return `<span class="meal-done">&#10003; ${cap(m)} ${formatTimeOnly(s[m])}</span>`;
-      return `<span class="meal-none">${cap(m)}</span>`;
-    }).join('&ensp;');
+  // Session rows
+  let sessHTML='';
+  if(sess.length){
+    sessHTML=`<div class="shift-entries">`+
+      sess.map((ss,i)=>`<div class="shift-entry-row">
+        <span style="color:var(--dust)">Shift ${sess.length>1?i+1+' ':''}</span>
+        <span><span style="color:var(--dust)">In: </span><span class="t-val">${formatTimeOnly(ss.start)}</span></span>
+        <span><span style="color:var(--dust)">Out: </span><span class="t-val">${ss.end?formatTimeOnly(ss.end):'&mdash;'}</span></span>
+      </div>`).join('')+`</div>`;
+  }
 
-    const hasTimeInfo=timeInfo||s.shiftStart;
+  // Meal info
+  const mealInfo=meals.map(m=>{
+    if(s[m]) return `<span class="meal-done">&#10003; ${cap(m)} ${formatTimeOnly(s[m])}</span>`;
+    return `<span class="meal-none">${cap(m)}</span>`;
+  }).join('&ensp;');
 
-    // Build buttons — only interactive for current user
-    let btns='';
-    if(isMe){
-      // Row 1: On Shift / Off Shift
-      const onActive=st==='on'||st==='resting'||st==='dnd';
-      const offActive=st==='ended';
-      btns+=`<div class="shift-btn-grid row-2">
-        <button class="sbtn sbtn-on-shift${onActive?' active':''}" onclick="setShiftStatus('shiftStart')" ${onActive?'disabled':''}>
-          ${onActive?'&#9679; On Shift':'Start Shift'}
-        </button>
-        <button class="sbtn sbtn-off-shift${offActive?' active':''}" onclick="setShiftStatus('shiftEnd')" ${offActive||!s.shiftStart?'disabled':''}>
-          ${offActive?'&#10003; Off Shift':'End Shift'}
-        </button>
-      </div>`;
+  let btns='';
+  if(isMe){
+    const onShift=isCurrentlyOnShift(s);
 
-      // Row 2: Breakfast / Lunch / Dinner
-      btns+=`<div class="shift-btn-grid row-3" style="margin-top:0.4rem">
-        ${meals.map(m=>`<button class="sbtn sbtn-${m}${s[m]?' active':''}" onclick="setMeal('${m}')" ${s[m]?'disabled':''}>
-          ${s[m]?'&#10003; '+cap(m):cap(m)}
-        </button>`).join('')}
-      </div>`;
-
-      // Row 3: Resting / Do Not Disturb
-      const restActive=st==='resting';
-      const dndActive=st==='dnd';
-      btns+=`<div class="shift-btn-grid row-2" style="margin-top:0.4rem">
-        <button class="sbtn sbtn-resting${restActive?' active':''}" onclick="setOverlayStatus('resting')">
-          ${restActive?'&#9675; Resting':'Resting'}
-        </button>
-        <button class="sbtn sbtn-dnd${dndActive?' active':''}" onclick="setOverlayStatus('dnd')">
-          ${dndActive?'&#9888; Do Not Disturb':'Do Not Disturb'}
-        </button>
-      </div>`;
-    }
-
-    return `<div class="staff-card ${cardClass(st)}">
-      <div class="staff-card-header">
-        <div class="staff-name-row">
-          <div class="crew-avatar" style="width:28px;height:28px;font-size:0.8rem">${initials(u.name)}</div>
-          <div>
-            <span class="staff-card-name">${u.name}</span>
-            ${isMe?'<span class="staff-you-tag"> (you)</span>':''}
-          </div>
-        </div>
-        <span class="staff-status-highlight ${statusHlClass(st)}">${statusLabel(st)}</span>
-      </div>
-      ${hasTimeInfo||s.breakfast||s.lunch||s.dinner?`<div class="staff-time-info">
-        ${timeInfo?`<div>${timeInfo}</div>`:''}
-        <div style="margin-top:0.2rem">${mealInfo}</div>
-      </div>`:''}
-      ${btns}
+    // Start / End shift with manual time option
+    btns+=`<div class="shift-btn-grid row-2">
+      <button class="sbtn sbtn-on-shift${onShift?' active':''}" onclick="shiftIn()" ${onShift?'disabled':''}>
+        ${onShift?'&#9679; On Shift':'+ Start Shift'}
+      </button>
+      <button class="sbtn sbtn-off-shift" onclick="shiftOut()" ${!onShift?'disabled':''}>
+        End Shift
+      </button>
+    </div>
+    <span class="manual-toggle" onclick="toggleManual('manual-shift')">enter time manually</span>
+    <div class="manual-time-row" id="manual-shift">
+      <input type="time" id="manual-shift-time">
+      <button class="sbtn sbtn-on-shift" onclick="shiftInManual()">Start</button>
+      <button class="sbtn sbtn-off-shift" onclick="shiftOutManual()">End</button>
     </div>`;
-  }).join('');
+
+    // Meals with manual time option
+    btns+=`<div class="shift-btn-grid row-3" style="margin-top:0.5rem">
+      ${meals.map(m=>`<button class="sbtn sbtn-${m}${s[m]?' active':''}" onclick="setMeal('${m}',null)" ${s[m]?'disabled':''}>
+        ${s[m]?'&#10003; '+cap(m):cap(m)}
+      </button>`).join('')}
+    </div>
+    <span class="manual-toggle" onclick="toggleManual('manual-meals')">enter meal time manually</span>
+    <div class="manual-time-row" id="manual-meals">
+      <input type="time" id="manual-meal-time">
+      <select id="manual-meal-select" style="margin-bottom:0;padding:0.4rem 0.4rem;font-size:0.82rem;flex:1">
+        ${meals.map(m=>`<option value="${m}"${s[m]?' disabled':''}>` +cap(m)+(s[m]?' ✓':'')+`</option>`).join('')}
+      </select>
+      <button class="sbtn sbtn-breakfast" onclick="setMealManual()">Save</button>
+    </div>`;
+
+    // Resting / DND
+    const restActive=st==='resting';const dndActive=st==='dnd';
+    btns+=`<div class="shift-btn-grid row-2" style="margin-top:0.5rem">
+      <button class="sbtn sbtn-resting${restActive?' active':''}" onclick="setOverlayStatus('resting')">
+        ${restActive?'&#9675; Resting':'Resting'}
+      </button>
+      <button class="sbtn sbtn-dnd${dndActive?' active':''}" onclick="setOverlayStatus('dnd')">
+        ${dndActive?'&#9888; Do Not Disturb':'Do Not Disturb'}
+      </button>
+    </div>`;
+  }
+
+  return `<div class="staff-card ${cardClass(st)}">
+    <div class="staff-card-header">
+      <div class="staff-name-row">
+        <div class="crew-avatar" style="width:28px;height:28px;font-size:0.8rem">${initials(u.name)}</div>
+        <div>
+          <span class="staff-card-name">${u.name}</span>
+          ${isMe?'<span class="staff-you-tag"> (you)</span>':''}
+        </div>
+      </div>
+      <span class="staff-status-highlight ${statusHlClass(st)}">${statusLabel(st)}</span>
+    </div>
+    ${sessHTML}
+    <div class="staff-time-info" style="margin-top:${sessHTML?'0':'0.1rem'}">${mealInfo}</div>
+    ${btns}
+  </div>`;
 }
 
-// Set shiftStart or shiftEnd with current time
-async function setShiftStatus(field){
+function toggleManual(id){
+  const el=document.getElementById(id);
+  el.classList.toggle('visible');
+}
+
+function tsFromTimeInput(inputId){
+  const val=document.getElementById(inputId).value;
+  if(!val)return null;
+  const [h,m]=val.split(':').map(Number);
+  const d=new Date();d.setHours(h,m,0,0);return d.getTime();
+}
+
+async function shiftIn(ts){
   if(!currentUser)return;
-  const s=getShift(currentUser.phone);
-  // Prevent re-starting if already on shift, or ending if already ended
-  if(field==='shiftStart'&&s.shiftStart) return;
-  if(field==='shiftEnd'&&s.shiftEnd) return;
-  if(field==='shiftEnd'&&!s.shiftStart) return;
-  const ts=Date.now();
+  const t=ts||Date.now();
   const key=todayKey();
   if(!data.shifts)data.shifts={};
   if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
-  if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={};
-  data.shifts[currentUser.phone][key][field]=ts;
-  // Clear overlay status when going on shift
-  if(field==='shiftStart'){
-    data.shifts[currentUser.phone][key].status='on';
-  }
-  if(field==='shiftEnd'){
-    data.shifts[currentUser.phone][key].status='off';
-  }
+  if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={sessions:[],status:'off'};
+  const day=data.shifts[currentUser.phone][key];
+  if(!day.sessions)day.sessions=[];
+  // Only add if not currently on shift
+  if(day.sessions.length&&!day.sessions[day.sessions.length-1].end){return;}
+  day.sessions.push({start:t});
+  day.status='on';
   renderShifts();
-  await pushData(`Shift update: ${currentUser.name}`,'shift-save-indicator');
+  await pushData(`Shift start: ${currentUser.name}`,'shift-save-indicator');
+}
+async function shiftOut(ts){
+  if(!currentUser)return;
+  const t=ts||Date.now();
+  const key=todayKey();
+  const day=data.shifts&&data.shifts[currentUser.phone]&&data.shifts[currentUser.phone][key];
+  if(!day||!day.sessions||!day.sessions.length)return;
+  const last=day.sessions[day.sessions.length-1];
+  if(last.end)return;
+  last.end=t;
+  day.status='off';
+  renderShifts();
+  await pushData(`Shift end: ${currentUser.name}`,'shift-save-indicator');
+}
+async function shiftInManual(){
+  const ts=tsFromTimeInput('manual-shift-time');
+  if(!ts){alert('Please enter a time.');return;}
+  await shiftIn(ts);
+  document.getElementById('manual-shift').classList.remove('visible');
+}
+async function shiftOutManual(){
+  const ts=tsFromTimeInput('manual-shift-time');
+  if(!ts){alert('Please enter a time.');return;}
+  await shiftOut(ts);
+  document.getElementById('manual-shift').classList.remove('visible');
 }
 
-// Mark a meal as completed now
-async function setMeal(meal){
+async function setMeal(meal,ts){
   if(!currentUser)return;
+  const t=ts||Date.now();
   const key=todayKey();
   if(!data.shifts)data.shifts={};
   if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
-  if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={};
-  if(data.shifts[currentUser.phone][key][meal]) return; // already done
-  data.shifts[currentUser.phone][key][meal]=Date.now();
+  if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={sessions:[],status:'off'};
+  if(data.shifts[currentUser.phone][key][meal])return;
+  data.shifts[currentUser.phone][key][meal]=t;
   renderShifts();
   await pushData(`${meal} marked: ${currentUser.name}`,'shift-save-indicator');
 }
+async function setMealManual(){
+  const ts=tsFromTimeInput('manual-meal-time');
+  const meal=document.getElementById('manual-meal-select').value;
+  if(!ts){alert('Please enter a time.');return;}
+  if(!meal){alert('Please select a meal.');return;}
+  await setMeal(meal,ts);
+  document.getElementById('manual-meals').classList.remove('visible');
+}
 
-// Toggle overlay statuses (resting / dnd) — tap again to clear
 async function setOverlayStatus(status){
   if(!currentUser)return;
   const key=todayKey();
   if(!data.shifts)data.shifts={};
   if(!data.shifts[currentUser.phone])data.shifts[currentUser.phone]={};
-  if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={};
+  if(!data.shifts[currentUser.phone][key])data.shifts[currentUser.phone][key]={sessions:[],status:'off'};
   const current=data.shifts[currentUser.phone][key].status;
-  // Toggle: tap same = clear back to 'on' (if on shift) or 'off'
-  const s=data.shifts[currentUser.phone][key];
-  if(current===status){
-    data.shifts[currentUser.phone][key].status=s.shiftStart&&!s.shiftEnd?'on':'off';
-  } else {
-    data.shifts[currentUser.phone][key].status=status;
-  }
+  const onShift=isCurrentlyOnShift(data.shifts[currentUser.phone][key]);
+  data.shifts[currentUser.phone][key].status=current===status?(onShift?'on':'off'):status;
   renderShifts();
-  await pushData(`Status update: ${currentUser.name}`,'shift-save-indicator');
+  await pushData(`Status: ${currentUser.name}`,'shift-save-indicator');
+}
+
+// ── PIN + HISTORY REPORT ──
+function openPinOverlay(){pinReset();openOverlay('pin-overlay');}
+function pinReset(){pinBuffer='';updatePinDots();document.getElementById('pin-error').textContent='';}
+function pinKey(k){
+  if(pinBuffer.length>=4)return;
+  pinBuffer+=k;updatePinDots();
+  if(pinBuffer.length===4)setTimeout(checkPin,120);
+}
+function pinBackspace(){if(pinBuffer.length)pinBuffer=pinBuffer.slice(0,-1);updatePinDots();}
+function pinClear(){pinBuffer='';updatePinDots();}
+function updatePinDots(){
+  for(let i=0;i<4;i++){const d=document.getElementById('pd'+i);if(d)d.classList.toggle('filled',i<pinBuffer.length);}
+}
+function checkPin(){
+  if(pinBuffer===MANAGER_PIN){
+    closeOverlay('pin-overlay');pinReset();openHistoryReport();
+  }else{
+    document.getElementById('pin-error').textContent='Incorrect PIN. Try again.';
+    pinBuffer='';updatePinDots();
+  }
+}
+
+function openHistoryReport(){
+  // Default date range: last 7 days
+  const today=new Date();const from=new Date();from.setDate(today.getDate()-6);
+  document.getElementById('rpt-from').value=from.toISOString().slice(0,10);
+  document.getElementById('rpt-to').value=today.toISOString().slice(0,10);
+  // Populate person filter
+  const sel=document.getElementById('rpt-person');
+  sel.innerHTML='<option value="">All Staff</option>';
+  getMergedCrew().forEach(u=>{
+    const o=document.createElement('option');o.value=u.phone;o.textContent=u.name;sel.appendChild(o);
+  });
+  renderReport();
+  openOverlay('history-overlay');
+}
+
+function renderReport(){
+  const fromVal=document.getElementById('rpt-from').value;
+  const toVal=document.getElementById('rpt-to').value;
+  const personFilter=document.getElementById('rpt-person').value;
+  const fromTs=fromVal?new Date(fromVal).setHours(0,0,0,0):0;
+  const toTs=toVal?new Date(toVal).setHours(23,59,59,999):Date.now();
+
+  const crew=getMergedCrew().filter(u=>!personFilter||u.phone===personFilter);
+  if(!data||!data.shifts){document.getElementById('report-body').innerHTML='<div class="empty-state">No shift data yet.</div>';return;}
+
+  // Collect all day entries within range
+  let rows=[];
+  crew.forEach(u=>{
+    const userShifts=data.shifts[u.phone]||{};
+    Object.entries(userShifts).forEach(([dateKey,day])=>{
+      // dateKey format: DD-MM-YYYY
+      const parts=dateKey.split('-');
+      const dayTs=new Date(`${parts[2]}-${parts[1]}-${parts[0]}`).getTime();
+      if(dayTs<fromTs||dayTs>toTs)return;
+      const sessions=(day.sessions||[]);
+      const hasMeals=day.breakfast||day.lunch||day.dinner;
+      if(!sessions.length&&!hasMeals)return;
+      rows.push({name:u.name,dateKey,dayTs,day});
+    });
+  });
+
+  rows.sort((a,b)=>b.dayTs-a.dayTs||(a.name.localeCompare(b.name)));
+
+  if(!rows.length){document.getElementById('report-body').innerHTML='<div class="empty-state" style="padding:1.5rem">No records found for selected range.</div>';return;}
+
+  const meals=['breakfast','lunch','dinner'];
+  const tableRows=rows.map(r=>{
+    const {name,dateKey,day}=r;
+    const dateParts=dateKey.split('-');
+    const displayDate=`${dateParts[0]}/${dateParts[1]}/${dateParts[2]}`;
+    const sessions=(day.sessions||[]);
+    const sessText=sessions.length
+      ?sessions.map(ss=>`${formatTimeOnly(ss.start)} &rarr; ${ss.end?formatTimeOnly(ss.end):'ongoing'}`).join('<br>')
+      :'<span style="color:rgba(160,136,80,0.4)">—</span>';
+    const mealCells=meals.map(m=>day[m]
+      ?`<td class="rpt-meal-done">&#10003; ${formatTimeOnly(day[m])}</td>`
+      :`<td class="rpt-meal-none">&mdash;</td>`).join('');
+    return `<tr><td class="rpt-name">${name}</td><td style="color:var(--dust)">${displayDate}</td><td style="line-height:1.7">${sessText}</td>${mealCells}</tr>`;
+  }).join('');
+
+  document.getElementById('report-body').innerHTML=`<table class="rpt-table">
+    <thead><tr><th>Name</th><th>Date</th><th>Shift Times</th><th>Bfast</th><th>Lunch</th><th>Dinner</th></tr></thead>
+    <tbody>${tableRows}</tbody>
+  </table>`;
+}
+
+function printShiftReport(){
+  const content=document.getElementById('report-body').innerHTML;
+  const fromVal=document.getElementById('rpt-from').value;
+  const toVal=document.getElementById('rpt-to').value;
+  const w=window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html><head><title>CMC Rocks — Shift Report</title>
+  <style>body{font-family:Arial,sans-serif;font-size:12px;padding:20px;color:#111}
+  h1{font-size:18px;margin-bottom:4px}p{color:#666;margin-bottom:12px}
+  table{width:100%;border-collapse:collapse}th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:0.1em;padding:6px 8px;border-bottom:2px solid #ccc;color:#444}
+  td{padding:5px 8px;border-bottom:1px solid #eee;vertical-align:top}
+  tr:last-child td{border-bottom:none}.meal-done{color:green}.meal-none{color:#ccc}
+  </style></head><body>
+  <h1>CMC Rocks &mdash; Shift History Report</h1>
+  <p>Period: ${fromVal||'All'} to ${toVal||'All'} &nbsp;&bull;&nbsp; Printed: ${new Date().toLocaleString('en-AU')}</p>
+  ${content.replace(/class="rpt-meal-done"/g,'class="meal-done"').replace(/class="rpt-meal-none"/g,'class="meal-none"').replace(/class="rpt-name"/g,'style="font-weight:600"')}
+  </body></html>`);
+  w.document.close();w.print();
 }
 
 // ── REGISTRATION ──
 function showRegForm(){
-  document.getElementById('reg-form').style.display='block';
-  document.getElementById('pick-form').style.display='none';
+  document.getElementById('reg-form').style.display='block';document.getElementById('pick-form').style.display='none';
   document.getElementById('reg-title').textContent='Register to Continue';
 }
 function showPickList(){
-  document.getElementById('reg-form').style.display='none';
-  document.getElementById('pick-form').style.display='block';
+  document.getElementById('reg-form').style.display='none';document.getElementById('pick-form').style.display='block';
   document.getElementById('reg-title').textContent='Select Your Name';
   renderPickList('pick-list',u=>{saveUser(u);closeOverlay('reg-overlay');showApp();});
 }
 function renderPickList(elId,onSelect){
-  const el=document.getElementById(elId);
-  const crew=getMergedCrew();
+  const el=document.getElementById(elId);const crew=getMergedCrew();
   if(!crew.length){el.innerHTML='<div class="empty-state">No crew registered yet.</div>';return;}
   el.innerHTML=crew.map(u=>`<div class="crew-list-item" onclick='_pick(${JSON.stringify(u)},"${elId}")'>
     <div class="crew-avatar">${initials(u.name)}</div>
@@ -758,11 +980,9 @@ function renderPickList(elId,onSelect){
 }
 function _pick(u,id){const el=document.getElementById(id);if(el&&el._cb)el._cb(u);}
 async function submitReg(){
-  const name=document.getElementById('reg-name').value.trim();
-  const phone=document.getElementById('reg-phone').value.trim();
+  const name=document.getElementById('reg-name').value.trim();const phone=document.getElementById('reg-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
-  const user={name,phone,id:Date.now().toString()};
-  saveUser(user);addLocalCrew(user);
+  const user={name,phone,id:Date.now().toString()};saveUser(user);addLocalCrew(user);
   if(!data)data={crew:[],radioLog:[],shifts:{}};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('reg-overlay');showApp();
@@ -787,11 +1007,9 @@ function hidePickOverlayReg(){
   document.getElementById('pick-overlay-sub').textContent='Who are you?';
 }
 async function submitPickOverlayReg(){
-  const name=document.getElementById('por-name').value.trim();
-  const phone=document.getElementById('por-phone').value.trim();
+  const name=document.getElementById('por-name').value.trim();const phone=document.getElementById('por-phone').value.trim();
   if(!name||!phone){alert('Please enter your name and phone number.');return;}
-  const user={name,phone,id:Date.now().toString()};
-  saveUser(user);addLocalCrew(user);
+  const user={name,phone,id:Date.now().toString()};saveUser(user);addLocalCrew(user);
   if(!data)data={crew:[],radioLog:[],shifts:{}};
   if(!data.crew.find(c=>c.phone===phone)){data.crew.push(user);await pushData(`Register: ${name}`);}
   closeOverlay('pick-overlay');
@@ -804,10 +1022,6 @@ function showApp(){
   document.getElementById('header-name').textContent=currentUser.name.split(' ')[0];
   if(data){renderRadios();renderShifts();}
 }
-function cap(s){return s.charAt(0).toUpperCase()+s.slice(1);}
-function initials(n){if(!n)return'?';return n.split(' ').map(w=>w[0]).join('').toUpperCase().slice(0,2);}
-function formatTime(ts){if(!ts)return'';return new Date(ts).toLocaleString('en-AU',{dateStyle:'short',timeStyle:'short'});}
-function formatTimeOnly(ts){if(!ts)return'';return new Date(ts).toLocaleTimeString('en-AU',{hour:'2-digit',minute:'2-digit'});}
 init();
 </script>
 </body>
