@@ -76,6 +76,16 @@
       "condition": "Minor wear",
       "notes": "",
       "id": "1774439866174"
+    },
+    {
+      "action": "in",
+      "siteId": "S123",
+      "deptId": "t2",
+      "by": "Rhys Barclay",
+      "time": 1774439874026,
+      "condition": "Good",
+      "notes": "",
+      "id": "1774439874026"
     }
   ]
 }
