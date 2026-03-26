@@ -29,8 +29,11 @@
       "createdBy": "Rhys Barclay",
       "createdAt": 1774494401656,
       "claimers": [],
-      "doners": [],
-      "status": "open"
+      "doners": [
+        "Rhys Barclay"
+      ],
+      "status": "done",
+      "doneAt": 1774494442520
     }
   ],
   "announcements": [],
