@@ -451,18 +451,16 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
   </div>
 </div>
 
-<!-- TODO EDIT MODAL (add helper / add photo after creation) -->
+<!-- TODO EDIT MODAL -->
 <div class="overlay hidden" id="todo-edit-overlay">
   <div class="modal">
     <div class="modal-logo">CMC <span>Rocks</span></div>
     <div class="modal-sub" id="todo-edit-sub">Update Task</div>
     <h2 id="todo-edit-title-display" style="font-size:0.9rem;letter-spacing:0.04em;color:var(--cream);font-family:'Barlow Condensed',sans-serif;margin-bottom:1.2rem;line-height:1.3"></h2>
-
     <div id="todo-edit-helper-section">
       <label>Add Helper from Crew</label>
       <div class="crew-list" id="todo-helper-crew-list" style="max-height:200px"></div>
     </div>
-
     <div id="todo-edit-photo-section" style="margin-top:0.8rem">
       <label>Add Photo</label>
       <input type="file" id="todo-edit-photo-input" accept="image/*" style="display:none" onchange="previewEditPhoto(this)">
@@ -472,7 +470,6 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
         <button type="button" onclick="clearEditPhoto()" style="margin-top:0.3rem;background:none;border:none;color:var(--dust);font-size:0.75rem;cursor:pointer;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em">&#10005; Remove</button>
       </div>
     </div>
-
     <button class="btn btn-gold" style="margin-top:1.2rem" onclick="saveTaskEdits()">&#10003; Save</button>
     <button class="btn secondary" onclick="closeOverlay('todo-edit-overlay')">Cancel</button>
   </div>
@@ -963,14 +960,10 @@ const PRIO_ORDER={urgent:0,high:1,medium:2,low:3};
 const PRIO_LABELS={urgent:'Urgent',high:'High',medium:'Medium',low:'Low'};
 const PRIO_PILL_CLASS={urgent:'prio-pill-urgent',high:'prio-pill-high',medium:'prio-pill-medium',low:'prio-pill-low'};
 
-// Photo helpers
 function previewTodoPhoto(input){
   if(!input.files||!input.files[0])return;
   const reader=new FileReader();
-  reader.onload=e=>{
-    document.getElementById('todo-photo-img').src=e.target.result;
-    document.getElementById('todo-photo-preview').style.display='block';
-  };
+  reader.onload=e=>{document.getElementById('todo-photo-img').src=e.target.result;document.getElementById('todo-photo-preview').style.display='block';};
   reader.readAsDataURL(input.files[0]);
 }
 function clearTodoPhoto(){
@@ -981,10 +974,7 @@ function clearTodoPhoto(){
 function previewEditPhoto(input){
   if(!input.files||!input.files[0])return;
   const reader=new FileReader();
-  reader.onload=e=>{
-    document.getElementById('todo-edit-photo-img').src=e.target.result;
-    document.getElementById('todo-edit-photo-preview').style.display='block';
-  };
+  reader.onload=e=>{document.getElementById('todo-edit-photo-img').src=e.target.result;document.getElementById('todo-edit-photo-preview').style.display='block';};
   reader.readAsDataURL(input.files[0]);
 }
 function clearEditPhoto(){
@@ -993,7 +983,7 @@ function clearEditPhoto(){
   const prev=document.getElementById('todo-edit-photo-preview');if(prev)prev.style.display='none';
 }
 
-// AI title generation
+// AI title generation — fixed with required browser headers
 function onTodoNotesInput(){
   const val=document.getElementById('todo-notes-input').value.trim();
   document.getElementById('ai-gen-btn').disabled=!val;
@@ -1006,25 +996,32 @@ async function generateTodoTitle(){
   try{
     const resp=await fetch('https://api.anthropic.com/v1/messages',{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
+      headers:{
+        'Content-Type':'application/json',
+        'anthropic-version':'2023-06-01',
+        'anthropic-dangerous-direct-browser-calls':'true'
+      },
       body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
+        model:'claude-haiku-4-5-20251001',
         max_tokens:60,
         messages:[{role:'user',content:`You are helping crew at a music festival. Based on the following task description, write a SHORT task title (5 words max, no punctuation, action-first like "Fix barrier near stage"). Description: "${notes}". Reply with ONLY the title, nothing else.`}]
       })
     });
+    if(!resp.ok){const e=await resp.text();throw new Error(e);}
     const d=await resp.json();
     const title=(d.content&&d.content[0]&&d.content[0].text)||'';
     if(title.trim()){
       document.getElementById('ai-title-text').textContent=title.trim();
       document.getElementById('ai-title-preview').style.display='block';
-    }
-  }catch(e){alert('Could not generate title. Please type one manually.');}
+    }else{throw new Error('Empty response');}
+  }catch(e){
+    console.error('AI title error:',e);
+    alert('Could not generate title. Please type one manually.');
+  }
   btn.disabled=false;btn.textContent='✨ Generate Title from Details';
 }
 function acceptAiTitle(){
-  const t=document.getElementById('ai-title-text').textContent;
-  document.getElementById('todo-title-input').value=t;
+  document.getElementById('todo-title-input').value=document.getElementById('ai-title-text').textContent;
   document.getElementById('ai-title-preview').style.display='none';
 }
 function rejectAiTitle(){
@@ -1050,55 +1047,44 @@ async function submitTodo(){
   const imgEl=document.getElementById('todo-photo-img');
   const photoData=imgEl&&imgEl.src&&imgEl.src.startsWith('data:')?imgEl.src:null;
   const task={
-    id:Date.now().toString(),
-    title,notes,
+    id:Date.now().toString(),title,notes,
     priority:document.getElementById('todo-prio-input').value,
-    photos:photoData?[photoData]:[],
-    helpers:[],
-    createdBy:currentUser.name,
-    createdAt:Date.now(),
-    claimers:[],doners:[],
-    status:'open'
+    photos:photoData?[photoData]:[],helpers:[],
+    createdBy:currentUser.name,createdAt:Date.now(),
+    claimers:[],doners:[],status:'open'
   };
   data.todos.push(task);
   closeOverlay('todo-overlay');clearTodoPhoto();renderTodos();
   await pushData(`New task: ${title}`,'todo-save-indicator');
 }
 
-// Task editing (add helper / add photo)
 function openTaskEdit(id){
   editingTaskId=id;
   const t=(data.todos||[]).find(x=>x.id===id);if(!t)return;
-  document.getElementById('todo-edit-sub').textContent='Add Helper or Photo';
   document.getElementById('todo-edit-title-display').textContent=t.title;
   clearEditPhoto();
-  // build helper crew list — exclude people already helpers/claimers/doners/creator
   const allPeople=[...new Set([t.createdBy,...(t.claimers||[]),...(t.doners||[]),...(t.helpers||[])])];
   const crew=getMergedCrew().filter(u=>!allPeople.includes(u.name));
   const el=document.getElementById('todo-helper-crew-list');
-  if(!crew.length){
-    el.innerHTML='<div class="empty-state" style="padding:0.75rem">All crew already added.</div>';
-  }else{
-    el.innerHTML=crew.map(u=>`<div class="crew-list-item" onclick="addHelperToTask('${id}','${u.name.replace(/'/g,"\\'")}')">
+  el.innerHTML=!crew.length?'<div class="empty-state" style="padding:0.75rem">All crew already added.</div>':
+    crew.map(u=>`<div class="crew-list-item" onclick="addHelperToTask('${id}','${u.name.replace(/'/g,"\\'")}')">
       <div class="crew-avatar" style="width:28px;height:28px;font-size:0.8rem">${initials(u.name)}</div>
       <div><div class="crew-name">${u.name}</div></div>
     </div>`).join('');
-  }
   openOverlay('todo-edit-overlay');
 }
 async function addHelperToTask(id,name){
   const t=(data.todos||[]).find(x=>x.id===id);if(!t)return;
   if(!t.helpers)t.helpers=[];
   if(!t.helpers.includes(name))t.helpers.push(name);
-  // refresh list
   const allPeople=[...new Set([t.createdBy,...(t.claimers||[]),...(t.doners||[]),...(t.helpers||[])])];
   const crew=getMergedCrew().filter(u=>!allPeople.includes(u.name));
   const el=document.getElementById('todo-helper-crew-list');
-  if(!crew.length){el.innerHTML='<div class="empty-state" style="padding:0.75rem">All crew already added.</div>';}
-  else{el.innerHTML=crew.map(u=>`<div class="crew-list-item" onclick="addHelperToTask('${id}','${u.name.replace(/'/g,"\\'")}')">
-    <div class="crew-avatar" style="width:28px;height:28px;font-size:0.8rem">${initials(u.name)}</div>
-    <div><div class="crew-name">${u.name}</div></div>
-  </div>`).join('');}
+  el.innerHTML=!crew.length?'<div class="empty-state" style="padding:0.75rem">All crew already added.</div>':
+    crew.map(u=>`<div class="crew-list-item" onclick="addHelperToTask('${id}','${u.name.replace(/'/g,"\\'")}')">
+      <div class="crew-avatar" style="width:28px;height:28px;font-size:0.8rem">${initials(u.name)}</div>
+      <div><div class="crew-name">${u.name}</div></div>
+    </div>`).join('');
   renderTodos();
   await pushData(`Helper added to: ${t.title}`,'todo-save-indicator');
 }
@@ -1106,10 +1092,7 @@ async function saveTaskEdits(){
   const t=(data.todos||[]).find(x=>x.id===editingTaskId);if(!t)return;
   const imgEl=document.getElementById('todo-edit-photo-img');
   const photoData=imgEl&&imgEl.src&&imgEl.src.startsWith('data:')?imgEl.src:null;
-  if(photoData){
-    if(!t.photos)t.photos=[];
-    t.photos.push(photoData);
-  }
+  if(photoData){if(!t.photos)t.photos=[];t.photos.push(photoData);}
   closeOverlay('todo-edit-overlay');clearEditPhoto();renderTodos();
   await pushData(`Task updated: ${t.title}`,'todo-save-indicator');
 }
@@ -1142,9 +1125,7 @@ function renderTodos(){
   if(todoFilter==='all'||todoFilter==='done'){
     if(showDone.length){
       const arrow=doneTodoExpanded?'&#9650;':'&#9660;';
-      doneSection=`<div class="todo-done-section-header" onclick="toggleDoneSection()">
-        <span>Completed (${showDone.length})</span><span>${arrow}</span>
-      </div>`;
+      doneSection=`<div class="todo-done-section-header" onclick="toggleDoneSection()"><span>Completed (${showDone.length})</span><span>${arrow}</span></div>`;
       if(doneTodoExpanded)doneSection+=showDone.map(t=>buildTodoCard(t)).join('');
     }
   }
@@ -1162,53 +1143,32 @@ function buildTodoCard(t){
   const helpers=t.helpers||[];
   const iClaimed=currentUser&&claimers.includes(currentUser.name);
   const iDone=currentUser&&doners.includes(currentUser.name);
-
-  // People chips — claimers (blue), doners (green), helpers (dust)
   const allChips=[
     ...claimers.map(n=>`<span class="todo-chip todo-chip-claim">&#9889; ${n}</span>`),
     ...doners.map(n=>`<span class="todo-chip todo-chip-done">&#10003; ${n}</span>`),
     ...helpers.filter(h=>!claimers.includes(h)&&!doners.includes(h)).map(n=>`<span class="todo-chip todo-chip-helper">&#128100; ${n}</span>`)
   ];
   const peopleHTML=allChips.length?`<div class="todo-people-row">${allChips.join('')}</div>`:'';
-
-  // Photos — grid if multiple, single if one
   const photos=t.photos||(t.photo?[t.photo]:[]);
   let photoHTML='';
-  if(photos.length===1){
-    photoHTML=`<img class="todo-photo" src="${photos[0]}" onclick="openTodoPhotoIdx('${t.id}',0)" alt="Task photo">`;
-  }else if(photos.length>1){
-    photoHTML=`<div class="todo-photo-grid">${photos.map((p,i)=>`<img src="${p}" onclick="openTodoPhotoIdx('${t.id}',${i})" alt="Photo ${i+1}">`).join('')}</div>`;
-  }
-
+  if(photos.length===1)photoHTML=`<img class="todo-photo" src="${photos[0]}" onclick="openTodoPhotoIdx('${t.id}',0)" alt="Task photo">`;
+  else if(photos.length>1)photoHTML=`<div class="todo-photo-grid">${photos.map((p,i)=>`<img src="${p}" onclick="openTodoPhotoIdx('${t.id}',${i})" alt="Photo ${i+1}">`).join('')}</div>`;
   let actions='';
   if(!isDone){
-    if(!iClaimed){
-      actions+=`<button class="todo-action-btn btn-claim" onclick="claimTodo('${t.id}')">&#9889; I'll Do It</button>`;
-    }else{
-      actions+=`<button class="todo-action-btn btn-unclaim" onclick="unclaimTodo('${t.id}')">Unclaim</button>`;
-    }
-    if(!iDone){
-      actions+=`<button class="todo-action-btn btn-done" onclick="doneTodo('${t.id}')">&#10003; Mark Done</button>`;
-    }
+    if(!iClaimed)actions+=`<button class="todo-action-btn btn-claim" onclick="claimTodo('${t.id}')">&#9889; I'll Do It</button>`;
+    else actions+=`<button class="todo-action-btn btn-unclaim" onclick="unclaimTodo('${t.id}')">Unclaim</button>`;
+    if(!iDone)actions+=`<button class="todo-action-btn btn-done" onclick="doneTodo('${t.id}')">&#10003; Mark Done</button>`;
     actions+=`<button class="todo-action-btn" onclick="openTaskEdit('${t.id}')" style="border-color:rgba(160,136,80,0.3);color:var(--dust)">&#128100; Add Helper / Photo</button>`;
   }
-  if(isMe){
-    actions+=`<button class="todo-action-btn btn-delete" onclick="deleteTodo('${t.id}')">&#10005; Delete</button>`;
-  }
-
+  if(isMe)actions+=`<button class="todo-action-btn btn-delete" onclick="deleteTodo('${t.id}')">&#10005; Delete</button>`;
   return `<div class="todo-card ${prioClass}${isDone?' todo-done':''}">
-    <div class="todo-card-top">
-      <div class="todo-title">${t.title}</div>
-      <span class="todo-prio-pill ${pillClass}">${PRIO_LABELS[t.priority||'medium']}</span>
-    </div>
+    <div class="todo-card-top"><div class="todo-title">${t.title}</div><span class="todo-prio-pill ${pillClass}">${PRIO_LABELS[t.priority||'medium']}</span></div>
     ${t.notes?`<div class="todo-notes">${t.notes}</div>`:''}
-    ${photoHTML}
-    ${peopleHTML}
+    ${photoHTML}${peopleHTML}
     <div class="todo-meta"><div>Added by <strong>${t.createdBy}</strong> &bull; ${formatTime(t.createdAt)}</div></div>
     ${actions?`<div class="todo-actions">${actions}</div>`:''}
   </div>`;
 }
-
 function openTodoPhotoIdx(id,idx){
   const t=(data.todos||[]).find(x=>x.id===id);if(!t)return;
   const photos=t.photos||(t.photo?[t.photo]:[]);
@@ -1221,8 +1181,7 @@ async function claimTodo(id){
   const t=(data.todos||[]).find(x=>x.id===id);if(!t)return;
   if(!t.claimers)t.claimers=t.claimedBy?[t.claimedBy]:[];
   if(t.claimers.includes(currentUser.name))return;
-  t.claimers.push(currentUser.name);
-  if(t.status==='open')t.status='claimed';
+  t.claimers.push(currentUser.name);if(t.status==='open')t.status='claimed';
   renderTodos();await pushData(`Task claimed: ${t.title}`,'todo-save-indicator');
 }
 async function unclaimTodo(id){
@@ -1344,24 +1303,17 @@ function renderCamping(){
       const isOpen=cardState==='gate-open';
       const pillText=isOpen?'Open':'Closed';
       const hasCd=!!GATE_DATES[g.name]&&!!g.open;
-      const cdStrip=hasCd?`<div class="gate-countdown">
-        <span class="gate-cd-label"></span>
-        <span class="gate-cd-timer" data-idx="${i}"></span>
-      </div>`:'';
+      const cdStrip=hasCd?`<div class="gate-countdown"><span class="gate-cd-label"></span><span class="gate-cd-timer" data-idx="${i}"></span></div>`:'';
       return `<div class="gate-card ${cardState}">
         <div class="gate-card-top">
           <div class="gate-status-dot"></div>
           <div class="gate-info">
             <div class="gate-name">${g.name}</div>
-            <div class="gate-times">
-              <span style="color:var(--dust)">Open: </span><span>${g.open||'—'}</span>
-              &ensp;<span style="color:var(--dust)">Close: </span><span>${g.close||'—'}</span>
-            </div>
+            <div class="gate-times"><span style="color:var(--dust)">Open: </span><span>${g.open||'—'}</span>&ensp;<span style="color:var(--dust)">Close: </span><span>${g.close||'—'}</span></div>
             ${g.notes?`<div class="gate-notes">${g.notes}</div>`:''}
           </div>
           <span class="gate-status-pill">${pillText}</span>
-        </div>
-        ${cdStrip}
+        </div>${cdStrip}
       </div>`;
     }).join('');
     tickCountdown();
