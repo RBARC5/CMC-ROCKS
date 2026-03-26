@@ -579,6 +579,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 
 <script>
 const PROXY='https://cmc-rocks-proxy.8gonula.workers.dev';
+const RAW_URL='https://raw.githubusercontent.com/RBARC5/CMC-ROCKS/main/data.json';
 const MANAGER_PIN='1234';
 const CAMP_MAP_URL='campmap.webp';
 const GATE_DATES={
@@ -623,8 +624,20 @@ async function fetchData(){
   try{
     const resp=await fetch(PROXY,{headers:{'Accept':'application/json'}});
     const meta=await resp.json();
-    if(meta.content){const decoded=decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));data=JSON.parse(decoded);}
-  }catch(e){if(!data)data={crew:[],radioLog:[],shifts:{},gates:[],todos:[]};console.warn('Fetch failed',e);}
+    if(meta.content){
+      // proxy returned inline content (small file)
+      const decoded=decodeURIComponent(escape(atob(meta.content.replace(/\n/g,''))));
+      data=JSON.parse(decoded);
+    }else if(meta.download_url||meta.sha){
+      // file too large for inline — fetch raw directly, add cache-bust
+      const raw=await fetch(RAW_URL+'?t='+Date.now());
+      data=await raw.json();
+    }
+    if(data&&!data.todos)data.todos=[];
+  }catch(e){
+    if(!data)data={crew:[],radioLog:[],shifts:{},gates:[],todos:[]};
+    console.warn('fetchData error',e);
+  }
 }
 
 function startPolling(){
@@ -983,7 +996,6 @@ function clearEditPhoto(){
   const prev=document.getElementById('todo-edit-photo-preview');if(prev)prev.style.display='none';
 }
 
-// AI title generation — fixed with required browser headers
 function onTodoNotesInput(){
   const val=document.getElementById('todo-notes-input').value.trim();
   document.getElementById('ai-gen-btn').disabled=!val;
