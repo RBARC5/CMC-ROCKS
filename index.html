@@ -225,7 +225,11 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 .todo-notes{font-size:0.8rem;color:var(--dust);line-height:1.5;margin-bottom:0.6rem}
 .todo-meta{font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.06em;color:rgba(160,136,80,0.6);margin-bottom:0.65rem;line-height:1.7}
 .todo-meta strong{color:var(--dust)}
-.todo-cat-tag{display:inline-block;font-family:'Barlow Condensed',sans-serif;font-size:0.62rem;letter-spacing:0.14em;text-transform:uppercase;padding:0.1rem 0.45rem;border-radius:2px;background:rgba(244,233,211,0.07);border:1px solid var(--border);color:var(--dust);margin-bottom:0.5rem}
+.todo-photo{width:100%;border-radius:4px;border:1px solid var(--border);margin-bottom:0.6rem;cursor:pointer;display:block}
+.todo-people-row{display:flex;flex-wrap:wrap;gap:0.3rem;margin-bottom:0.4rem}
+.todo-chip{display:inline-flex;align-items:center;gap:0.3rem;border-radius:2px;padding:0.12rem 0.5rem;font-family:'Barlow Condensed',sans-serif;font-size:0.68rem;letter-spacing:0.08em}
+.todo-chip-claim{background:rgba(0,72,255,0.12);border:1px solid rgba(0,72,255,0.3);color:#7fa8ff}
+.todo-chip-done{background:rgba(157,152,18,0.15);border:1px solid rgba(157,152,18,0.35);color:var(--olive)}
 .todo-actions{display:flex;gap:0.4rem;flex-wrap:wrap}
 .todo-action-btn{padding:0.35rem 0.75rem;border:1px solid var(--border);border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.14em;text-transform:uppercase;cursor:pointer;background:rgba(244,233,211,0.05);color:var(--dust);transition:all 0.15s}
 .todo-action-btn:hover{border-color:var(--cream);color:var(--cream)}
@@ -412,15 +416,15 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
       <option value="medium" selected>&#128993; Medium</option>
       <option value="low">&#9898; Low</option>
     </select>
-    <label>Category</label>
-    <select id="todo-cat-input">
-      <option value="General">General</option>
-      <option value="Setup">Setup</option>
-      <option value="Pack Down">Pack Down</option>
-      <option value="Safety">Safety</option>
-      <option value="Catering">Catering</option>
-      <option value="Other">Other</option>
-    </select>
+    <label>Photo <span style="color:var(--dust);font-size:0.7em">(optional)</span></label>
+    <div style="margin-bottom:1rem">
+      <input type="file" id="todo-photo-input" accept="image/*" style="display:none" onchange="previewTodoPhoto(this)">
+      <button type="button" class="btn secondary" style="margin-top:0;width:auto;padding:0.4rem 1rem;font-size:0.78rem" onclick="document.getElementById('todo-photo-input').click()">&#128247; Choose Photo</button>
+      <div id="todo-photo-preview" style="margin-top:0.6rem;display:none">
+        <img id="todo-photo-img" style="width:100%;border-radius:4px;border:1px solid var(--border)" src="" alt="">
+        <button type="button" onclick="clearTodoPhoto()" style="margin-top:0.3rem;background:none;border:none;color:var(--dust);font-size:0.75rem;cursor:pointer;font-family:'Barlow Condensed',sans-serif;letter-spacing:0.1em">&#10005; Remove photo</button>
+      </div>
+    </div>
     <button class="btn btn-gold" onclick="submitTodo()">Add Task</button>
     <button class="btn secondary" onclick="closeOverlay('todo-overlay')">Cancel</button>
   </div>
@@ -428,7 +432,7 @@ input:focus,select:focus,textarea:focus{border-color:var(--rust)}
 
 <div id="map-fs-overlay" class="hidden">
   <button id="map-fs-close" onclick="closeMapFS()">&#10005; Close</button>
-  <img id="map-fs-img" src="" alt="Camp Map">
+  <img id="map-fs-img" src="" alt="Map / Photo">
 </div>
 
 <div id="app" style="display:none">
@@ -914,11 +918,25 @@ const PRIO_ORDER={urgent:0,high:1,medium:2,low:3};
 const PRIO_LABELS={urgent:'Urgent',high:'High',medium:'Medium',low:'Low'};
 const PRIO_PILL_CLASS={urgent:'prio-pill-urgent',high:'prio-pill-high',medium:'prio-pill-medium',low:'prio-pill-low'};
 
+function previewTodoPhoto(input){
+  if(!input.files||!input.files[0])return;
+  const reader=new FileReader();
+  reader.onload=e=>{
+    document.getElementById('todo-photo-img').src=e.target.result;
+    document.getElementById('todo-photo-preview').style.display='block';
+  };
+  reader.readAsDataURL(input.files[0]);
+}
+function clearTodoPhoto(){
+  const inp=document.getElementById('todo-photo-input');if(inp)inp.value='';
+  const img=document.getElementById('todo-photo-img');if(img)img.src='';
+  const prev=document.getElementById('todo-photo-preview');if(prev)prev.style.display='none';
+}
 function openTodoModal(){
   document.getElementById('todo-title-input').value='';
   document.getElementById('todo-notes-input').value='';
   document.getElementById('todo-prio-input').value='medium';
-  document.getElementById('todo-cat-input').value='General';
+  clearTodoPhoto();
   openOverlay('todo-overlay');
 }
 async function submitTodo(){
@@ -926,20 +944,22 @@ async function submitTodo(){
   const title=document.getElementById('todo-title-input').value.trim();
   if(!title){alert('Please enter a task title.');return;}
   if(!data.todos)data.todos=[];
+  const imgEl=document.getElementById('todo-photo-img');
+  const photoData=imgEl&&imgEl.src&&imgEl.src.startsWith('data:')?imgEl.src:null;
   const task={
     id:Date.now().toString(),
     title,
     notes:document.getElementById('todo-notes-input').value.trim(),
     priority:document.getElementById('todo-prio-input').value,
-    category:document.getElementById('todo-cat-input').value,
+    photo:photoData,
     createdBy:currentUser.name,
     createdAt:Date.now(),
-    claimedBy:null,claimedAt:null,
-    doneBy:null,doneAt:null,
+    claimers:[],
+    doners:[],
     status:'open'
   };
   data.todos.push(task);
-  closeOverlay('todo-overlay');renderTodos();
+  closeOverlay('todo-overlay');clearTodoPhoto();renderTodos();
   await pushData(`New task: ${title}`,'todo-save-indicator');
 }
 function setTodoFilter(f,btn){
@@ -954,17 +974,16 @@ function renderTodos(){
   const todos=data.todos||[];
   let open=todos.filter(t=>t.status!=='done');
   let done=todos.filter(t=>t.status==='done');
-  // sort open: priority first, then claimed before unclaimed, then newest
   open.sort((a,b)=>{
     const pd=(PRIO_ORDER[a.priority]||2)-(PRIO_ORDER[b.priority]||2);if(pd!==0)return pd;
-    if(a.claimedBy&&!b.claimedBy)return -1;if(!a.claimedBy&&b.claimedBy)return 1;
+    const ac=(a.claimers||[]).length,bc=(b.claimers||[]).length;
+    if(ac&&!bc)return -1;if(!ac&&bc)return 1;
     return b.createdAt-a.createdAt;
   });
   done.sort((a,b)=>b.doneAt-a.doneAt);
-  // apply filter
   let showOpen=open,showDone=done;
-  if(todoFilter==='open')showOpen=open.filter(t=>!t.claimedBy),showDone=[];
-  else if(todoFilter==='claimed')showOpen=open.filter(t=>t.claimedBy),showDone=[];
+  if(todoFilter==='open')showOpen=open.filter(t=>!(t.claimers||[]).length),showDone=[];
+  else if(todoFilter==='claimed')showOpen=open.filter(t=>(t.claimers||[]).length),showDone=[];
   else if(todoFilter==='done')showOpen=[],showDone=done;
   const openHTML=showOpen.length?showOpen.map(t=>buildTodoCard(t)).join(''):'<div class="empty-state" style="padding:1rem 0">No tasks here.</div>';
   let doneSection='';
@@ -985,22 +1004,26 @@ function buildTodoCard(t){
   const prioClass=`prio-${t.priority||'medium'}`;
   const pillClass=PRIO_PILL_CLASS[t.priority||'medium'];
   const isMe=currentUser&&currentUser.name===t.createdBy;
-  const isClaimer=currentUser&&currentUser.name===t.claimedBy;
-  let metaLines=`<div>Added by <strong>${t.createdBy}</strong> &bull; ${formatTime(t.createdAt)}</div>`;
-  if(t.claimedBy)metaLines+=`<div>&#9889; Claimed by <strong>${t.claimedBy}</strong> &bull; ${formatTime(t.claimedAt)}</div>`;
-  if(t.doneBy)metaLines+=`<div>&#10003; Done by <strong>${t.doneBy}</strong> &bull; ${formatTime(t.doneAt)}</div>`;
+  // support legacy single-person format
+  const claimers=t.claimers||(t.claimedBy?[t.claimedBy]:[]);
+  const doners=t.doners||(t.doneBy?[t.doneBy]:[]);
+  const iClaimed=currentUser&&claimers.includes(currentUser.name);
+  const iDone=currentUser&&doners.includes(currentUser.name);
+  const claimerHTML=claimers.length?`<div class="todo-people-row">${claimers.map(n=>`<span class="todo-chip todo-chip-claim">&#9889; ${n}</span>`).join('')}</div>`:'';
+  const donerHTML=doners.length?`<div class="todo-people-row">${doners.map(n=>`<span class="todo-chip todo-chip-done">&#10003; ${n}</span>`).join('')}</div>`:'';
+  const photoHTML=t.photo?`<img class="todo-photo" src="${t.photo}" onclick="openTodoPhoto('${t.id}')" alt="Task photo">`:'';
   let actions='';
   if(!isDone){
-    if(!t.claimedBy){
+    if(!iClaimed){
       actions+=`<button class="todo-action-btn btn-claim" onclick="claimTodo('${t.id}')">&#9889; I'll Do It</button>`;
-    }else if(isClaimer){
-      actions+=`<button class="todo-action-btn btn-done" onclick="doneTodo('${t.id}')">&#10003; Mark Done</button>`;
-      actions+=`<button class="todo-action-btn btn-unclaim" onclick="unclaimTodo('${t.id}')">Unclaim</button>`;
     }else{
+      actions+=`<button class="todo-action-btn btn-unclaim" onclick="unclaimTodo('${t.id}')">Unclaim</button>`;
+    }
+    if(!iDone){
       actions+=`<button class="todo-action-btn btn-done" onclick="doneTodo('${t.id}')">&#10003; Mark Done</button>`;
     }
   }
-  if(isMe||isDone){
+  if(isMe){
     actions+=`<button class="todo-action-btn btn-delete" onclick="deleteTodo('${t.id}')">&#10005; Delete</button>`;
   }
   return `<div class="todo-card ${prioClass}${isDone?' todo-done':''}">
@@ -1008,28 +1031,41 @@ function buildTodoCard(t){
       <div class="todo-title">${t.title}</div>
       <span class="todo-prio-pill ${pillClass}">${PRIO_LABELS[t.priority||'medium']}</span>
     </div>
-    <span class="todo-cat-tag">${t.category||'General'}</span>
     ${t.notes?`<div class="todo-notes">${t.notes}</div>`:''}
-    <div class="todo-meta">${metaLines}</div>
+    ${photoHTML}
+    ${claimerHTML}${donerHTML}
+    <div class="todo-meta"><div>Added by <strong>${t.createdBy}</strong> &bull; ${formatTime(t.createdAt)}</div></div>
     ${actions?`<div class="todo-actions">${actions}</div>`:''}
   </div>`;
 }
+function openTodoPhoto(id){
+  const t=(data.todos||[]).find(x=>x.id===id);if(!t||!t.photo)return;
+  document.getElementById('map-fs-img').src=t.photo;
+  document.getElementById('map-fs-overlay').classList.remove('hidden');
+}
 async function claimTodo(id){
   if(!currentUser)return;
-  const t=(data.todos||[]).find(x=>x.id===id);if(!t||t.claimedBy)return;
-  t.claimedBy=currentUser.name;t.claimedAt=Date.now();t.status='claimed';
+  const t=(data.todos||[]).find(x=>x.id===id);if(!t)return;
+  if(!t.claimers)t.claimers=t.claimedBy?[t.claimedBy]:[];
+  if(t.claimers.includes(currentUser.name))return;
+  t.claimers.push(currentUser.name);
+  if(t.status==='open')t.status='claimed';
   renderTodos();await pushData(`Task claimed: ${t.title}`,'todo-save-indicator');
 }
 async function unclaimTodo(id){
   if(!currentUser)return;
   const t=(data.todos||[]).find(x=>x.id===id);if(!t)return;
-  t.claimedBy=null;t.claimedAt=null;t.status='open';
+  if(!t.claimers)t.claimers=[];
+  t.claimers=t.claimers.filter(n=>n!==currentUser.name);
+  if(!t.claimers.length&&t.status==='claimed')t.status='open';
   renderTodos();await pushData(`Task unclaimed: ${t.title}`,'todo-save-indicator');
 }
 async function doneTodo(id){
   if(!currentUser)return;
   const t=(data.todos||[]).find(x=>x.id===id);if(!t)return;
-  t.doneBy=currentUser.name;t.doneAt=Date.now();t.status='done';
+  if(!t.doners)t.doners=t.doneBy?[t.doneBy]:[];
+  if(!t.doners.includes(currentUser.name))t.doners.push(currentUser.name);
+  t.doneAt=Date.now();t.status='done';
   renderTodos();await pushData(`Task done: ${t.title}`,'todo-save-indicator');
 }
 async function deleteTodo(id){
@@ -1132,7 +1168,7 @@ function renderCamping(){
       let cardState='gate-closed';
       if(openTs&&closeTs&&now>=openTs&&now<closeTs)cardState='gate-open';
       else if(closeTs&&now>=closeTs)cardState='gate-past';
-      const isPast=cardState==='gate-past';const isOpen=cardState==='gate-open';
+      const isOpen=cardState==='gate-open';
       const pillText=isOpen?'Open':'Closed';
       const hasCd=!!GATE_DATES[g.name]&&!!g.open;
       const cdStrip=hasCd?`<div class="gate-countdown">
