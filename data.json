@@ -1,5 +1,11 @@
 {
-  "crew": [],
+  "crew": [
+    {
+      "name": "J Dog",
+      "phone": "041234568",
+      "id": "1774495347399"
+    }
+  ],
   "radioLog": [],
   "shifts": {},
   "gates": [],
